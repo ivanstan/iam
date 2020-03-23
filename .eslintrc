@@ -1,0 +1,70 @@
+---
+root: true
+parser: babel-eslint
+extends:
+    - airbnb
+    - plugin:prettier/recommended
+globals:
+  document: readonly
+
+  context: readonly
+  beforeEach: readonly
+  cy: readonly
+  it: readonly
+rules:
+  arrow-parens: off
+  class-methods-use-this: off
+  comma-dangle:
+    - error
+    - arrays: "ignore"
+      objects: "ignore"
+      imports: "ignore"
+      exports: "ignore"
+      functions: never
+  consistent-return: off
+  curly: off
+  func-names: off
+  no-confusing-arrow: off
+  no-mixed-operators: off
+  no-new: off
+  no-param-reassign: off
+  no-plusplus: off
+  no-return-assign: off
+  no-underscore-dangle: off
+  no-script-url: off
+  no-use-before-define: ["error", { "functions": false, "classes": true, "variables": true }]
+  quotes:
+    - error
+    - single
+  import/no-extraneous-dependencies: off
+  import/no-named-as-default: off
+  import/prefer-default-export: off
+  import/no-unresolved: warn
+  import/extensions: off
+  jsx-a11y/href-no-hash: off
+  jsx-a11y/label-has-for: off
+  jsx-a11y/no-static-element-interactions: off
+  jsx-a11y/interactive-supports-focus: off
+  jsx-a11y/click-events-have-key-events: off
+  jsx-a11y/anchor-is-valid: off
+  prefer-const: ["error", { "destructuring": "all" }]
+  react/forbid-prop-types: off
+  react/jsx-closing-bracket-location: off
+  react/jsx-filename-extension: off
+  react/jsx-first-prop-new-line: off
+  react/jsx-one-expression-per-line: [warn, { "allow": "single-child" }]
+  react/jsx-sort-props: warn
+  react/no-array-index-key: off
+  react/no-danger: off
+  react/no-multi-comp: off
+  react/no-unused-prop-types: off
+  react/prefer-stateless-function: off
+  react/prop-types: 0
+  react/require-default-props: off
+  react/sort-comp: off
+  react/jsx-props-no-spreading: off
+  react/sort-prop-types:
+    - error
+  react/destructuring-assignment: off
+  // no-unused-vars: [2, {"vars": "all", "args": {"all-except-prefixes": ["_"]}}]
+  no-unused-vars: [2, { "varsIgnorePattern": "^_" }]

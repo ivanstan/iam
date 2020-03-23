@@ -1,0 +1,17 @@
+{% extends 'card.html.twig' %}
+
+{% block title %}Login{{ parent() }}{% endblock %}
+
+{% block card %}
+    <h1 class="h3 mb-3">{% trans %}Login{% endtrans %}</h1>
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <div class="h-100"
+         id="login-form"
+         data-csrf="{{ csrf_token('authenticate') }}"
+         data-email="{{ last_username }}"></div>
+{% endblock %}
+

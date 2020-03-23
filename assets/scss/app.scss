@@ -1,0 +1,26 @@
+$blue:    #2196f3 !default;
+@import "~bootstrap/scss/bootstrap";
+
+@import "~tailwindcss/dist/base";
+@import "~tailwindcss/dist/components";
+@import "~tailwindcss/dist/utilities";
+
+html {
+  height: 100vh;
+}
+
+body {
+  padding: 0;
+  height: 100vh;
+}
+
+.vertical-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#react-navbar {
+  min-height: 64px;
+  background: $primary;
+}

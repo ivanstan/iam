@@ -1,2 +1,15 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    form_themes: ['bootstrap_4_layout.html.twig']
+    globals:
+        app_name: '%app_name%'
+        google_analytics_key: '%google_analytics_key%'
+        google_maps_key: '%google_maps_key%'
+    date:
+        format: '%date_format%'
+        interval_format: '%%d days'
+        timezone: '%default_timezone%'
+    number_format:
+        decimals: 2
+        decimal_point: ','
+        thousands_separator: '.'

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administer users{{ parent() }}{% endblock %}
+
+{% block body %}
+    {% include 'components/navbar.html.twig.html' %}
+
+    <div class="container-fluid mt-3">
+        <table class="table">
+            {% for user in pager.currentPageResults %}
+                <tr>
+                    <td>{{ user.email }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7" class="text-center">{{ 'No results found'|trans }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    {% include 'components/pager.html.twig' with {pager: pager} only %}
+
+{% endblock %}
