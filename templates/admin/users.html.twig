@@ -6,17 +6,72 @@
     {% include 'components/navbar.html.twig.html' %}
 
     <div class="container-fluid mt-3">
-        <table class="table">
-            {% for user in pager.currentPageResults %}
-                <tr>
-                    <td>{{ user.email }}</td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="7" class="text-center">{{ 'No results found'|trans }}</td>
-                </tr>
-            {% endfor %}
-        </table>
+
+        <div class="row">
+            <div class="col-12">
+                {% include 'components/flash.html.twig' %}
+            </div>
+        </div>
+
+{#        <div class="row">#}
+{#            <div class="col-3">#}
+{#                <form method="get" class="d-flex mb-3">#}
+{#                    <input class="form-control mr-2" type="text" name="search" />#}
+{#                    <input type="hidden" name="page" value="{{ app.request.get('page') }}">#}
+{#                    <input class="btn btn-primary" type="submit" value="{{ 'Search'|trans }}" />#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{{ 'Email'|trans }}</th>
+                            <th>{{ 'Roles'|trans }}</th>
+                            <th class="text-center">{{ 'Active'|trans }}</th>
+                            <th class="text-center">{{ 'Actions'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in pager.currentPageResults %}
+                        <tr>
+                            <td>{{ user.email }}</td>
+                            <td class="d-none d-sm-table-cell">
+                                {% for role in user.roles %}
+                                    <span class="badge badge-secondary">{{ role|replace({'ROLE_': '' })|capitalize|trans }}</span>
+                                {% endfor %}
+                            </td>
+                            <td class="d-none d-sm-table-cell text-center">
+                                {% if user.active %}
+                                    <span class="badge badge-success">{{ 'Yes'|trans }}</span>
+                                {% else %}
+                                    <span class="badge badge-danger">{{ 'No'|trans }}</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-primary mr-2" href="{{ path('user_edit', {'id': user.id}) }}">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <div class="float-right">
+                                    {% include 'components/delete-button.html.twig' with {
+                                        'action': path('user_delete', {'id': user.id}),
+                                        'csrf': csrf_token('delete' ~ user.id),
+                                        'entity': 'user'
+                                    } only %}
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7" class="text-center">{{ 'No results found'|trans }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     {% include 'components/pager.html.twig' with {pager: pager} only %}

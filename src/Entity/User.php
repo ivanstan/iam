@@ -114,7 +114,7 @@ class User implements UserInterface
 
     public function eraseCredentials(): void
     {
-         $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function isActive(): bool
@@ -135,5 +135,17 @@ class User implements UserInterface
     public function setPlainPassword(string $plainPassword): void
     {
         $this->plainPassword = $plainPassword;
+    }
+
+    public function __toString(): string
+    {
+        $user = [
+            'id' => $this->id,
+            'email' => $this->email,
+            'roles' => $this->getRoles(),
+            'active' => $this->active,
+        ];
+
+        return (string) json_encode($user, JSON_THROW_ON_ERROR);
     }
 }

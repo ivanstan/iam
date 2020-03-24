@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -53,15 +54,26 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?User
+    public function search(?string $name): QueryBuilder
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $queryBuilder = $this->createQueryBuilder('u');
+        $queryBuilder
+            ->addOrderBy('u.email')
+            ->addOrderBy('u.active');
+
+        return $queryBuilder;
+
+//        if (empty($name)) {
+//            return $queryBuilder;
+//        }
+//
+//        return $queryBuilder
+//            ->where(
+//                $queryBuilder->expr()->andX(
+//                    $queryBuilder->expr()->eq('u.email', 'name')
+//                )
+//            )
+//            ->setParameter('name', $name);
     }
-    */
+
 }

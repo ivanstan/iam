@@ -4,8 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
-// import Visibility from '@material-ui/icons/Visibility';
-// import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import {Visibility, VisibilityOff} from './icons';
 import _ from 'lodash';
 import { FormHelperText } from '@material-ui/core';
 
@@ -69,7 +68,7 @@ export class PasswordField extends React.Component<PasswordFieldPropsInterface, 
                 onClick={this.handleClickShowPassword}
                 onMouseDown={e => e.preventDefault()}
               >
-                {/*{show ? <Visibility/> : <VisibilityOff/>}*/}
+                {show ? <Visibility/> : <VisibilityOff/>}
               </IconButton>
             </InputAdornment>
           )}

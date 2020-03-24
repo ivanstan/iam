@@ -2,7 +2,7 @@
 <html lang="{{ app.request.locale }}">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %} | Application Name{% endblock %}</title>
+    <title>{% block title %} | {{ app_name }}{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('build/app.css') }}">
     {% endblock %}
@@ -11,10 +11,11 @@
 <div id="app-root"></div>
 {% block body %}
 {% endblock %}
-</body>
 {% block javascripts %}
+    {% include('components/globals.html.twig') %}
     <script src="{{ asset('build/runtime.js') }}"></script>
     <script src="{{ asset('build/vendors~app.js') }}"></script>
     <script src="{{ asset('build/app.js') }}"></script>
 {% endblock %}
+</body>
 </html>

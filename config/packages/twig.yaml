@@ -3,8 +3,6 @@ twig:
     form_themes: ['bootstrap_4_layout.html.twig']
     globals:
         app_name: '%app_name%'
-        google_analytics_key: '%google_analytics_key%'
-        google_maps_key: '%google_maps_key%'
     date:
         format: '%date_format%'
         interval_format: '%%d days'

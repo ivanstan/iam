@@ -3,6 +3,4 @@ parameters:
   mail_from: 'no-replay@domain.com'
   default_timezone: 'Europe/Belgrade'
   date_format: 'd-m-Y H:i'
-  app_name: 'Ivan Stanojević'
-  google_analytics_key: 'UA-37623519-7'
-  google_maps_key: 'AIzaSyBqMe3saKYfSyioFQggL4ZekWzHilem9E0'
+  app_name: 'Application Name'
