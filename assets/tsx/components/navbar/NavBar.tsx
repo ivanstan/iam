@@ -4,7 +4,7 @@ import { translate } from 'react-polyglot';
 import { withStyles } from '@material-ui/core/styles';
 import { AccountCircled } from '../icons';
 import { store } from '../../services/Store';
-import If from 'react-if';
+import { If } from 'react-if';
 
 const useStyles: any = theme => ({});
 
@@ -47,12 +47,13 @@ class NavBar extends React.Component<any, any> {
 
   render() {
     const user = store.me();
+    const win: any = window;
 
     // eslint-disable-next-line react/jsx-no-undef
     return (
       <AppBar position="static" elevation={0}>
         <Toolbar>
-          <Typography variant="h6">{window.App['appName']}</Typography>
+          <Typography variant="h6">{win.App['appName']}</Typography>
           <div className={'flex-grow-1'}>
             <ToolBarButton onClick={this.onUsers}>Users</ToolBarButton>
           </div>

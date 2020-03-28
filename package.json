@@ -50,5 +50,7 @@
         "build": "encore production --progress",
         "test": "yarn run cypress open"
     },
-    "dependencies": {}
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.13.0"
+    }
 }

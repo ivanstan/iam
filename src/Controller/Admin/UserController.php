@@ -31,7 +31,7 @@ class UserController extends AbstractController
         $pager->setCurrentPage($request->query->get('page', 1));
 
         return $this->render(
-            'admin/users.html.twig',
+            'admin/user/users.html.twig',
             [
                 'pager' => $pager,
             ]
@@ -71,7 +71,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_admin_users');
         }
 
-        return $this->render('pages/admin/user/edit.html.twig', [
+        return $this->render('admin/user/edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);

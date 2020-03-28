@@ -34,6 +34,11 @@ class User implements UserInterface
      */
     private bool $active = true;
 
+    /**
+     * @ORM\Column(type="boolean", options={"default" : 0})
+     */
+    private bool $verified = false;
+
     /** @var string */
     private $plainPassword;
 
@@ -147,5 +152,15 @@ class User implements UserInterface
         ];
 
         return (string) json_encode($user, JSON_THROW_ON_ERROR);
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->verified;
+    }
+
+    public function setVerified(bool $verified): void
+    {
+        $this->verified = $verified;
     }
 }

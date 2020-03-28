@@ -23,14 +23,20 @@
 {#            </div>#}
 {#        </div>#}
 
+        <div class="row mb-3">
+            <div class="col-12">
+                <a class="btn btn-primary" href="{{ path('user_new') }}">{{ "New"|trans }}</a>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-12">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>{{ 'Email'|trans }}</th>
-                            <th>{{ 'Roles'|trans }}</th>
-                            <th class="text-center">{{ 'Active'|trans }}</th>
+                            <th class="d-none d-sm-table-cell">{{ 'Roles'|trans }}</th>
+                            <th class="d-none d-sm-table-cell text-center">{{ 'Active'|trans }}</th>
                             <th class="text-center">{{ 'Actions'|trans }}</th>
                         </tr>
                     </thead>
