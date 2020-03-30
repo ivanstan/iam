@@ -4,7 +4,7 @@
     * IP
     * User agent
 * Password history
-* Optional registration - site settings
+* Optional registration
 * Change email
 * Sent mail admin
 * Inform user of changed password

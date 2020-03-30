@@ -13,7 +13,9 @@
     <div class="h-100"
          id="login-form"
          data-csrf="{{ csrf_token('authenticate') }}"
-         data-email="{{ last_username }}"></div>
+         data-email="{{ last_username }}"
+         data-registration-allowed="{{ registration_allowed }}"
+    ></div>
 
     {#    {% include 'pages/security/_login_form.html.twig' %}#}
 {% endblock %}

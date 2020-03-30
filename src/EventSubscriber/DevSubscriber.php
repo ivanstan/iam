@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class DevSubscriber implements EventSubscriberInterface
 {
-    private $env;
+    private string $env;
 
     private static array $messages = ['info', 'warning', 'danger', 'success'];
 

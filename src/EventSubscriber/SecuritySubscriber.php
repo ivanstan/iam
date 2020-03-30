@@ -26,11 +26,8 @@ class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterfa
     public const LOGIN_ATTEMPTS_BAN = 5;
     public const LOGIN_ATTEMPTS_MESSAGE = 3;
 
-    /** @var EntityManagerInterface */
-    private $em;
-
-    /** @var RequestStack */
-    private $request;
+    private EntityManagerInterface $em;
+    private RequestStack $request;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -104,6 +101,4 @@ class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterfa
             }
         }
     }
-
-
 }

@@ -1,0 +1,17 @@
+dev_mail_invite:
+    path:         /_mail/invite
+    controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        template: email/invite.html.twig
+
+dev_mail_recovery:
+    path:         /_mail/recovery
+    controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        template: email/recovery.html.twig
+
+dev_mail_verify:
+    path:         /_mail/verify
+    controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        template: email/verify.html.twig

@@ -1,8 +1,8 @@
-{% extends 'pages/security/_security_base.html.twig' %}
+{% extends 'card.html.twig' %}
 
 {% block title %}{{ 'recovery.title'|trans }} | {{ parent() }}{% endblock %}
 
-{% block content %}
+{% block card %}
     <h3 class="mb-3 text-center">{{ 'recovery.title'|trans }}</h3>
     {{ include('components/messages.html.twig') }}
     {{ form_start(form) }}

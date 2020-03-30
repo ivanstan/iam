@@ -1,14 +1,14 @@
-{% extends 'pages/security/_security_base.html.twig' %}
+{% extends 'card.html.twig' %}
 
 {% block title %}{{ 'recovery.title'|trans }} | {{ parent() }}{% endblock %}
 
-{% block content %}
+{% block card %}
     <h3 class="mb-3 text-center">{{ 'recovery.title'|trans }}</h3>
     {{ include('components/messages.html.twig') }}
     {{ form_start(form) }}
     {{ form_widget(form) }}
     <div class="text-center mb-3">
-        <a href="{{ path('security_login') }}">{{ 'register.goto_login'|trans }}</a>
+        <a href="{{ path('app_login') }}">{{ 'register.goto_login'|trans }}</a>
     </div>
     {% include 'components/form-submit.html.twig' with {'title':'recovery.submit'|trans } only %}
     {{ form_end(form) }}

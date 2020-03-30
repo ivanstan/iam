@@ -82,7 +82,7 @@ class ProfileController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            $user->setPassword($data['password']);
+            $user->setPlainPassword($data['password']);
 
             $em = $this->getDoctrine()->getManager();
             $em->flush();

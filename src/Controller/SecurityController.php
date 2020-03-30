@@ -14,6 +14,7 @@ use App\Security\SecurityService;
 use App\Service\DateTimeService;
 use App\Service\Traits\TranslatorAwareTrait;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -25,16 +26,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Validator\Constraints\Email;
 
-class SecurityController extends AbstractController
+class SecurityController extends AbstractController implements LoggerAwareInterface
 {
     use TranslatorAwareTrait;
     use LoggerAwareTrait;
 
-    /** @var SecurityMailerService */
-    private $securityMailer;
-
-    /** @var SecurityService */
-    private $securityService;
+    private SecurityMailerService $securityMailer;
+    private SecurityService $securityService;
 
     public function __construct(
         SecurityMailerService $securityMailer,
@@ -47,7 +45,7 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils, SettingsRepository $repository): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('app_index');
@@ -58,7 +56,11 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('pages/security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('pages/security/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error,
+            'registration_allowed' => $repository->isRegistrationEnabled(),
+        ]);
     }
 
     /**
@@ -247,7 +249,7 @@ class SecurityController extends AbstractController
             $data = $form->getData();
 
             $user = $entity->getUser();
-            $user->setPassword($data);
+            $user->setPlainPassword($data);
             $user->setVerified(true);
 
             $em->remove($entity);

@@ -10,12 +10,12 @@ trait UpdatedTrait
      */
     private $updated;
 
-    public function getUpdated(): \DateTime
+    public function getUpdatedAt(): \DateTime
     {
         return $this->updated;
     }
 
-    public function setUpdated(\DateTime $updated): void
+    public function setUpdatedAt(\DateTime $updated): void
     {
         $this->updated = $updated;
     }

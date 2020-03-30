@@ -10,12 +10,12 @@ trait CreatedTrait
      */
     private $created;
 
-    public function getCreated(): \DateTime
+    public function getCreatedAt(): \DateTime
     {
         return $this->created;
     }
 
-    public function setCreated(\DateTime $created): void
+    public function setCreatedAt(\DateTime $created): void
     {
         $this->created = $created;
     }

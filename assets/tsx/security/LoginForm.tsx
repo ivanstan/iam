@@ -4,7 +4,8 @@ import { PasswordField } from '../components/PasswordField';
 import * as EmailValidator from 'email-validator';
 import { FilledInputProps } from '@material-ui/core/FilledInput';
 import { translate, TranslateProps } from 'react-polyglot';
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from '@material-ui/core/styles';
+import { If } from 'react-if';
 
 const useStyles: any = theme => ({
   container: {
@@ -19,6 +20,7 @@ interface LoginFormPropsInterface extends TranslateProps, StyledComponentProps {
   csrf: string,
   error: string,
   email: string,
+  registrationAllowed: boolean,
 }
 
 class LoginForm extends React.Component<LoginFormPropsInterface, any> {
@@ -84,7 +86,7 @@ class LoginForm extends React.Component<LoginFormPropsInterface, any> {
   isValid = (): boolean => {
     const { emailError, passwordError } = this.state;
 
-    return !emailError  && !passwordError;
+    return !emailError && !passwordError;
   };
 
   isSubmitEnabled = (): boolean => {
@@ -109,13 +111,17 @@ class LoginForm extends React.Component<LoginFormPropsInterface, any> {
 
   private onPasswordFieldKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && this.isSubmitEnabled()) {
-      this.form.dispatchEvent(new Event('submit'))
+      this.form.dispatchEvent(new Event('submit'));
     }
   };
 
   render() {
-    const { t, classes } = this.props;
+    const { t, classes, registrationAllowed } = this.props;
     const { email, password, emailError, passwordError, dirty, formError } = this.state;
+
+    const resetPassword = <>
+      <a href="/recovery">{t('Forgot your password?')}</a>
+    </>;
 
     return <form method="post" ref={ref => this.form = ref} id="login-form">
       <FormHelperText error={true} style={{ marginBottom: 30, marginTop: 15 }}>
@@ -148,7 +154,7 @@ class LoginForm extends React.Component<LoginFormPropsInterface, any> {
         onChange={(e: Event) => this.handleChange('password', e)}
         onKeyPress={this.onPasswordFieldKeyPress}
         error={dirty && (passwordError !== null)}
-        helperText={passwordError}
+        helperText={passwordError || resetPassword}
         inputRef={ref => this.password = ref}
         className={classes?.spacerBottom}
       />
@@ -156,7 +162,9 @@ class LoginForm extends React.Component<LoginFormPropsInterface, any> {
       <input type="hidden" name="_csrf_token" value={this.props.csrf} />
       <input type="checkbox" name="_remember_me" defaultChecked className="hidden" />
 
-      {/*<a href="/register" data-turbolinks-action="replace">{t('Register')}</a>*/}
+      <If condition={registrationAllowed}>
+        <a href="/register" data-turbolinks-action="replace">{t('Register')}</a>
+      </If>
 
       <Button
         type="submit"
@@ -173,4 +181,4 @@ class LoginForm extends React.Component<LoginFormPropsInterface, any> {
   }
 }
 
-export default translate()(withStyles(useStyles)(LoginForm))
+export default translate()(withStyles(useStyles)(LoginForm));

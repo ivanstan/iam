@@ -3,9 +3,10 @@
 namespace App\Service;
 
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Twig\Environment;
 
 class MailerService
@@ -27,13 +28,21 @@ class MailerService
 
         /** @var Address $address */
         foreach ($email->getTo() as $address) {
-            $message = (new \Swift_Message($email->getSubject()))
-                ->setFrom($this->mailFrom)
-                ->setTo($address->getEncodedAddress())
-                ->setBody($body, 'text/html');
-//             ToDo: add plain text   ->addPart(strip_tags($body), 'text/plain');
+            $message = (new Email())
+                ->from($this->mailFrom)
+                ->to($address->getEncodedAddress())
+                ->subject($email->getSubject())
+                ->html($body);
 
-            $this->mailer->send($message);
+            try {
+                $this->mailer->send($message);
+            } catch (TransportExceptionInterface $e) {
+
+                print_r($e);
+
+                // ToDo: log
+
+            }
         }
     }
 }

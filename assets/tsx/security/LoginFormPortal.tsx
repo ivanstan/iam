@@ -7,9 +7,10 @@ export class LoginFormPortal extends React.Component<any, any> {
     const element = document.getElementById(this.props.id);
     if (element) {
       const form = (<LoginForm
-        csrf={element.getAttribute('data-csrf')}
-        error={element.getAttribute('data-error')}
-        email={element.getAttribute('data-email')}
+          csrf={element.getAttribute('data-csrf')}
+          error={element.getAttribute('data-error')}
+          email={element.getAttribute('data-email')}
+          registrationAllowed={element.getAttribute('data-registration-allowed')}
         />
       );
 
