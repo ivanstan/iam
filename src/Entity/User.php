@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Service\Security\Role;
+use App\Security\Role;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -92,6 +92,10 @@ class User implements UserInterface
 
     public function setRoles(array $roles): self
     {
+        if (!\in_array(Role::USER, $roles, true)) {
+            $roles[] = Role::USER;
+        }
+
         $this->roles = $roles;
 
         return $this;
@@ -151,7 +155,7 @@ class User implements UserInterface
             'active' => $this->active,
         ];
 
-        return (string) json_encode($user, JSON_THROW_ON_ERROR);
+        return (string)json_encode($user, JSON_THROW_ON_ERROR);
     }
 
     public function isVerified(): bool

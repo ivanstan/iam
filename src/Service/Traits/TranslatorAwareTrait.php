@@ -6,8 +6,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 trait TranslatorAwareTrait
 {
-    /** @var TranslatorInterface */
-    private $translator;
+    private TranslatorInterface $translator;
 
     /**
      * @required

@@ -1,12 +1,29 @@
 import React from 'react';
-import { AppBar, Button, IconButton, Menu, MenuItem, Toolbar, Typography } from '@material-ui/core';
+import {
+  AppBar,
+  Button,
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  Menu,
+  MenuItem,
+  SwipeableDrawer,
+  Toolbar,
+  Typography,
+} from '@material-ui/core';
 import { translate } from 'react-polyglot';
 import { withStyles } from '@material-ui/core/styles';
-import { AccountCircled } from '../icons';
+import { AccountCircled, MenuIcon } from '../icons';
 import { store } from '../../services/Store';
 import { If } from 'react-if';
 
-const useStyles: any = theme => ({});
+const useStyles: any = theme => ({
+  adminMenu: {
+    minWidth: 250,
+  },
+});
 
 const ToolBarButton = withStyles(theme => ({
   root: {
@@ -18,15 +35,16 @@ const ToolBarButton = withStyles(theme => ({
 class NavBar extends React.Component<any, any> {
 
   public readonly state = {
-    anchor: null,
+    userMenuAnchor: null,
+    adminMenuAnchor: null,
   };
 
   public handleClick = event => {
-    this.setState({ anchor: event.currentTarget });
+    this.setState({ userMenuAnchor: event.currentTarget });
   };
 
   public handleClose = () => {
-    this.setState({ anchor: null });
+    this.setState({ userMenuAnchor: null });
   };
 
   public onLogout = () => {
@@ -45,17 +63,60 @@ class NavBar extends React.Component<any, any> {
     window.location.replace('/admin/users');
   };
 
+  public toggleAdminBar = open => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    this.setState({ adminMenuAnchor: open });
+  };
+
+  public isAdmin(): boolean {
+    const user = store.me();
+
+    if (user === null || !user.hasOwnProperty('roles')) {
+      return false;
+    }
+
+    return user.roles.indexOf('ROLE_ADMIN') > -1;
+  }
+
   render() {
     const user = store.me();
     const win: any = window;
+    const { classes } = this.props;
+
+    const adminMenu = (
+      <div>
+        <Divider />
+        <List className={classes.adminMenu}>
+          <ListItem button>
+            {/*<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>*/}
+            <ListItemText primary={'User management'} onClick={this.onUsers} />
+          </ListItem>
+          <ListItem button>
+            <ListItemText primary={'Settings'} onClick={() => {
+              window.location.replace('/admin/settings');
+            }} />
+          </ListItem>
+        </List>
+      </div>
+    );
 
     // eslint-disable-next-line react/jsx-no-undef
     return (
       <AppBar position="static" elevation={0}>
         <Toolbar>
+
+          <If condition={this.isAdmin()}>
+            <IconButton color="inherit" onClick={this.toggleAdminBar(true)}>
+              <MenuIcon />
+            </IconButton>
+          </If>
+
           <Typography variant="h6">{win.App['appName']}</Typography>
           <div className={'flex-grow-1'}>
-            <ToolBarButton onClick={this.onUsers}>Users</ToolBarButton>
+            {/*<ToolBarButton onClick={this.onUsers}>Users</ToolBarButton>*/}
           </div>
 
           <If condition={user !== null}>
@@ -74,16 +135,26 @@ class NavBar extends React.Component<any, any> {
         </Toolbar>
 
         <Menu
-          id="simple-menu"
-          anchorEl={this.state.anchor}
+          id="user-menu"
+          anchorEl={this.state.userMenuAnchor}
           keepMounted
-          open={Boolean(this.state.anchor)}
+          open={Boolean(this.state.userMenuAnchor)}
           onClose={this.handleClose}
         >
           <If condition={user !== null}>
-            <MenuItem onClick={this.onLogout}>Logout</MenuItem>
+            <MenuItem className="logout" onClick={this.onLogout}>Logout</MenuItem>
           </If>
         </Menu>
+
+        <SwipeableDrawer
+          disableBackdropTransition
+          anchor={'left'}
+          open={Boolean(this.state.adminMenuAnchor)}
+          onClose={this.toggleAdminBar(false)}
+          onOpen={this.toggleAdminBar(true)}
+        >
+          {adminMenu}
+        </SwipeableDrawer>
       </AppBar>
     );
   }

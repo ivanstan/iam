@@ -1,0 +1,15 @@
+{% extends 'card.html.twig' %}
+
+{% block title %}{{ 'Register'|trans }} {{ parent() }}{% endblock %}
+
+{% block card %}
+    <h1 class="h3 mb-3">{% trans %}Register{% endtrans %}</h1>
+    {{ include('components/messages.html.twig') }}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div class="text-center mb-3">
+        <a href="{{ path('app_login') }}">{{ 'Already have account? Login'|trans }}</a>
+    </div>
+    {% include 'components/form-submit.html.twig' with {'title':'Register'|trans } only %}
+    {{ form_end(form) }}
+{% endblock %}

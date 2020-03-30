@@ -11,6 +11,8 @@ globals:
   beforeEach: readonly
   cy: readonly
   it: readonly
+  expect: readonly
+  describe: readonly
 rules:
   arrow-parens: off
   class-methods-use-this: off

@@ -15,17 +15,23 @@ class PasswordRepeatType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $builder->add('password', RepeatedType::class, [
+        $builder->add('plainPassword', RepeatedType::class, [
             'type' => PasswordType::class,
             'invalid_message' => 'Password must match',
             'required' => true,
             'first_options' => [
                 'label' => false,
-                'attr' => ['placeholder' => 'Password'],
+                'attr' => [
+                    'placeholder' => 'Password',
+                    'data-test' => 'password',
+                ],
             ],
             'second_options' => [
                 'label' => false,
-                'attr' => ['placeholder' => 'Repeat password'],
+                'attr' => [
+                    'placeholder' => 'Repeat password',
+                    'data-test' => 'repeat-password',
+                ],
             ],
             'constraints' => [
                 new NotBlank([
@@ -46,10 +52,10 @@ class PasswordRepeatType extends AbstractType
             static function ($passwordAsString) {
 
                 if ($passwordAsString instanceof User) {
-                    return $passwordAsString->getPassword();
+                    return $passwordAsString->getPlainPassword();
                 }
 
-                return $passwordAsString['password'] ?? $passwordAsString;
+                return $passwordAsString['plainPassword'] ?? $passwordAsString;
             }
         ));
     }

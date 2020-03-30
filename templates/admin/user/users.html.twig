@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Administer users{{ parent() }}{% endblock %}
+{% block title %}User management{{ parent() }}{% endblock %}
 
 {% block body %}
     {% include 'components/navbar.html.twig.html' %}
@@ -9,7 +9,7 @@
 
         <div class="row">
             <div class="col-12">
-                {% include 'components/flash.html.twig' %}
+                {% include 'components/messages.html.twig' %}
             </div>
         </div>
 

@@ -27,3 +27,14 @@
 Cypress.Commands.add('navigate', url => {
   return cy.visit(Cypress.env('baseUrl') + url);
 });
+
+Cypress.Commands.add('login', (email, password) => {
+  cy.navigate('/login');
+  cy.get('[name="email"]').type(email);
+  cy.get('[name="password"]').type(password);
+  cy.get('[type="submit"]').click();
+});
+
+Cypress.Commands.add('logout', () => {
+  cy.get('.logout').click({force: true});
+});

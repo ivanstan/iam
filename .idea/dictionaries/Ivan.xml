@@ -2,6 +2,7 @@
   <dictionary name="Ivan">
     <words>
       <w>csrf</w>
+      <w>warmup</w>
     </words>
   </dictionary>
 </component>

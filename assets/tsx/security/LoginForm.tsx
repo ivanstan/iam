@@ -165,6 +165,7 @@ class LoginForm extends React.Component<LoginFormPropsInterface, any> {
         color="primary"
         size="large"
         disabled={!this.isSubmitEnabled()}
+        data-test="submit"
       >
         {t('Login')}
       </Button>

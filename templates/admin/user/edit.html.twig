@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'user.create'|trans }} | {{ parent() }}{% endblock %}
+{% block title %}{{ "New user"|trans }} {{ parent() }}{% endblock %}
 
 {% block body %}
     {% include 'components/navbar.html.twig.html' %}
 
     <div class="row">
         <div class="col-12">
-            {% include 'components/flash.html.twig' %}
+            {% include 'components/messages.html.twig' %}
         </div>
     </div>
 
