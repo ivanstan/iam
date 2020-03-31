@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\CreatedTrait;
+use App\Entity\Traits\UpdatedTrait;
 use App\Security\Role;
+use App\Service\DateTimeService;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -11,9 +14,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @ORM\HasLifecycleCallbacks()
  */
 class User implements UserInterface
 {
+    use CreatedTrait;
+    use UpdatedTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -52,6 +59,43 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private string $password;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\UserPreference", cascade={"persist", "remove"}, fetch="EAGER")
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    protected $preference;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $avatar;
+
+    /**
+     * @var Session[]
+     * @ORM\OneToMany(targetEntity="App\Entity\Session", mappedBy="user", cascade={"remove"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $sessions;
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAt(): void
+    {
+        $this->created = DateTimeService::getCurrentUTC();
+        $this->updated = DateTimeService::getCurrentUTC();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setUpdated(): void
+    {
+        $this->updated = DateTimeService::getCurrentUTC();
+    }
 
     public function getId(): ?int
     {
@@ -166,5 +210,19 @@ class User implements UserInterface
     public function setVerified(bool $verified): void
     {
         $this->verified = $verified;
+    }
+
+    public function getPreference(): UserPreference
+    {
+        if ($this->preference) {
+            return $this->preference;
+        }
+
+        return new UserPreference();
+    }
+
+    public function setPreference(UserPreference $preference): void
+    {
+        $this->preference = $preference;
     }
 }

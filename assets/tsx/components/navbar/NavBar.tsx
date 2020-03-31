@@ -84,7 +84,7 @@ class NavBar extends React.Component<any, any> {
   render() {
     const user = store.me();
     const win: any = window;
-    const { classes } = this.props;
+    const { classes, t } = this.props;
 
     const adminMenu = (
       <div>
@@ -93,6 +93,11 @@ class NavBar extends React.Component<any, any> {
           <ListItem button>
             {/*<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>*/}
             <ListItemText primary={'User management'} onClick={this.onUsers} />
+          </ListItem>
+          <ListItem button>
+            <ListItemText primary={'Mailbox'} onClick={() => {
+              window.location.replace('/admin/mailbox');
+            }} />
           </ListItem>
           <ListItem button>
             <ListItemText primary={'Settings'} onClick={() => {
@@ -142,7 +147,19 @@ class NavBar extends React.Component<any, any> {
           onClose={this.handleClose}
         >
           <If condition={user !== null}>
-            <MenuItem className="logout" onClick={this.onLogout}>Logout</MenuItem>
+            <MenuItem onClick={() => {
+              window.location.replace('/user/profile');
+            }}>{t('Profile')}</MenuItem>
+          </If>
+
+          <If condition={user !== null}>
+            <MenuItem onClick={() => {
+              window.location.replace('/user/account');
+            }}>{t('Account')}</MenuItem>
+          </If>
+          <Divider/>
+          <If condition={user !== null}>
+            <MenuItem className="logout" onClick={this.onLogout}>{t('Logout')}</MenuItem>
           </If>
         </Menu>
 

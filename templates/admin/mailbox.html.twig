@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    {% include 'components/navbar.html.twig.html' %}
+
+<div class="container-fluid mt-3">
+
+    <div class="row">
+        <div class="col-12">
+            {% include 'components/messages.html.twig' %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="list-group">
+                {% for mail in pager.currentPageResults %}
+                    <li class="list-group-item">
+                        <a href="{{ path('admin_mailbox_read', {mail: mail.id, page: pager.currentPage}) }}">
+                            {{ mail.subject }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            {% include 'components/pager.html.twig' with {pager: pager} only %}
+        </div>
+
+        <div class="col-md-9">
+            {% if mail is not null %}
+                {{ mail.subject }}
+
+                <div class="body">
+                    {{ mail.body|raw }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+

@@ -57,7 +57,7 @@ class ProfileController extends AbstractController
     }
 
     /**
-     * @Route("/user/security", name="user_profile_security")
+     * @Route("/user/account", name="user_profile_security")
      * @IsGranted("ROLE_USER")
      */
     public function security(Request $request): Response
