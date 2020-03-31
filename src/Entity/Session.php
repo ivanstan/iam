@@ -41,6 +41,20 @@ class Session
      */
     private $lifetime;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $ip;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $userAgent;
+
     public function getId(): string
     {
         return $this->id;
@@ -89,5 +103,25 @@ class Session
     public function setLifetime(\DateInterval $lifetime): void
     {
         $this->lifetime = $lifetime;
+    }
+
+    public function getIp(): string
+    {
+        return $this->ip;
+    }
+
+    public function setIp(string $ip): void
+    {
+        $this->ip = $ip;
+    }
+
+    public function getUserAgent(): string
+    {
+        return $this->userAgent;
+    }
+
+    public function setUserAgent(string $userAgent): void
+    {
+        $this->userAgent = $userAgent;
     }
 }

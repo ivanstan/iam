@@ -7,24 +7,22 @@ use App\Entity\User;
 use App\Repository\SessionRepository;
 use App\Service\DateTimeService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class DoctrineSessionHandler implements \SessionHandlerInterface
 {
-    /** @var EntityManagerInterface */
-    protected $em;
+    protected EntityManagerInterface $em;
+    protected TokenStorageInterface $token;
+    protected RequestStack $requestStack;
+    protected SessionRepository $repository;
 
-    /** @var TokenStorageInterface */
-    private $token;
-
-    /** @var SessionRepository */
-    private $repository;
-
-    public function __construct(EntityManagerInterface $em, TokenStorageInterface $token)
+    public function __construct(EntityManagerInterface $em, TokenStorageInterface $token, RequestStack $requestStack)
     {
         $this->em = $em;
-        $this->repository = $this->em->getRepository(Session::class);
         $this->token = $token;
+        $this->requestStack = $requestStack;
+        $this->repository = $this->em->getRepository(Session::class);
     }
 
     public function close(): bool
@@ -68,7 +66,7 @@ class DoctrineSessionHandler implements \SessionHandlerInterface
     {
         $lifeTime = (int)ini_get('session.gc_maxlifetime');
 
-        $interval = new \DateInterval('PT'.$lifeTime.'S');
+        $interval = new \DateInterval('PT' . $lifeTime . 'S');
 
         $session = $this->repository->get($id);
 
@@ -76,6 +74,11 @@ class DoctrineSessionHandler implements \SessionHandlerInterface
         $session->setDate(DateTimeService::getCurrentUTC());
         $session->setLifetime($interval);
         $session->setUser($this->getUser());
+
+        if ($request = $this->requestStack->getMasterRequest()) {
+            $session->setIp($request->getClientIp());
+            $session->setUserAgent($request->headers->get('User-Agent'));
+        }
 
         $this->em->persist($session);
         $this->em->flush();

@@ -7,6 +7,7 @@ use App\Entity\Traits\UpdatedTrait;
 use App\Security\Role;
 use App\Service\DateTimeService;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -78,7 +79,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Session", mappedBy="user", cascade={"remove"})
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
-    private array $sessions = [];
+    private $sessions;
 
     /**
      * @ORM\PrePersist

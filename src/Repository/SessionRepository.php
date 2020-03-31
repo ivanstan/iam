@@ -38,9 +38,9 @@ class SessionRepository extends ServiceEntityRepository
 
     public function remove(string $id): void
     {
-        $session = $this->get($id);
-
-        $this->getEntityManager()->remove($session);
+        $this->getEntityManager()->remove(
+            $this->get($id)
+        );
     }
 
     public function purge(): void
