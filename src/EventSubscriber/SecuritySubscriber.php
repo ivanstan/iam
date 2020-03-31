@@ -70,7 +70,7 @@ class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterfa
         $user = $event->getAuthenticationToken()->getUser();
 
         if ($user instanceof User) {
-            //            $this->logger->warning(sprintf('Open session for user %s', $user->getEmail()));
+            $this->logger->warning(sprintf('Open session for user %s', $user->getEmail()));
         }
     }
 

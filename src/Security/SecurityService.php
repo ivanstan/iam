@@ -17,22 +17,11 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class SecurityService
 {
-    public const TOKEN_VALIDITY_INTERVAL = 'P1D';
-
-    /** @var EntityManagerInterface */
-    private $em;
-
-    /** @var RequestStack */
-    private $requestStack;
-
-    /** @var TokenStorageInterface */
-    private $tokenStorage;
-
-    /** @var EventDispatcherInterface */
-    private $eventDispatcher;
-
-    /** @var SessionInterface */
-    private $session;
+    private EntityManagerInterface $em;
+    private RequestStack $requestStack;
+    private TokenStorageInterface $tokenStorage;
+    private EventDispatcherInterface $eventDispatcher;
+    private SessionInterface $session;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -67,29 +56,36 @@ class SecurityService
         $this->session->set('_security_common', serialize($token));
 
         $event = new InteractiveLoginEvent($this->requestStack->getMasterRequest(), $token);
-        $this->eventDispatcher->dispatch('security.interactive_login', $event);
+        $this->eventDispatcher->dispatch($event);
     }
 
     public function verify(string $token): ?User
     {
-        $token = $this->em->getRepository(UserToken::class)->getToken($token, UserVerificationToken::class);
-
-        return $this->loginAndVerify($token);
+        return $this->useToken(
+            $this->em->getRepository(UserToken::class)->getToken($token, UserVerificationToken::class)
+        );
     }
 
     public function recover(string $token): ?User
     {
-        $token = $this->em->getRepository(UserToken::class)->getToken($token, UserRecoveryToken::class);
-
-        return $this->loginAndVerify($token);
+        return $this->useToken(
+            $this->em->getRepository(UserToken::class)->getToken($token, UserRecoveryToken::class)
+        );
     }
 
-    private function loginAndVerify(?UserToken $token): ?User {
+    /**
+     * Use token to login. Set user verified and dispose of used token.
+     *
+     * @param UserToken|null $token
+     *
+     * @return User|null
+     * @throws \Exception
+     */
+    private function useToken(?UserToken $token): ?User {
         if (!$token || !$token->isValid(DateTimeService::getCurrentUTC())) {
             return null;
         }
 
-        /** @var User $user */
         $user = $token->getUser();
 
         $this->login($user);

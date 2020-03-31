@@ -18,7 +18,7 @@ describe('Security', function() {
       cy.get('[type="submit"]').should('be.enabled');
       cy.get('[type="submit"]').click();
 
-      cy.url().should('include', 'https://127.0.0.1:8000/');
+      cy.url().should('include', Cypress.env('baseUrl'));
     });
 
     it('Logout works', () => {

@@ -60,7 +60,7 @@ class ProfileController extends AbstractController
      * @Route("/user/account", name="user_profile_security")
      * @IsGranted("ROLE_USER")
      */
-    public function security(Request $request): Response
+    public function account(Request $request): Response
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -72,7 +72,7 @@ class ProfileController extends AbstractController
                 [
                     'constraints' => new UserPassword(),
                     'label' => false,
-                    'attr' => ['placeholder' => 'security.current_password'],
+                    'attr' => ['placeholder' => 'Current password', 'data-test' => 'current-password'],
                 ]
             )
             ->add('password', PasswordRepeatType::class, ['label' => false]);
@@ -93,7 +93,7 @@ class ProfileController extends AbstractController
         }
 
         return $this->render(
-            'pages/user/security.html.twig',
+            'pages/user/account.html.twig',
             [
                 'form' => $form->createView(),
             ]

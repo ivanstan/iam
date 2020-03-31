@@ -56,9 +56,9 @@ class User implements UserInterface
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
-    private string $password;
+    private $password;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\UserPreference", cascade={"persist", "remove"}, fetch="EAGER")
@@ -78,7 +78,7 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Session", mappedBy="user", cascade={"remove"})
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
-    private $sessions;
+    private array $sessions = [];
 
     /**
      * @ORM\PrePersist
@@ -148,12 +148,12 @@ class User implements UserInterface
     /**
      * @see UserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
 
@@ -167,7 +167,7 @@ class User implements UserInterface
 
     public function eraseCredentials(): void
     {
-        $this->plainPassword = null;
+        //        $this->plainPassword = null;
     }
 
     public function isActive(): bool
@@ -185,8 +185,12 @@ class User implements UserInterface
         return $this->plainPassword;
     }
 
-    public function setPlainPassword(string $plainPassword): void
+    public function setPlainPassword($plainPassword): void
     {
+        if (is_array($plainPassword)) {
+            return;
+        }
+
         $this->plainPassword = $plainPassword;
     }
 
@@ -197,6 +201,7 @@ class User implements UserInterface
             'email' => $this->email,
             'roles' => $this->getRoles(),
             'active' => $this->active,
+            'displayName' => $this->getDisplayName(),
         ];
 
         return (string)json_encode($user, JSON_THROW_ON_ERROR);
@@ -224,5 +229,10 @@ class User implements UserInterface
     public function setPreference(UserPreference $preference): void
     {
         $this->preference = $preference;
+    }
+
+    public function getDisplayName(): string
+    {
+        return $this->getEmail();
     }
 }

@@ -12,9 +12,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class ApiExceptionSubscriber implements EventSubscriberInterface
 {
     /**
-     * Exception handler will fire on exception occurred on a path bellow /.
+     * Exception handler will fire on exception occurred on a path bellow.
      */
-    protected const API_PATH = '/';
+    protected const API_PATH = '/api';
 
     private string $env;
 

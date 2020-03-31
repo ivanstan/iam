@@ -32,7 +32,7 @@
             {% if mail is not null %}
                 {{ mail.subject }}
 
-                <div class="body">
+                <div data-test="mailbox-body">
                     {{ mail.body|raw }}
                 </div>
             {% endif %}

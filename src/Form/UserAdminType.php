@@ -40,7 +40,14 @@ class UserAdminType extends AbstractType
                 );
 
                 if ($isNew) {
-                    $form->add('plainPassword', PasswordRepeatType::class, ['label' => false, 'required' => false]);
+                    $form->add(
+                        'plainPassword',
+                        PasswordRepeatType::class,
+                        [
+                            'label' => false,
+                            'required' => false,
+                        ]
+                    );
                 }
 
                 $form->add(
@@ -56,13 +63,34 @@ class UserAdminType extends AbstractType
                     ]
                 );
 
-                $options = ['required' => false];
+                $activeOptions = [
+                    'required' => false,
+                    'attr' => [
+                        'data-test' => 'user-active',
+                    ],
+                    'data' => $isNew,
+                ];
+
                 if ($isNew) {
-                    $options['data'] = true;
+                    $activeOptions['data'] = true;
                 }
 
-                $form->add('active', CheckboxType::class, $options);
-                $form->add('verified', CheckboxType::class, $options);
+                $form->add('active', CheckboxType::class, $activeOptions);
+
+
+                $verifiedOptions = [
+                    'required' => false,
+                    'attr' => [
+                        'data-test' => 'user-verified',
+                    ],
+                    'data' => $isNew,
+                ];
+
+                if ($isNew) {
+                    $verifiedOptions['data'] = true;
+                }
+
+                $form->add('verified', CheckboxType::class, $verifiedOptions);
 
                 if ($isNew) {
                     $form->add(
@@ -72,6 +100,9 @@ class UserAdminType extends AbstractType
                             'required' => false,
                             'mapped' => false,
                             'label' => 'Send invitation',
+                            'attr' => [
+                                'data-test' => 'user-invite',
+                            ],
                         ]
                     );
                 }

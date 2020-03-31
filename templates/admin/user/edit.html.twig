@@ -5,13 +5,13 @@
 {% block body %}
     {% include 'components/navbar.html.twig.html' %}
 
-    <div class="row">
-        <div class="col-12">
-            {% include 'components/messages.html.twig' %}
-        </div>
-    </div>
-
     <div class="container-fluid py-3">
+        <div class="row">
+            <div class="col-12">
+                {% include 'components/messages.html.twig' %}
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-12">
                 {{ include('admin/user/_form.html.twig') }}

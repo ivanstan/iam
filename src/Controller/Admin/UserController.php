@@ -42,11 +42,9 @@ class UserController extends AbstractController
      * @Route("/user/new", name="user_new", methods={"GET","POST"})
      * @Route("/user/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, User $user = null): Response
+    public function edit(Request $request, SecurityMailerService $recovery, User $user = null): Response
     {
-        if ($user === null) {
-            $user = new User();
-        }
+        $user = $user ?? new User();
 
         $form = $this->createForm(UserAdminType::class, $user);
         $form->handleRequest($request);
@@ -62,7 +60,7 @@ class UserController extends AbstractController
 
             if (isset($form['invite']) && $form['invite']->getData()) {
                 try {
-//                    $recovery->invite($user);
+                    $recovery->invite($user);
                 } catch (\Exception $e) {
                     $this->addFlash('danger', $this->translator->trans('misc.messages.email_fail'));
                 }
@@ -71,10 +69,13 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_admin_users');
         }
 
-        return $this->render('admin/user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
+        return $this->render(
+            'admin/user/edit.html.twig',
+            [
+                'user' => $user,
+                'form' => $form->createView(),
+            ]
+        );
     }
 
     /**
@@ -91,7 +92,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_admin_users');
         }
 
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($user);
             $em->flush();

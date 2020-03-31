@@ -13,6 +13,7 @@ globals:
   it: readonly
   expect: readonly
   describe: readonly
+  Cypress: readonly
 rules:
   arrow-parens: off
   class-methods-use-this: off
