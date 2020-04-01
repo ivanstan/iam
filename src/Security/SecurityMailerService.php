@@ -67,7 +67,7 @@ class SecurityMailerService
         $this->em->persist($token);
         $this->em->flush();
 
-        $subject = $this->translator->trans('recovery.subject', [], 'email');
+        $subject = $this->translator->trans('recovery.subject', []);
         $email = (new TemplatedEmail())
             ->to($user->getEmail())
             ->subject($subject)

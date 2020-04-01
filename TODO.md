@@ -16,3 +16,4 @@
 
 Bonus:
 * Contact form
+* Event log

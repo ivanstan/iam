@@ -23,6 +23,12 @@ const useStyles: any = theme => ({
   adminMenu: {
     minWidth: 250,
   },
+  appTitle: {
+    '&:hover': {
+      color: '#fff',
+      textDecoration: 'none',
+    },
+  },
 });
 
 const ToolBarButton = withStyles(theme => ({
@@ -47,20 +53,19 @@ class NavBar extends React.Component<any, any> {
     this.setState({ userMenuAnchor: null });
   };
 
-  public onLogout = () => {
-    window.location.replace('/logout');
-
-    this.handleClose();
-  };
-
   public onLogin = () => {
     window.location.replace('/login');
 
     this.handleClose();
   };
 
-  public onUsers = () => {
-    window.location.replace('/admin/users');
+  public adminNavigate = (url) => {
+    window.location.replace(url);
+  };
+
+  public userNavigate = (url) => {
+    window.location.replace(url);
+    this.handleClose();
   };
 
   public toggleAdminBar = open => (event) => {
@@ -71,7 +76,7 @@ class NavBar extends React.Component<any, any> {
     this.setState({ adminMenuAnchor: open });
   };
 
-  public isAdmin(): boolean {
+  public isAdmin = (): boolean => {
     const user = store.me();
 
     if (user === null || !user.hasOwnProperty('roles')) {
@@ -79,9 +84,9 @@ class NavBar extends React.Component<any, any> {
     }
 
     return user.roles.indexOf('ROLE_ADMIN') > -1;
-  }
+  };
 
-  render() {
+  render = () => {
     const user = store.me();
     const win: any = window;
     const { classes, t } = this.props;
@@ -92,17 +97,13 @@ class NavBar extends React.Component<any, any> {
         <List className={classes.adminMenu}>
           <ListItem button>
             {/*<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>*/}
-            <ListItemText primary={'User management'} onClick={this.onUsers} />
+            <ListItemText primary={'User management'} onClick={() => this.adminNavigate('/admin/users')} />
           </ListItem>
           <ListItem button>
-            <ListItemText primary={'Mailbox'} onClick={() => {
-              window.location.replace('/admin/mailbox');
-            }} />
+            <ListItemText primary={'Mailbox'} onClick={() => this.adminNavigate('/admin/mailbox')} />
           </ListItem>
           <ListItem button>
-            <ListItemText primary={'Settings'} onClick={() => {
-              window.location.replace('/admin/settings');
-            }} />
+            <ListItemText primary={'Settings'} onClick={() => this.adminNavigate('/admin/settings')} />
           </ListItem>
         </List>
       </div>
@@ -119,16 +120,23 @@ class NavBar extends React.Component<any, any> {
             </IconButton>
           </If>
 
-          <Typography variant="h6">{win.App['appName']}</Typography>
+          <a href="/" className={classes.appTitle}>
+            <Typography variant="h6">{win.App['appName']}</Typography>
+          </a>
+
           <div className={'flex-grow-1'}>
             {/*<ToolBarButton onClick={this.onUsers}>Users</ToolBarButton>*/}
           </div>
 
           <If condition={user !== null}>
-            <IconButton aria-label="menu" color="inherit" edge="start" onClick={this.handleClick}
-                        aria-controls="simple-menu" aria-haspopup="true">
-              <AccountCircled />
-            </IconButton>
+            <div>
+              <span className="pr-2">{user.email}</span>
+              <IconButton aria-label="menu" color="inherit" edge="start" onClick={this.handleClick}
+                          aria-controls="simple-menu" aria-haspopup="true">
+
+                <AccountCircled />
+              </IconButton>
+            </div>
           </If>
 
           <If condition={user === null}>
@@ -147,19 +155,19 @@ class NavBar extends React.Component<any, any> {
           onClose={this.handleClose}
         >
           <If condition={user !== null}>
-            <MenuItem onClick={() => {
-              window.location.replace('/user/profile');
-            }}>{t('Profile')}</MenuItem>
+            <MenuItem onClick={() => this.userNavigate('/user/profile')}>{t('Profile')}</MenuItem>
           </If>
 
           <If condition={user !== null}>
             <MenuItem onClick={() => {
-              window.location.replace('/user/account');
+              this.userNavigate('/user/account');
             }}>{t('Account')}</MenuItem>
           </If>
-          <Divider/>
+
+          <Divider />
+
           <If condition={user !== null}>
-            <MenuItem className="logout" onClick={this.onLogout}>{t('Logout')}</MenuItem>
+            <MenuItem className="logout" onClick={() => this.userNavigate('/logout')}>{t('Logout')}</MenuItem>
           </If>
         </Menu>
 
@@ -174,7 +182,7 @@ class NavBar extends React.Component<any, any> {
         </SwipeableDrawer>
       </AppBar>
     );
-  }
+  };
 }
 
 export default translate()(withStyles(useStyles)(NavBar));

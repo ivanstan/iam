@@ -1,4 +1,4 @@
-import { action, configure, observable } from 'mobx';
+import { action, configure } from 'mobx';
 
 configure({ enforceActions: 'never' });
 
@@ -12,6 +12,12 @@ class Store {
     }
 
     return JSON.parse(App.user);
+  };
+
+  registrationEnabled = () => {
+    const settings: any = window['App']?.settings;
+
+    return settings?.registrationEnabled;
   };
 }
 

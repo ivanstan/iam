@@ -120,7 +120,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
                 'constraints' => [new Email()],
                 'label' => false,
                 'required' => true,
-                'attr' => ['placeholder' => 'user.property.email.title'],
+                'attr' => ['placeholder' => 'Email'],
             ]
         )->getForm();
 

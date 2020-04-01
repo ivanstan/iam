@@ -13,8 +13,8 @@ use Twig\Environment;
 
 class MailerService
 {
-    protected EntityManagerInterface $entityManager;
     private string $mailFrom;
+    protected EntityManagerInterface $entityManager;
     private MailerInterface $mailer;
     private Environment $twig;
 
@@ -48,7 +48,10 @@ class MailerService
             $this->entityManager->flush();
 
             try {
-                $this->mailer->send($message);
+                $test = $this->mailer->send($message);
+
+                print_r($test); die();
+
             } catch (TransportExceptionInterface $e) {
                 print_r($e);
                 // ToDo: log
