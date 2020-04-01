@@ -2,11 +2,13 @@
 
 namespace App\EventSubscriber;
 
-use App\Controller\SecurityController;
+use App\Controller\ProfileController;
 use App\Entity\User;
 use App\Service\Traits\TranslatorAwareTrait;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -16,8 +18,10 @@ class ForceUserPasswordSubscriber implements EventSubscriberInterface
 {
     use TranslatorAwareTrait;
 
-    private TokenStorageInterface $tokenStorage;
-    private UrlGeneratorInterface $urlGenerator;
+    protected const REDIRECT_TO = [ProfileController::class, 'account'];
+
+    protected TokenStorageInterface $tokenStorage;
+    protected UrlGeneratorInterface $urlGenerator;
 
     public function __construct(TokenStorageInterface $tokenStorage, UrlGeneratorInterface $urlGenerator)
     {
@@ -32,42 +36,45 @@ class ForceUserPasswordSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onKernelController(ControllerEvent $event): void
+    protected function condition(): bool
     {
         if (!$this->tokenStorage->getToken()) {
-            return;
+            return false;
         }
 
         /** @var User $user */
         $user = $this->tokenStorage->getToken()->getUser();
 
-        if (!is_object($user) || $user->getPassword() !== null) {
-            return;
-        }
+        return !(!is_object($user) || $user->getPassword() !== null);
+    }
 
-        if ($this->getControllerName($event) !== SecurityController::class && $event->getRequest()->getMethod() !== 'settings') {
-            $redirectUrl = $this->urlGenerator->generate('user_profile_security');
-            $event->setController(
-                function () use ($redirectUrl, $event) {
-                    $event->getRequest()->getSession()->getFlashBag()->add(
-                        'info',
-                        $this->translator->trans('settings.password_is_null')
-                    );
+    protected function controller(Request $request): Response
+    {
+        $request->getSession()->getFlashBag()->add(
+            'info',
+            $this->translator->trans('settings.password_is_null')
+        );
 
-                    return new RedirectResponse($redirectUrl);
-                }
-            );
+        return new RedirectResponse(
+            $this->urlGenerator->generate('user_profile_security')
+        );
+    }
+
+    public function onKernelController(ControllerEvent $event): void
+    {
+        if ($this->condition() && $this->getController($event) !== self::REDIRECT_TO) {
+            $event->setController(fn() => $this->controller($event->getRequest()));
         }
     }
 
-    private function getControllerName(ControllerEvent $event): string
+    protected function getController(ControllerEvent $event): array
     {
-        $controller = $event->getController()[0] ?? null;
+        $controller = $event->getController();
 
-        if (!$controller || !is_object($controller)) {
-            return null;
+        if (is_array($controller) && isset($controller[0])) {
+            $controller[0] = get_class($controller[0]);
         }
 
-        return get_class($controller);
+        return $controller;
     }
 }

@@ -49,9 +49,6 @@ class MailerService
 
             try {
                 $test = $this->mailer->send($message);
-
-                print_r($test); die();
-
             } catch (TransportExceptionInterface $e) {
                 print_r($e);
                 // ToDo: log

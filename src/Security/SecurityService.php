@@ -39,7 +39,7 @@ class SecurityService
 
     public function login(User $user): void
     {
-        $token = new UsernamePasswordToken($user, null, 'common', $user->getRoles());
+        $token = new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles());
         $request = $this->requestStack->getMasterRequest();
 
         if ($request && !$request->hasPreviousSession()) {

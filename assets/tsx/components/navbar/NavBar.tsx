@@ -130,7 +130,7 @@ class NavBar extends React.Component<any, any> {
 
           <If condition={user !== null}>
             <div>
-              <span className="pr-2">{user.email}</span>
+              <span className="pr-2">{user?.email}</span>
               <IconButton aria-label="menu" color="inherit" edge="start" onClick={this.handleClick}
                           aria-controls="simple-menu" aria-haspopup="true">
 
