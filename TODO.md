@@ -17,3 +17,4 @@
 Bonus:
 * Contact form
 * Event log
+* Ban list

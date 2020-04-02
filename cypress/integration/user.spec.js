@@ -18,8 +18,18 @@ describe('User', function() {
 
       cy.logout();
       // attempt login with new user
+      cy.navigate('/login');
       cy.login('test1@example.com', 'test123');
       cy.url().should('include', Cypress.env('baseUrl'));
+      cy.get('header [data-test="user-email"]').contains('test1@example.com');
+
+      cy.logout();
+      // login with admin and delete user
+      cy.navigate('/login');
+      cy.login('admin@example.com', 'test123');
+      cy.navigate('/admin/users');
+      cy.get('[data-user="edit-user-test1@example.com"] .delete').click();
+      cy.type('{enter}');
     });
 
     it('Invitation works', () => {
@@ -32,14 +42,26 @@ describe('User', function() {
 
       // get invitation link from mailbox
       cy.navigate('/admin/mailbox');
-      const invite = cy.get('[data-test="mailbox-body"] .btn-primary').invoke('attr', 'href');
-
-      console.log(invite);
-
 
       // attempt to use invitation link
-      cy.logout();
-      cy.navigate(invite);
+      cy.get('[data-test="mailbox-body"] .btn-primary').invoke('attr', 'href').then(url => {
+          url = url.replace(Cypress.env('baseUrl'), '');
+
+          cy.logout();
+          cy.navigate(url);
+
+          // set password
+          cy.get('[data-test="password"]').type('test123');
+          cy.get('[data-test="repeat-password"]').type('test123');
+          cy.get('[data-test="submit"]').click();
+
+          // attempt to login with new password
+          cy.logout();
+          cy.navigate('/login');
+          cy.login('test2@example.com', 'test123');
+          cy.get('header [data-test="user-email"]').contains('test2@example.com');
+        }
+      );
     });
   });
 });

@@ -42,7 +42,7 @@
                     </thead>
                     <tbody>
                     {% for user in pager.currentPageResults %}
-                        <tr>
+                        <tr data-user="edit-user-{{ user.email }}">
                             <td>{{ user.email }}</td>
                             <td class="d-none d-sm-table-cell">
                                 {% for role in user.roles %}

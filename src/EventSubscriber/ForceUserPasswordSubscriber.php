@@ -2,13 +2,14 @@
 
 namespace App\EventSubscriber;
 
-use App\Controller\ProfileController;
+use App\Controller\SecurityController;
 use App\Entity\User;
 use App\Service\Traits\TranslatorAwareTrait;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Controller\ErrorController;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -18,7 +19,7 @@ class ForceUserPasswordSubscriber implements EventSubscriberInterface
 {
     use TranslatorAwareTrait;
 
-    protected const REDIRECT_TO = [ProfileController::class, 'account'];
+    protected const REDIRECT_TO = [SecurityController::class, 'password'];
 
     protected TokenStorageInterface $tokenStorage;
     protected UrlGeneratorInterface $urlGenerator;
@@ -56,25 +57,29 @@ class ForceUserPasswordSubscriber implements EventSubscriberInterface
         );
 
         return new RedirectResponse(
-            $this->urlGenerator->generate('user_profile_security')
+            $this->urlGenerator->generate('app_user_password')
         );
     }
 
     public function onKernelController(ControllerEvent $event): void
     {
-        if ($this->condition() && $this->getController($event) !== self::REDIRECT_TO) {
+        if ($this->condition() && $this->getController($event)) {
             $event->setController(fn() => $this->controller($event->getRequest()));
         }
     }
 
-    protected function getController(ControllerEvent $event): array
+    protected function getController(ControllerEvent $event): bool
     {
         $controller = $event->getController();
+
+        if ($controller instanceof ErrorController) {
+            return false;
+        }
 
         if (is_array($controller) && isset($controller[0])) {
             $controller[0] = get_class($controller[0]);
         }
 
-        return $controller;
+        return $controller !== self::REDIRECT_TO;
     }
 }

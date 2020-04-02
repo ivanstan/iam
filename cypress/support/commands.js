@@ -36,5 +36,5 @@ Cypress.Commands.add('login', (email, password) => {
 });
 
 Cypress.Commands.add('logout', () => {
-  cy.get('.logout').click({force: true});
+  cy.get('[data-test="logout"]').click({force: true});
 });

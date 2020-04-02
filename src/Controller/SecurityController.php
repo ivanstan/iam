@@ -16,6 +16,7 @@ use App\Service\Traits\TranslatorAwareTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -56,11 +57,14 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('pages/security/login.html.twig', [
-            'last_username' => $lastUsername,
-            'error' => $error,
-            'registration_allowed' => $repository->isRegistrationEnabled(),
-        ]);
+        return $this->render(
+            'pages/security/login.html.twig',
+            [
+                'last_username' => $lastUsername,
+                'error' => $error,
+                'registration_allowed' => $repository->isRegistrationEnabled(),
+            ]
+        );
     }
 
     /**
@@ -97,7 +101,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
             $this->securityMailer->requestVerification($user);
             $this->addFlash('success', $this->translator->trans('user.messages.register.success'));
 
-            return $this->redirectToRoute('security_login');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render(
@@ -201,7 +205,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
                 $user = $this->securityService->recover($token);
                 break;
             default: // invitation
-                $redirect = 'app_index';
+                $redirect = 'app_user_password';
                 $failMessageId = 'user.messages.invitation.bad_token';
                 $successMessage = $this->translator->trans('user.messages.invitation.success');
                 $logMessage = 'User %s has received invitation and verified account';
@@ -232,7 +236,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
     /**
      * @Route("/recover-password/{token}", name="security_recovery_token")
      */
-    public function recoveryToken(Request $request, string $token, EntityManagerInterface $em): Response
+    public function recover(Request $request, EntityManagerInterface $em, string $token = null): Response
     {
         $entity = $em->getRepository(UserToken::class)->getToken($token, UserRecoveryToken::class);
 
@@ -242,22 +246,64 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
             return $this->redirectToRoute('security_recovery');
         }
 
+        $user = $entity->getUser();
+
         $form = $this->createForm(PasswordRepeatType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            $user = $entity->getUser();
             $user->setPlainPassword($data);
             $user->setVerified(true);
+            $user->setUpdated();
 
-            $em->remove($entity);
+            if (isset($entity)) {
+                $em->remove($entity);
+            }
+
             $em->flush();
 
             $this->addFlash('success', $this->translator->trans('user.password.changed'));
 
-            $this->redirectToRoute('app_login');
+            $this->redirectToRoute('app_index');
+        }
+
+        return $this->render(
+            'pages/security/reset.html.twig',
+            [
+                'form' => $form->createView(),
+            ]
+        );
+    }
+
+    /**
+     * @Route("/user/password", name="app_user_password")
+     * @IsGranted("ROLE_USER")
+     */
+    public function password(Request $request, EntityManagerInterface $em): Response
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        if ($user->getPassword() !== null) {
+            return $this->redirectToRoute('app_index');
+        }
+
+        $form = $this->createForm(PasswordRepeatType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            $user->setPlainPassword($data);
+            $user->setVerified(true);
+            $user->setUpdated();
+            $em->flush();
+
+            $this->addFlash('success', $this->translator->trans('user.password.changed'));
+
+            return $this->redirectToRoute('app_index');
         }
 
         return $this->render(
