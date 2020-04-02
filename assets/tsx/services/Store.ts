@@ -14,6 +14,12 @@ class Store {
     return JSON.parse(App.user);
   };
 
+  locale = () => {
+    const settings: any = window['App']?.settings;
+
+    return settings?.locale || 'en';
+  };
+
   registrationEnabled = () => {
     const settings: any = window['App']?.settings;
 

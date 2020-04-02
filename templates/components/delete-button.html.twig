@@ -1,6 +1,5 @@
-<form class="d-inline-block" method="post" action="{{ action }}"
-      onsubmit="return confirm('{{'Would you like to delete %entity%?'|trans({'%entity%': entity}) }}');">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="hidden" name="_token" value="{{ csrf }}">
-    <button class="delete btn btn-outline-danger"><i class="far fa-trash"></i></button>
-</form>
+<button class="delete btn btn-outline-danger delete-button"
+        data-token="{{ csrf }}"
+        data-action="{{ action }}"
+><i class="far fa-trash"></i></button>
+

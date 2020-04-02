@@ -103,6 +103,9 @@ class NavBar extends React.Component<any, any> {
             <ListItemText primary={'Mailbox'} onClick={() => this.adminNavigate('/admin/mailbox')} />
           </ListItem>
           <ListItem button>
+            <ListItemText primary={'Block'} onClick={() => this.adminNavigate('/admin/block')} />
+          </ListItem>
+          <ListItem button>
             <ListItemText primary={'Settings'} onClick={() => this.adminNavigate('/admin/settings')} />
           </ListItem>
         </List>
@@ -130,8 +133,8 @@ class NavBar extends React.Component<any, any> {
 
           <If condition={user !== null}>
             <div>
-              <span className="pr-2">{user?.email}</span>
-              <IconButton aria-label="menu" color="inherit" edge="start" onClick={this.handleClick}
+              <span className="pr-2" data-test="user-email">{user?.email}</span>
+              <IconButton data-test="user-menu" aria-label="menu" color="inherit" edge="start" onClick={this.handleClick}
                           aria-controls="simple-menu" aria-haspopup="true">
 
                 <AccountCircled />
@@ -148,7 +151,6 @@ class NavBar extends React.Component<any, any> {
         </Toolbar>
 
         <Menu
-          id="user-menu"
           anchorEl={this.state.userMenuAnchor}
           keepMounted
           open={Boolean(this.state.userMenuAnchor)}
@@ -167,7 +169,7 @@ class NavBar extends React.Component<any, any> {
           <Divider />
 
           <If condition={user !== null}>
-            <MenuItem className="logout" onClick={() => this.userNavigate('/logout')}>{t('Logout')}</MenuItem>
+            <MenuItem data-test="logout" onClick={() => this.userNavigate('/logout')}>{t('Logout')}</MenuItem>
           </If>
         </Menu>
 

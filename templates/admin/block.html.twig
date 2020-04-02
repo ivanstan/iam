@@ -32,17 +32,12 @@
                             <td class="d-none d-sm-table-cell">{{ item.lock.expire ? item.lock.expire|date : '-' }}</td>
                             <td class="text-center">
                                 {% if item.active %}
-                                    <span class="badge badge-success">{{ 'general.yes'|trans }}</span>
+                                    <span class="badge badge-success">{{ 'Yes'|trans }}</span>
                                 {% else %}
-                                    <span class="badge badge-danger">{{ 'general.no'|trans }}</span>
+                                    <span class="badge badge-danger">{{ 'No'|trans }}</span>
                                 {% endif %}
                             </td>
                             <td>
-
-
-                                <button class="delete-button">Delete</button>
-
-
                                 {% include 'components/delete-button.html.twig' with {
                                     'action': path('block_delete', {'id': item.lock.id}),
                                     'csrf': csrf_token('delete' ~ item.lock.id),
