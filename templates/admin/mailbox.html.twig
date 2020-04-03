@@ -3,7 +3,7 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-    {% include 'components/navbar.html.twig.html' %}
+    {% include 'components/navbar.html.twig' %}
 
     <div class="container-fluid mt-3">
 
@@ -14,8 +14,8 @@
         </div>
 
         <div class="row">
-            <div class="col-md-3">
-                <ul class="list-group">
+            <div class="col-md-4">
+                <ul class="list-group mb-3">
                     {% for mail in pager.currentPageResults %}
                         <li class="list-group-item">
                             <a href="{{ path('admin_mailbox_read', {mail: mail.id, page: pager.currentPage}) }}">
@@ -29,10 +29,12 @@
                     {% endfor %}
                 </ul>
 
-                {% include 'components/pager.html.twig' with {pager: pager} only %}
+                <div class="pager d-flex justify-content-center mb-3">
+                    {{ pagerfanta(pager, 'twitter_bootstrap4_translated', {prev_message: '&larr;', next_message: '&rarr;'}) }}
+                </div>
             </div>
 
-            <div class="col-md-9">
+            <div class="col-md-8">
                 {% if mail is not null %}
                     <table class="table">
                         <tr>

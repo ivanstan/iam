@@ -27,6 +27,7 @@ class MailBoxController extends AbstractController
         $query = $repository->findAll();
         $pager = new Pagerfanta(new DoctrineORMAdapter($query));
         $pager->setCurrentPage($request->query->get('page', 1));
+        $pager->setMaxPerPage(8);
 
         if ($mail === null) {
             $iterator = $pager->getIterator();

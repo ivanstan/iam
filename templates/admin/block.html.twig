@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'block.title'|trans }} {{ parent() }}{% endblock %}
+{% block title %}{{ 'Block'|trans }} {{ parent() }}{% endblock %}
 
 {% block body %}
-    {% include 'components/navbar.html.twig.html' %}
+    {% include 'components/navbar.html.twig' %}
 
     <div class="row">
         <div class="col-12">
@@ -17,10 +17,10 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>{{ 'block.reason'|trans }}</th>
-                        <th>{{ 'general.ip'|trans }}</th>
-                        <th class="d-none d-sm-table-cell">{{ 'block.expire'|trans }}</th>
-                        <th style="width: 110px;" class="text-center">Active</th>
+                        <th>{{ 'Reason'|trans }}</th>
+                        <th>{{ 'IP'|trans }}</th>
+                        <th class="d-none d-sm-table-cell">{{ 'Expire'|trans }}</th>
+                        <th style="width: 110px;" class="text-center">{{ 'Active'|trans }}</th>
                         <th style="width: 50px;"></th>
                     </tr>
                     </thead>

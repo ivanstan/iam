@@ -2,24 +2,16 @@
     {{ form_row(form.email) }}
 
     {% if user.id %}
-{#        <table class="table">#}
-{#            <tr>#}
-{#                <th>{{ 'user.created'|trans }}</th>#}
-{#                <td>{% include 'components/date-field.html.twig' with {date: user.createdAt} only %}</td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <th>{{ 'user.updated'|trans }}</th>#}
-{#                <td>{% include 'components/date-field.html.twig' with {date: user.updated} only %}</td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <th>{{ 'user.lastLogin'|trans }}</th>#}
-{#                <td>{% include 'components/date-field.html.twig' with {date: user.lastLogin} only %}</td>#}
-{#            </tr>#}
-{#            <tr>#}
-{#                <th>{{ 'general.ip'|trans }}</th>#}
-{#                <td>{{ user.ip|default('-') }}</td>#}
-{#            </tr>#}
-{#        </table>#}
+        <table class="table">
+            <tr>
+                <th>{{ 'Created'|trans }}</th>
+                <td>{% include 'components/date-field.html.twig' with {date: user.createdAt} only %}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Updated'|trans }}</th>
+                <td>{% include 'components/date-field.html.twig' with {date: user.updatedAt} only %}</td>
+            </tr>
+        </table>
     {% endif %}
 
     {% if form.plainPassword is defined %}

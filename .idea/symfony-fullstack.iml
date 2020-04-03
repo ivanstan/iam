@@ -125,5 +125,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="@types/react-dom" level="application" />
+    <orderEntry type="library" name="7aab1fb6aa" level="application" />
   </component>
 </module>

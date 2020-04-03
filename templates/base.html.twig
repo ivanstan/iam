@@ -9,12 +9,12 @@
     {% endblock %}
 </head>
 <body>
-{% include 'components/verify-notification.html.twig' %}
 <div id="app-root"></div>
 {% block body %}
 {% endblock %}
 {% block javascripts %}
     {% include('components/globals.html.twig') %}
+    <script src="https://kit.fontawesome.com/f3739e2a5a.js" crossorigin="anonymous"></script>
     <script src="{{ asset('build/runtime.js') }}"></script>
     <script src="{{ asset('build/vendors~app.js') }}"></script>
     <script src="{{ asset('build/app.js') }}"></script>
