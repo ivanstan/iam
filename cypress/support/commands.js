@@ -36,5 +36,16 @@ Cypress.Commands.add('login', (email, password) => {
 });
 
 Cypress.Commands.add('logout', () => {
-  cy.get('[data-test="logout"]').click({force: true});
+  cy.get('[data-test="logout"]').click({ force: true });
+});
+
+Cypress.Commands.add('deleteUser', email => {
+  cy.login('admin@example.com', 'test123');
+
+  cy.navigate('/admin/users');
+  cy.get(`[data-user="edit-user-${email}"] .delete-button`).click();
+
+  cy.get('[data-test="yes"]').click();
+
+  cy.wait(1000);
 });

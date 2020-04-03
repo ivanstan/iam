@@ -84,6 +84,8 @@ class SecurityService
     private function useToken(?UserToken $token): ?User {
         if (!$token || !$token->isValid(DateTimeService::getCurrentUTC())) {
             return null;
+
+            // ToDo throw exception here
         }
 
         $user = $token->getUser();
@@ -91,6 +93,8 @@ class SecurityService
         $this->login($user);
 
         $user->setVerified(true);
+        $user->setUpdated();
+
         $this->em->remove($token);
         $this->em->flush();
 

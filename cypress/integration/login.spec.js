@@ -1,5 +1,5 @@
 describe('Security', function() {
-  context('Login Form', () => {
+  context('Login', () => {
     it('Login form validation', () => {
       cy.navigate('/login');
 
@@ -42,41 +42,83 @@ describe('Security', function() {
     });
   });
 
-  it('Verification', () => {
-    cy.navigate('/login');
-    cy.login('admin@example.com', 'test123');
+  it('Registration and verification', () => {
+    // register new user
+    cy.navigate('/register');
+    cy.get('[data-test="email"]').type('test@example.com');
+    cy.get('[data-test="password"]').type('test123');
+    cy.get('[data-test="repeat-password"]').type('test123');
+    cy.get('[data-test="submit"]').click();
 
-    // assert that admin is not verified and request verification mail
+    // login with new user
+    cy.navigate('/login');
+    cy.get('[name="email"]').type('test@example.com');
+    cy.get('[name="password"]').type('test123');
+    cy.get('[data-test="submit"]').click();
+    cy.get('header [data-test="user-email"]').contains('test@example.com');
+
+    // request verification mail
     cy.get('[data-test="verify-notification"]').should('be.visible');
     cy.get('[data-test="verify-notification"] button').click();
+
+    // login with administrator
+    cy.logout();
+    cy.login('admin@example.com', 'test123');
 
     // get invitation link from mailbox
     cy.navigate('/admin/mailbox');
 
-    // attempt to use invitation link
-    cy.get('[data-test="mailbox-body"] .btn-primary').invoke('attr', 'href').then(url => {
-      url = url.replace(Cypress.env('baseUrl'), '');
+    cy.get('[data-test="mailbox-body"] .btn-primary')
+      .invoke('attr', 'href')
+      .then(url => {
+        // attempt to use invitation link
+        url = url.replace(Cypress.env('baseUrl'), '');
 
-      cy.logout();
-      cy.navigate(url);
+        cy.logout();
+        cy.navigate(url);
 
-      cy.get('[data-test="verify-notification"]').should('not.exist');
-    });
+        cy.get('[data-test="verify-notification"]').should('not.exist');
+
+        cy.logout();
+        cy.deleteUser('test@example.com');
+      });
   });
 
-  context('Registration', () => {
-    it('Registration works', () => {
-      cy.navigate('/register');
-      cy.get('[data-test="email"]').type('test@example.com');
-      cy.get('[data-test="password"]').type('test123');
-      cy.get('[data-test="repeat-password"]').type('test123');
-      cy.get('[data-test="submit"]').click();
+  it('Recover password', () => {
+    cy.navigate('/recovery');
+    cy.get('[data-test="email"]').type('user3@example.com');
+    cy.get('[data-test="submit"]').click();
 
-      cy.navigate('/login');
-      cy.get('[name="email"]').type('test@example.com');
-      cy.get('[name="password"]').type('test123');
-      cy.get('[data-test="submit"]').click();
-      cy.get('header [data-test="user-email"]').contains('test@example.com');
-    });
+    // login with administrator
+    cy.login('admin@example.com', 'test123');
+
+    // get password reset link from mailbox
+    cy.navigate('/admin/mailbox');
+
+    cy.get('[data-test="mailbox-body"] .btn-primary')
+      .invoke('attr', 'href')
+      .then(url => {
+        // attempt to use invitation link
+        url = url.replace(Cypress.env('baseUrl'), '');
+
+        cy.logout();
+        cy.navigate(url);
+
+        cy.get('[data-test="password"]').type('qwe123');
+        cy.get('[data-test="repeat-password"]').type('qwe123');
+        cy.get('[data-test="submit"]');
+        cy.wait(2000);
+        cy.navigate('/');
+        cy.wait(2000);
+        cy.logout();
+        cy.login('user3@example.com', 'qwe123');
+        cy.get('header [data-test="user-email"]').contains('user3@example.com');
+        cy.get('[data-test="verify-notification"]').should('not.exist');
+      });
+  });
+
+  it('Inactive user can\'t login', () => {
+    cy.login('user1@example.com', 'test123');
+    cy.get('[data-test="alert-danger"]').should('be.visible');
   });
 });

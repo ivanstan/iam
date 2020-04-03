@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\Mail;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerAwareTrait;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
@@ -13,17 +14,19 @@ use Twig\Environment;
 
 class MailerService
 {
-    private string $mailFrom;
-    protected EntityManagerInterface $entityManager;
-    private MailerInterface $mailer;
-    private Environment $twig;
+    use LoggerAwareTrait;
+
+    protected string $mailFrom;
+    protected EntityManagerInterface $em;
+    protected MailerInterface $mailer;
+    protected Environment $twig;
 
     public function __construct($mailFrom, MailerInterface $mailer, Environment $twig, EntityManagerInterface $entityManager)
     {
         $this->mailFrom = $mailFrom;
         $this->mailer = $mailer;
         $this->twig = $twig;
-        $this->entityManager = $entityManager;
+        $this->em = $entityManager;
     }
 
     public function send(TemplatedEmail $email): void
@@ -38,22 +41,19 @@ class MailerService
                 ->subject($email->getSubject())
                 ->html($body);
 
-            $mail = new Mail();
-            $mail->setFrom($this->mailFrom);
-            $mail->setTo($address->getAddress());
-            $mail->setSubject($email->getSubject());
-            $mail->setBody($body);
-
-            $this->entityManager->persist($mail);
-            $this->entityManager->flush();
-
             try {
-                $test = $this->mailer->send($message);
+                $this->mailer->send($message);
             } catch (TransportExceptionInterface $e) {
-                print_r($e);
-                // ToDo: log
-
+                $this->logger->warning(sprintf('Unable to send mail with exception: %s', $e->getMessage()));
             } finally {
+                $mail = new Mail();
+                $mail->setFrom($this->mailFrom);
+                $mail->setTo($address->getAddress());
+                $mail->setSubject($email->getSubject());
+                $mail->setBody($body);
+
+                $this->em->persist($mail);
+                $this->em->flush();
             }
         }
     }

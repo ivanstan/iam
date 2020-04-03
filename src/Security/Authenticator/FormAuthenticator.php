@@ -26,7 +26,7 @@ class FormAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
     use TargetPathTrait;
     use TranslatorAwareTrait;
 
-    private EntityManagerInterface $entityManager;
+    private EntityManagerInterface $em;
     private UrlGeneratorInterface $urlGenerator;
     private CsrfTokenManagerInterface $csrfTokenManager;
     private UserPasswordEncoderInterface $passwordEncoder;
@@ -37,7 +37,7 @@ class FormAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $passwordEncoder
     ) {
-        $this->entityManager = $entityManager;
+        $this->em = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
@@ -70,7 +70,7 @@ class FormAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
             throw new InvalidCsrfTokenException();
         }
 
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
+        $user = $this->em->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
 
         if (!$user) {
             // fail authentication with a custom error

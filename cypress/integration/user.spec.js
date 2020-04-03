@@ -1,14 +1,12 @@
 describe('User', function() {
   context('Admin', () => {
-    beforeEach(() => {
-      cy.login('admin@example.com', 'test123');
-    });
-
     it('Show user management', () => {
+      cy.login('admin@example.com', 'test123');
       cy.navigate('/admin/users');
     });
 
-    it('Create user works', () => {
+    it('Create user', () => {
+      cy.login('admin@example.com', 'test123');
       // create new user
       cy.navigate('/admin/user/new');
       cy.get('[data-test="email"]').type('test1@example.com');
@@ -18,21 +16,17 @@ describe('User', function() {
 
       cy.logout();
       // attempt login with new user
-      cy.navigate('/login');
       cy.login('test1@example.com', 'test123');
       cy.url().should('include', Cypress.env('baseUrl'));
       cy.get('header [data-test="user-email"]').contains('test1@example.com');
 
       cy.logout();
       // login with admin and delete user
-      cy.navigate('/login');
-      cy.login('admin@example.com', 'test123');
-      cy.navigate('/admin/users');
-      cy.get('[data-user="edit-user-test1@example.com"] .delete').click();
-      cy.type('{enter}');
+      cy.deleteUser('test1@example.com');
     });
 
-    it('Invitation works', () => {
+    it('Invitation', () => {
+      cy.login('admin@example.com', 'test123');
       // invite new user
       cy.navigate('/admin/user/new');
       cy.get('[data-test="email"]').type('test2@example.com');
@@ -57,7 +51,6 @@ describe('User', function() {
 
           // attempt to login with new password
           cy.logout();
-          cy.navigate('/login');
           cy.login('test2@example.com', 'test123');
           cy.get('header [data-test="user-email"]').contains('test2@example.com');
         }

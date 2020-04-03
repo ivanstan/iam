@@ -1,7 +1,7 @@
 {% if app.request.hasPreviousSession %}
     {% for label, messages in app.session.flashbag.all %}
         {% for message in messages %}
-            <div class="alert alert-{{ label }}" role="alert">
+            <div class="alert alert-{{ label }}" role="alert" data-test="alert-{{ label }}">
                 {{ message|raw }}
             </div>
         {% endfor %}

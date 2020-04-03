@@ -1,7 +1,7 @@
 describe('Profile', function() {
   context('Admin', () => {
-    it('Change password works', () => {
-      cy.login('test@example.com', 'test123');
+    it('Change password', () => {
+      cy.login('user4@example.com', 'test123');
       cy.navigate('/user/account');
 
       cy.get('[data-test="current-password"]').type('test123');
@@ -10,8 +10,8 @@ describe('Profile', function() {
       cy.get('[data-test="submit"]').click();
 
       cy.logout();
-      cy.login('test@example.com', 'qwe123');
-      cy.url().should('include', Cypress.env('baseUrl'));
+      cy.login('user4@example.com', 'qwe123');
+      cy.get('header [data-test="user-email"]').contains('user4@example.com');
     });
   });
 });

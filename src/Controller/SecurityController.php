@@ -124,7 +124,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
                 'constraints' => [new Email()],
                 'label' => false,
                 'required' => true,
-                'attr' => ['placeholder' => 'Email'],
+                'attr' => ['placeholder' => 'Email', 'data-test' => 'email'],
             ]
         )->getForm();
 
@@ -184,11 +184,23 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
     }
 
     /**
+     * @Route("/password/recover/{token}", name="security_recovery_token")
      * @Route("/verify/{token}", name="security_verification_token")
      * @Route("/invitation/{token}", name="security_invitation_token")
      */
     public function verifyToken(Request $request, string $token): RedirectResponse
     {
+        if ($this->getUser() !== null) {
+            $this->addFlash(
+                'warning',
+                $this->translator->trans(
+                    'You are already have active session. Please logout before using provided url.',
+                    )
+            );
+
+            return $this->redirectToRoute('app_index');
+        }
+
         switch ($request->get('_route')) {
             case 'security_verification_token': // verification
                 $redirect = 'app_index';
@@ -198,7 +210,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
                 $user = $this->securityService->verify($token);
                 break;
             case 'security_recovery_token': // recovery
-                $redirect = 'security_settings';
+                $redirect = 'app_user_password_recover';
                 $failMessageId = 'user.messages.recovery.bad_token';
                 $successMessage = $this->translator->trans('user.messages.recovery.success');
                 $logMessage = 'User %s has used login token';
@@ -234,19 +246,18 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
     }
 
     /**
-     * @Route("/recover-password/{token}", name="security_recovery_token")
+     * @Route("/user/password/recover", name="app_user_password_recover")
+     * @IsGranted("ROLE_USER")
      */
     public function recover(Request $request, EntityManagerInterface $em, string $token = null): Response
     {
-        $entity = $em->getRepository(UserToken::class)->getToken($token, UserRecoveryToken::class);
+        $user = $this->getUser();
 
-        if ($entity === null || !$entity->isValid(DateTimeService::getCurrentUTC())) {
+        if ($user === null) {
             $this->addFlash('warning', $this->translator->trans('security.token.invalid'));
 
             return $this->redirectToRoute('security_recovery');
         }
-
-        $user = $entity->getUser();
 
         $form = $this->createForm(PasswordRepeatType::class);
         $form->handleRequest($request);
@@ -258,15 +269,11 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
             $user->setVerified(true);
             $user->setUpdated();
 
-            if (isset($entity)) {
-                $em->remove($entity);
-            }
-
             $em->flush();
 
             $this->addFlash('success', $this->translator->trans('user.password.changed'));
 
-            $this->redirectToRoute('app_index');
+            return $this->redirectToRoute('app_index');
         }
 
         return $this->render(
