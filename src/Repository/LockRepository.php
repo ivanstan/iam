@@ -69,7 +69,7 @@ class LockRepository extends ServiceEntityRepository
 
         $lock = new Lock($lockName);
         $lock->setData($data);
-        $lock->setValue(1);
+        $lock->setValue(0);
         $lock->setExpire($expire);
 
         $this->getEntityManager()->persist($lock);

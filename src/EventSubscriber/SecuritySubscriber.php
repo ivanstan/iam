@@ -96,7 +96,7 @@ class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterfa
 
                 $session->getFlashBag()->add(
                     'danger',
-                    $this->translator->trans('login.messages.attempts_left', ['%attempts_left%' => $attemptsLeft])
+                    $this->translator->trans('login.messages.attempts_left %attempts_left%', ['%attempts_left%' => $attemptsLeft])
                 );
             }
         }
