@@ -9,7 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-class AdminSettings extends AbstractType
+class AdminSettingsForm extends AbstractType
 {
     protected SettingsRepository $repository;
 

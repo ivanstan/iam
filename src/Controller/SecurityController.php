@@ -6,7 +6,7 @@ use App\Entity\Token\UserRecoveryToken;
 use App\Entity\Token\UserToken;
 use App\Entity\User;
 use App\Form\PasswordRepeatType;
-use App\Form\RegisterType;
+use App\Form\RegistrationForm;
 use App\Repository\SettingsRepository;
 use App\Security\Role;
 use App\Security\SecurityMailerService;
@@ -85,7 +85,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
         }
 
         $user = new User();
-        $form = $this->createForm(RegisterType::class, $user);
+        $form = $this->createForm(RegistrationForm::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

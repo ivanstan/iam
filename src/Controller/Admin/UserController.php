@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
-use App\Form\UserAdminType;
+use App\Form\UserEditForm;
 use App\Repository\UserRepository;
 use App\Security\SecurityMailerService;
 use App\Service\Traits\TranslatorAwareTrait;
@@ -46,7 +46,7 @@ class UserController extends AbstractController
     {
         $user = $user ?? new User();
 
-        $form = $this->createForm(UserAdminType::class, $user);
+        $form = $this->createForm(UserEditForm::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

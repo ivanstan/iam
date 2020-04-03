@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Form\AdminSettings;
+use App\Form\AdminSettingsForm;
 use App\Repository\SettingsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,12 +19,12 @@ class SettingsController extends AbstractController
      */
     public function users(Request $request, SettingsRepository $repository): Response
     {
-        $form = $this->createForm(AdminSettings::class);
+        $form = $this->createForm(AdminSettingsForm::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            
+
             $repository->set(SettingsRepository::REGISTRATION_ENABLED, $data[SettingsRepository::REGISTRATION_ENABLED] ?? true);
         }
 

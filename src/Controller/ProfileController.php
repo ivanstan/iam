@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\PasswordRepeatType;
-use App\Form\UserType;
+use App\Form\UserProfileForm;
 use App\Service\Traits\TranslatorAwareTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +32,7 @@ class ProfileController extends AbstractController
             $preference->setTimezone($this->getParameter('default_timezone'));
         }
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserProfileForm::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
