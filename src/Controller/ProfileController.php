@@ -88,7 +88,7 @@ class ProfileController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            $this->addFlash('success', $this->translator->trans('user.messages.password.change'));
+            $this->addFlash('success', $this->translator->trans('Password has been successfully changed.'));
 
             return $this->redirectToRoute('user_profile_security');
         }

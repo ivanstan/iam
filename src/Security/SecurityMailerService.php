@@ -15,15 +15,17 @@ class SecurityMailerService
 {
     use TranslatorAwareTrait;
 
-    private EntityManagerInterface $em;
-    private MailerService $mailer;
-    private TokenGenerator $generator;
+    protected string $appName;
+    protected EntityManagerInterface $em;
+    protected MailerService $mailer;
+    protected TokenGenerator $generator;
 
-    public function __construct(EntityManagerInterface $em, MailerService $mailer, TokenGenerator $generator)
+    public function __construct(EntityManagerInterface $em, MailerService $mailer, TokenGenerator $generator, string $appName)
     {
         $this->em = $em;
         $this->mailer = $mailer;
         $this->generator = $generator;
+        $this->appName = $appName;
     }
 
     /**
@@ -35,7 +37,7 @@ class SecurityMailerService
         $this->em->persist($token);
         $this->em->flush();
 
-        $subject = $this->translator->trans('verify.subject');
+        $subject = $this->translator->trans('Verify your account | %app_name%', ['%app_name%' => $this->appName]);
 
         $email = (new TemplatedEmail())
             ->to($user->getEmail())
@@ -60,7 +62,7 @@ class SecurityMailerService
         $this->em->persist($token);
         $this->em->flush();
 
-        $subject = $this->translator->trans('recovery.subject');
+        $subject = $this->translator->trans('Password recovery | %app_name%', ['%app_name%' => $this->appName]);
         $email = (new TemplatedEmail())
             ->to($user->getEmail())
             ->subject($subject)
@@ -84,7 +86,7 @@ class SecurityMailerService
         $this->em->persist($token);
         $this->em->flush();
 
-        $subject = $this->translator->trans('invite.subject');
+        $subject = $this->translator->trans('You have invitation | %app_name%', ['%app_name%' => $this->appName]);
         $email = (new TemplatedEmail())
             ->to($user->getEmail())
             ->subject($subject)

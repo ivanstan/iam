@@ -96,7 +96,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
             $this->logger->info(sprintf('New user %s has registered', $user->getEmail()));
 
             $this->securityMailer->requestVerification($user);
-            $this->addFlash('success', $this->translator->trans('user.messages.register.success'));
+            $this->addFlash('success', $this->translator->trans('You have registered successfully.'));
 
             return $this->redirectToRoute('app_login');
         }
@@ -136,7 +136,13 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
                 $this->logger->info(sprintf('User %s has requested password recovery', $user->getEmail()));
             }
 
-            $this->addFlash('success', $this->translator->trans('user.messages.recovery.request'));
+            $this->addFlash(
+                'success',
+                $this->translator->trans(
+                    'You have requested account recovery. Email will be sent to: %email% with further instructions.',
+                    ['email' => $data['email']]
+                )
+            );
 
             return $this->redirectToRoute('app_login');
         }
@@ -167,7 +173,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
             $this->addFlash(
                 'info',
                 $this->translator->trans(
-                    'user.messages.verify.request',
+                    'Verification mail with further instructions is sent to %email%.',
                     [
                         '%email%' => $user->getEmail(),
                     ]
@@ -201,22 +207,22 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
         switch ($request->get('_route')) {
             case 'security_verification_token': // verification
                 $redirect = 'app_index';
-                $failMessageId = 'user.messages.verify.bad_token';
-                $successMessage = $this->translator->trans('user.messages.verify.success');
+                $failMessage = 'Verification link is not valid or expired';
+                $successMessage = 'Your account is successfully verified.';
                 $logMessage = 'User %s has verified';
                 $user = $this->securityService->verify($token);
                 break;
             case 'security_recovery_token': // recovery
                 $redirect = 'app_user_password_recover';
-                $failMessageId = 'user.messages.recovery.bad_token';
-                $successMessage = $this->translator->trans('user.messages.recovery.success');
+                $failMessage = 'Recovery link is not valid or expired';
+                $successMessage = 'You have successfully recovered your account.';
                 $logMessage = 'User %s has used login token';
                 $user = $this->securityService->recover($token);
                 break;
             default: // invitation
                 $redirect = 'app_user_password';
-                $failMessageId = 'user.messages.invitation.bad_token';
-                $successMessage = $this->translator->trans('user.messages.invitation.success');
+                $failMessage = 'Invitation is not valid or expired';
+                $successMessage = 'You have finished invitation successfully.';
                 $logMessage = 'User %s has received invitation and verified account';
                 $user = $this->securityService->recover($token);
         }
@@ -225,7 +231,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
             $this->addFlash(
                 'danger',
                 $this->translator->trans(
-                    $failMessageId,
+                    $failMessage,
                     [
                         '%url%' => $this->generateUrl('security_recovery'),
                     ]
@@ -237,7 +243,10 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
 
         $this->logger->info(sprintf($logMessage, $user->getEmail()));
 
-        $this->addFlash('success', $successMessage);
+        $this->addFlash(
+            'success',
+            $this->translator->trans($successMessage)
+        );
 
         return $this->redirectToRoute($redirect);
     }
@@ -251,7 +260,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
         $user = $this->getUser();
 
         if ($user === null) {
-            $this->addFlash('warning', $this->translator->trans('security.token.invalid'));
+            $this->addFlash('warning', $this->translator->trans('Unable to find user session.'));
 
             return $this->redirectToRoute('security_recovery');
         }
@@ -268,7 +277,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
 
             $em->flush();
 
-            $this->addFlash('success', $this->translator->trans('user.password.changed'));
+            $this->addFlash('success', $this->translator->trans('Password has been successfully changed.'));
 
             return $this->redirectToRoute('app_index');
         }
@@ -305,7 +314,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
             $user->setUpdated();
             $em->flush();
 
-            $this->addFlash('success', $this->translator->trans('user.password.changed'));
+            $this->addFlash('success', $this->translator->trans('New password has been set.'));
 
             return $this->redirectToRoute('app_index');
         }

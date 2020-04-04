@@ -56,7 +56,7 @@ class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterfa
         if ($lock && $lock->getValue() > self::LOGIN_ATTEMPTS_BAN) {
             throw new AccessDeniedHttpException(
                 $this->translator->trans(
-                    'pages.ban.body',
+                    'You have been denied access. If you believe this was a mistake, please contact administrator.',
                     [
                         '%ip%' => $event->getRequest()->getClientIp(),
                     ]
@@ -96,7 +96,7 @@ class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterfa
 
                 $session->getFlashBag()->add(
                     'danger',
-                    $this->translator->trans('login.messages.attempts_left %attempts_left%', ['%attempts_left%' => $attemptsLeft])
+                    $this->translator->trans('You have %attempts_left% attempts left. You risk being denied access.', ['%attempts_left%' => $attemptsLeft])
                 );
             }
         }

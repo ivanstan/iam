@@ -67,7 +67,7 @@ class FormAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException($this->translator->trans('Invalid CSRF token'));
+            throw new InvalidCsrfTokenException($this->translator->trans('Invalid CSRF token.'));
         }
 
         $user = $this->em->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
@@ -79,11 +79,11 @@ class FormAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException($this->translator->trans('login.messages.bad_credentials'));
+            throw new CustomUserMessageAuthenticationException($this->translator->trans('Incorrect email or password.'));
         }
 
         if (!$user->isActive()) {
-            throw new CustomUserMessageAuthenticationException($this->translator->trans('login.messages.user_blocked'));
+            throw new CustomUserMessageAuthenticationException($this->translator->trans('Your account was suspended. Please contact administrator.'));
         }
 
         return $user;

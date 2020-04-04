@@ -62,7 +62,7 @@ class UserController extends AbstractController
                 try {
                     $recovery->invite($user);
                 } catch (\Exception $e) {
-                    $this->addFlash('danger', $this->translator->trans('misc.messages.email_fail'));
+                    $this->addFlash('danger', $this->translator->trans('Unable to send mail.'));
                 }
             }
 
@@ -87,7 +87,7 @@ class UserController extends AbstractController
         $currentUser = $this->getUser();
 
         if ($currentUser->getId() === $user->getId()) {
-            $this->addFlash('warning', $this->translator->trans('Unable to delete yourself.'));
+            $this->addFlash('warning', $this->translator->trans('You cannot delete your own account.'));
 
             return $this->redirectToRoute('app_admin_users');
         }
