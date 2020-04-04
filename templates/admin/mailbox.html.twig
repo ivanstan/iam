@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}{{ "Mailbox"|trans }} {{ parent() }}{% endblock %}
 
 {% block body %}
     {% include 'components/navbar.html.twig' %}

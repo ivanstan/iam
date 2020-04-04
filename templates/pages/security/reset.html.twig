@@ -1,12 +1,12 @@
 {% extends 'card.html.twig' %}
 
-{% block title %}{{ 'recovery.title'|trans }} | {{ parent() }}{% endblock %}
+{% block title %}{{ 'Recover account'|trans }} {{ parent() }}{% endblock %}
 
 {% block card %}
-    <h3 class="mb-3 text-center">{{ 'recovery.title'|trans }}</h3>
+    <h3 class="mb-3 text-center">{{ 'Recover account'|trans }}</h3>
     {{ include('components/messages.html.twig') }}
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    {% include 'components/form-submit.html.twig' with {'title':'recovery.submit'|trans } only %}
+    {% include 'components/form-submit.html.twig' with {'title':'Submit'|trans } only %}
     {{ form_end(form) }}
 {% endblock %}
