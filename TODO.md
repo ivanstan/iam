@@ -1,14 +1,11 @@
 # Backlog
 
 * Session management
-* Password history
-* Change email
 * Inform user of changed password
 * Two factor authentication on new devices
 * Inform user when someone tries to login as him
 * Write last user access in session table on Kernel shutdown
 * Add option for user avatar
-* Add ability to show flash messages by throwing exception
 * Create language selector
 
 # Tasks
@@ -48,3 +45,23 @@
 - When user requests account delete, account will also be deactivated.
 - If user logs in before number of days had passed, account is activated and
   delete request is canceled.
+
+### Change email
+- Create feature flag.
+- Create a feature for user to make a request for changing account's email
+- Form should exist on page `/user/account`, with ability to enter mail and send
+  request.
+- Upon request system shall send two emails one to old email with confirmation
+  link, upon clicking link email should be changed.
+- Another email should be sent to new email informing that this address is now
+  owner of account on [Application name]. If owner agrees with change no action
+  should be taken. If owner disagrees (mistake happened), he should be able to
+  click link to cancel change request and revert mail change.
+- Number of days confirmation mails are active - TBD.
+
+### Password history
+- Create feature flag.
+- All previous user password hashes should be stored and checked when user
+  enters new password during account recovery.
+- During account recovery user should not be able to enter any of the previous
+  passwords.
