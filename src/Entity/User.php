@@ -7,7 +7,6 @@ use App\Entity\Traits\UpdatedTrait;
 use App\Security\Role;
 use App\Service\DateTimeService;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\PersistentCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -188,7 +187,7 @@ class User implements UserInterface
 
     public function setPlainPassword($plainPassword): void
     {
-        if (is_array($plainPassword)) {
+        if (\is_array($plainPassword)) {
             return;
         }
 

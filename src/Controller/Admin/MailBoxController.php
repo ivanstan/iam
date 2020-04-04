@@ -31,7 +31,7 @@ class MailBoxController extends AbstractController
 
         if ($mail === null) {
             $iterator = $pager->getIterator();
-            $mail = $iterator[0] ?? null;
+            $mail = $iterator->getArrayCopy()[0] ?? null;
         }
 
         return $this->render(

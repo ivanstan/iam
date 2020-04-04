@@ -33,7 +33,7 @@ class TokenGenerator
 
     public function generateUrl(Token $token): ?string
     {
-        $pathName = self::$pathNameMap[get_class($token)] ?? null;
+        $pathName = self::$pathNameMap[\get_class($token)] ?? null;
 
         if ($pathName === null) {
             return null;

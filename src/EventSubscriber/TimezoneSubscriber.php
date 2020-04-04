@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class TimezoneSubscriber implements EventSubscriberInterface
 {
-    private $token;
+    private TokenStorageInterface $token;
 
     public function __construct(TokenStorageInterface $token)
     {

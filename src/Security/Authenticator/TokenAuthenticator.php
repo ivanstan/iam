@@ -38,7 +38,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
     {
         $token = $this->em->getRepository(Token::class)->getAuthenticationToken($credentials['token']);
 
-        if (null === $token) {
+        if ($token === null) {
             return null;
         }
 

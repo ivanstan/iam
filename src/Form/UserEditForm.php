@@ -23,7 +23,7 @@ class UserEditForm extends AbstractType
             static function (FormEvent $event) {
                 $user = $event->getData();
                 $form = $event->getForm();
-                $isNew = !$user || null === $user->getId();
+                $isNew = !$user || $user->getId() === null;
 
                 $form->add(
                     'email',

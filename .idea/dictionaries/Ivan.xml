@@ -1,7 +1,11 @@
 <component name="ProjectDictionaryState">
   <dictionary name="Ivan">
     <words>
+      <w>bcrypt</w>
       <w>csrf</w>
+      <w>dateinterval</w>
+      <w>exts</w>
+      <w>maxlifetime</w>
       <w>warmup</w>
     </words>
   </dictionary>

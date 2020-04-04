@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Token\UserRecoveryToken;
-use App\Entity\Token\UserToken;
 use App\Entity\User;
 use App\Form\PasswordRepeatType;
 use App\Form\RegistrationForm;
@@ -11,7 +9,6 @@ use App\Repository\SettingsRepository;
 use App\Security\Role;
 use App\Security\SecurityMailerService;
 use App\Security\SecurityService;
-use App\Service\DateTimeService;
 use App\Service\Traits\TranslatorAwareTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerAwareInterface;
@@ -249,7 +246,7 @@ class SecurityController extends AbstractController implements LoggerAwareInterf
      * @Route("/user/password/recover", name="app_user_password_recover")
      * @IsGranted("ROLE_USER")
      */
-    public function recover(Request $request, EntityManagerInterface $em, string $token = null): Response
+    public function recover(Request $request, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
 

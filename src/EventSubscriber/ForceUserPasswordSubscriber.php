@@ -9,6 +9,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Controller\ErrorController;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -46,15 +47,14 @@ class ForceUserPasswordSubscriber implements EventSubscriberInterface
         /** @var User $user */
         $user = $this->tokenStorage->getToken()->getUser();
 
-        return !(!is_object($user) || $user->getPassword() !== null);
+        return !(!\is_object($user) || $user->getPassword() !== null);
     }
 
     protected function controller(Request $request): Response
     {
-        $request->getSession()->getFlashBag()->add(
-            'info',
-            $this->translator->trans('settings.password_is_null')
-        );
+        /** @var FlashBagInterface $flashBag */
+        $flashBag = $request->getSession()->getFlashBag();
+        $flashBag->add('info', $this->translator->trans('settings.password_is_null'));
 
         return new RedirectResponse(
             $this->urlGenerator->generate('app_user_password')
@@ -76,8 +76,8 @@ class ForceUserPasswordSubscriber implements EventSubscriberInterface
             return false;
         }
 
-        if (is_array($controller) && isset($controller[0])) {
-            $controller[0] = get_class($controller[0]);
+        if (\is_array($controller) && isset($controller[0])) {
+            $controller[0] = \get_class($controller[0]);
         }
 
         return $controller !== self::REDIRECT_TO;

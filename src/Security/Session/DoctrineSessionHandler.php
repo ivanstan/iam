@@ -59,7 +59,7 @@ class DoctrineSessionHandler implements \SessionHandlerInterface
 
         $resource = $session->getData();
 
-        return is_resource($resource) ? stream_get_contents($resource) : $resource;
+        return \is_resource($resource) ? stream_get_contents($resource) : $resource;
     }
 
     public function write($id, $data): bool

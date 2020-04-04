@@ -14,15 +14,10 @@ class MailRepository extends ServiceEntityRepository
         parent::__construct($registry, Mail::class);
     }
 
-    public function findAll($query = null): QueryBuilder
+    public function findAll(): QueryBuilder
     {
         $builder = $this->createQueryBuilder('m');
-
         $builder->orderBy('m.created', 'DESC');
-
-        if ($query !== null) {
-//            $builder->andWhere('u.email LIKE :query')->setParameter('query', '%'.$query.'%');
-        }
 
         return $builder;
     }

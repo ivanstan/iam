@@ -32,7 +32,7 @@ class PasswordHashSubscriber
         if ($entity instanceof User) {
             $this->encode($entity);
 
-            $meta = $args->getEntityManager()->getClassMetadata(get_class($entity));
+            $meta = $args->getEntityManager()->getClassMetadata(\get_class($entity));
             $args->getEntityManager()->getUnitOfWork()->recomputeSingleEntityChangeSet($meta, $entity);
         }
     }

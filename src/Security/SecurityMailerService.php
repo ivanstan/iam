@@ -15,14 +15,9 @@ class SecurityMailerService
 {
     use TranslatorAwareTrait;
 
-    /** @var EntityManagerInterface */
-    private $em;
-
-    /** @var MailerInterface */
-    private $mailer;
-
-    /** @var TokenGenerator */
-    private $generator;
+    private EntityManagerInterface $em;
+    private MailerService $mailer;
+    private TokenGenerator $generator;
 
     public function __construct(EntityManagerInterface $em, MailerService $mailer, TokenGenerator $generator)
     {
@@ -32,7 +27,6 @@ class SecurityMailerService
     }
 
     /**
-     * @throws TransportExceptionInterface
      * @throws \Exception
      */
     public function requestVerification(User $user): void
@@ -41,7 +35,7 @@ class SecurityMailerService
         $this->em->persist($token);
         $this->em->flush();
 
-        $subject = $this->translator->trans('verify.subject', [], 'email');
+        $subject = $this->translator->trans('verify.subject');
 
         $email = (new TemplatedEmail())
             ->to($user->getEmail())
@@ -58,7 +52,6 @@ class SecurityMailerService
     }
 
     /**
-     * @throws TransportExceptionInterface
      * @throws \Exception
      */
     public function requestRecovery(User $user): void
@@ -67,7 +60,7 @@ class SecurityMailerService
         $this->em->persist($token);
         $this->em->flush();
 
-        $subject = $this->translator->trans('recovery.subject', []);
+        $subject = $this->translator->trans('recovery.subject');
         $email = (new TemplatedEmail())
             ->to($user->getEmail())
             ->subject($subject)
@@ -83,7 +76,6 @@ class SecurityMailerService
     }
 
     /**
-     * @throws TransportExceptionInterface
      * @throws \Exception
      */
     public function invite(User $user): void
@@ -92,7 +84,7 @@ class SecurityMailerService
         $this->em->persist($token);
         $this->em->flush();
 
-        $subject = $this->translator->trans('invite.subject', [], 'email');
+        $subject = $this->translator->trans('invite.subject');
         $email = (new TemplatedEmail())
             ->to($user->getEmail())
             ->subject($subject)

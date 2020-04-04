@@ -43,9 +43,9 @@ class FormAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
         $this->passwordEncoder = $passwordEncoder;
     }
 
-    public function supports(Request $request)
+    public function supports(Request $request): bool
     {
-        return 'app_login' === $request->attributes->get('_route') && $request->isMethod('POST');
+        return $request->attributes->get('_route') === 'app_login' && $request->isMethod('POST');
     }
 
     public function getCredentials(Request $request)
@@ -67,7 +67,7 @@ class FormAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException();
+            throw new InvalidCsrfTokenException($this->translator->trans('Invalid CSRF token'));
         }
 
         $user = $this->em->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
