@@ -25,12 +25,13 @@ add('writable_dirs', []);
 // Writable dirs by web server
 add('writable_dirs', []);
 
-// Hosts
 host('ivanstanojevic.me')
     ->user('glutenfr')
     ->port(2233)
     ->stage('stage')
-    ->set('deploy_path', '~/projects/dev.ivanstanojevic.me');
+    ->set('deploy_path','~/projects/dev.ivanstanojevic.me')
+    ->set('rsync_src', 'public')
+    ->set('rsync_dest','current/public');
 
 // Tasks
 task('build', function () {
@@ -40,11 +41,6 @@ task('build', function () {
 task('deploy:assets:install', function () {
     run('{{bin/php}} {{bin/console}} assets:install {{console_options}} {{release_path}}/public');
 })->desc('Install bundle assets');
-
-task('yarn:build', function () {
-    run('yarn install');
-    run('yarn build prod');
-});
 
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
@@ -60,7 +56,6 @@ task('deploy', [
     'deploy:shared',
     'deploy:assets',
     'deploy:vendors',
-    'yarn:build',
     'deploy:assets:install',
     'deploy:assetic:dump',
     'deploy:cache:clear',
