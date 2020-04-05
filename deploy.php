@@ -42,6 +42,11 @@ task('deploy:assets:install', function () {
     run('{{bin/php}} {{bin/console}} assets:install {{console_options}} {{release_path}}/public');
 })->desc('Install bundle assets');
 
+task('yarn:build', function () {
+    run('yarn');
+    run('yarn build');
+})->desc('Install bundle assets');
+
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
 
@@ -58,6 +63,7 @@ task('deploy', [
     'deploy:vendors',
     'deploy:assets:install',
     'deploy:assetic:dump',
+    'yarn:build',
     'deploy:cache:clear',
     'deploy:cache:warmup',
     'deploy:writable',
