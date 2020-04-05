@@ -41,7 +41,7 @@ class UserCreateCommand extends Command
         $question->setHidden(true);
         $password = $helper->ask($input, $output, $question);
 
-        $question = new ChoiceQuestion('Select role for new user?', Role::toArray(), 0);
+        $question = new ChoiceQuestion('Select role for new user?', array_values(Role::toArray()), 0);
         $question->setErrorMessage('Role \'%s\' is invalid.');
         $role = $helper->ask($input, $output, $question);
 

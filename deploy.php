@@ -40,9 +40,8 @@ task('deploy:assets:install', function () {
     run('{{bin/php}} {{bin/console}} assets:install {{console_options}} {{release_path}}/public');
 })->desc('Install bundle assets');
 
-task('yarn:build', function () {
-    run('cd {{release_path}} && yarn');
-    run('cd {{release_path}} && yarn build');
+task('copy', function () {
+    run('echo "scp -P 2233 -r ./public/build glutenfr@ivanstanojevic.me:/home/glutenfr/projects/dev.ivanstanojevic.me/current/public"');
 })->desc('Install bundle assets');
 
 // [Optional] if deploy fails automatically unlock.
@@ -61,7 +60,7 @@ task('deploy', [
     'deploy:vendors',
     'deploy:assets:install',
     'deploy:assetic:dump',
-    'yarn:build',
+    'copy',
     'deploy:cache:clear',
     'deploy:cache:warmup',
     'deploy:writable',
