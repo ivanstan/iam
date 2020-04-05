@@ -24,3 +24,8 @@ bin/console doctrine:reload
 ```
 bin/console user:create
 ```
+
+## Deployment
+```
+dep deploy stage
+```
