@@ -29,9 +29,7 @@ host('ivanstanojevic.me')
     ->user('glutenfr')
     ->port(2233)
     ->stage('stage')
-    ->set('deploy_path','~/projects/dev.ivanstanojevic.me')
-    ->set('rsync_src', 'public')
-    ->set('rsync_dest','current/public');
+    ->set('deploy_path', '~/projects/dev.ivanstanojevic.me');
 
 // Tasks
 task('build', function () {
@@ -43,8 +41,8 @@ task('deploy:assets:install', function () {
 })->desc('Install bundle assets');
 
 task('yarn:build', function () {
-    run('yarn');
-    run('yarn build');
+    run('cd {{release_path}} && yarn');
+    run('cd {{release_path}} && yarn build');
 })->desc('Install bundle assets');
 
 // [Optional] if deploy fails automatically unlock.
