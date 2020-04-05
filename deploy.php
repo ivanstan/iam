@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection ALL */
+
 namespace Deployer;
 
 require 'recipe/symfony.php';
@@ -23,7 +24,6 @@ add('writable_dirs', []);
 
 // Writable dirs by web server
 add('writable_dirs', []);
-
 
 // Hosts
 host('ivanstanojevic.me')
