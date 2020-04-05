@@ -8,6 +8,7 @@
         "ext-json": "*",
         "babdev/pagerfanta-bundle": "^2.1",
         "doctrine/annotations": "^1.8",
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
         "myclabs/php-enum": "^1.7",
         "sensio/framework-extra-bundle": "^5.5",
         "symfony/apache-pack": "^1.0",
@@ -35,7 +36,6 @@
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^3.3",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.14",
         "symfony/profiler-pack": "*",

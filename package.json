@@ -6,7 +6,7 @@
         "@babel/preset-react": "^7.0.0",
         "@material-ui/core": "^4.9.5",
         "@material-ui/icons": "^4.9.1",
-        "@symfony/webpack-encore": "^0.28.2",
+        "@symfony/webpack-encore": "^0.28.3",
         "babel-eslint": "^10.0.1",
         "bootstrap": "^4.4.1",
         "core-js": "^3.0.0",

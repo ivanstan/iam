@@ -41,8 +41,35 @@ task('deploy:assets:install', function () {
     run('{{bin/php}} {{bin/console}} assets:install {{console_options}} {{release_path}}/public');
 })->desc('Install bundle assets');
 
+task('yarn:build', function () {
+    run('yarn install');
+    run('yarn build prod');
+});
+
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
+
+task('deploy', [
+    'deploy:info',
+    'deploy:prepare',
+    'deploy:lock',
+    'deploy:release',
+    'deploy:update_code',
+    'deploy:clear_paths',
+    'deploy:create_cache_dir',
+    'deploy:shared',
+    'deploy:assets',
+    'deploy:vendors',
+    'yarn:build',
+    'deploy:assets:install',
+    'deploy:assetic:dump',
+    'deploy:cache:clear',
+    'deploy:cache:warmup',
+    'deploy:writable',
+    'deploy:symlink',
+    'deploy:unlock',
+    'cleanup',
+])->desc('Deploy your project');
 
 // Migrate database before symlink new release.
 before('deploy:symlink', 'database:migrate');
