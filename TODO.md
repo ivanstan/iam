@@ -9,6 +9,7 @@
 * Create language selector
 * Better mail preview ?
 * Test for optional registration
+* Admin should not be able to set its account inactive
 
 # Tasks
 

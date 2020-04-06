@@ -131,7 +131,7 @@ class User implements UserInterface
         // guarantee every user at least has ROLE_USER
         $roles[] = Role::USER;
 
-        return array_unique($roles);
+        return array_values(array_unique($roles));
     }
 
     public function setRoles(array $roles): self
