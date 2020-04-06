@@ -49,7 +49,7 @@ export class PasswordField extends React.Component<PasswordFieldPropsInterface, 
 
   render() {
     const { value, show } = this.state;
-    const { className, variant, label, fullWidth, required, onKeyPress } = this.props;
+    const { className, variant, label, fullWidth, required, onKeyPress, error } = this.props;
 
     return (
       <FormControl fullWidth={fullWidth} required={required} variant={variant} className={className}>
@@ -78,7 +78,8 @@ export class PasswordField extends React.Component<PasswordFieldPropsInterface, 
           type={show ? 'text' : 'password'}
           value={value}
         />
-        <FormHelperText {..._.pick(this.props, ['error'])}>
+
+        <FormHelperText error={error}>
           {this.props.helperText || ' '}
         </FormHelperText>
       </FormControl>

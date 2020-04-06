@@ -163,7 +163,7 @@ class LoginForm extends React.Component<LoginFormPropsInterface, any> {
       <input type="checkbox" name="_remember_me" defaultChecked className="hidden" />
 
       <If condition={registrationAllowed}>
-        <a href="/register" data-turbolinks-action="replace">{t('Register')}</a>
+        <a href="/register" data-test="register-link">{t('Register')}</a>
       </If>
 
       <Button
