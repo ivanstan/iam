@@ -7,8 +7,22 @@
 * Write last user access in session table on Kernel shutdown
 * Add option for user avatar
 * Create language selector
+* Better mail preview ?
+* Test for optional registration
 
 # Tasks
+
+### User list improvements
+- Sortable columns
+- Search
+
+### Timezone feature flag
+
+### Google analytics feature
+
+### Mailbox improvements
+- Search
+- Connect mailbox recipient and sender to user
 
 ### Contact form
 - Create feature flag in admin settings

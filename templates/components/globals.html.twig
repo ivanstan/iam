@@ -5,7 +5,7 @@
         locale: "{{ app.request.locale }}",
         user: '{{ app.user ? app.user|raw : null }}',
         settings: {
-            registrationEnabled: {{ settings.isRegistrationEnabled }}
+            registrationEnabled: {{ settings.isRegistrationEnabled ? 'true' : 'false' }}
         }
     };
 </script>
