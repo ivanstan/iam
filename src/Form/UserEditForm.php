@@ -12,15 +12,26 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints\Email;
 
 class UserEditForm extends AbstractType
 {
+    private ?UserInterface $user;
+
+    public function __construct(TokenStorageInterface $tokenStorage)
+    {
+        if ($tokenStorage->getToken()) {
+            $this->user = $tokenStorage->getToken()->getUser();
+        }
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
-            static function (FormEvent $event) {
+            function (FormEvent $event) {
                 $user = $event->getData();
                 $form = $event->getForm();
                 $isNew = !$user || $user->getId() === null;
@@ -69,6 +80,7 @@ class UserEditForm extends AbstractType
                         'data-test' => 'user-active',
                     ],
                     'data' => $isNew,
+                    'disabled' => $user->getId() === $this->user->getId(),
                 ];
 
                 if ($isNew) {

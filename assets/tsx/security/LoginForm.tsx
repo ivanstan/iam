@@ -116,16 +116,12 @@ class LoginForm extends React.Component<LoginFormPropsInterface, any> {
   };
 
   render() {
-    const { t, classes, registrationAllowed } = this.props;
+    const { t, classes, registrationAllowed, error } = this.props;
     const { email, password, emailError, passwordError, dirty, formError } = this.state;
 
-    const resetPassword = <>
-      <a href="/recovery">{t('Forgot your password?')}</a>
-    </>;
-
-    return <form method="post" ref={ref => this.form = ref} id="login-form">
+    return <form method="post" ref={ref => this.form = ref}>
       <FormHelperText error={true} style={{ marginBottom: 30, marginTop: 15 }}>
-        {formError || ' '}
+        {formError || error || ' '}
       </FormHelperText>
 
       <TextField
@@ -154,17 +150,23 @@ class LoginForm extends React.Component<LoginFormPropsInterface, any> {
         onChange={(e: Event) => this.handleChange('password', e)}
         onKeyPress={this.onPasswordFieldKeyPress}
         error={dirty && (passwordError !== null)}
-        helperText={passwordError || resetPassword}
+        helperText={passwordError}
         inputRef={ref => this.password = ref}
         className={classes?.spacerBottom}
       />
 
       <input type="hidden" name="_csrf_token" value={this.props.csrf} />
-      <input type="checkbox" name="_remember_me" defaultChecked className="hidden" />
+      <input type="checkbox" name="_remember_me" defaultChecked className="d-none" />
 
-      <If condition={registrationAllowed}>
-        <a href="/register" data-test="register-link">{t('Register')}</a>
-      </If>
+
+      <div>
+        <a href="/recovery">{t('Forgot your password?')}</a>
+
+        <If condition={registrationAllowed}>
+          <a href="/register" data-test="register-link">{t('Register')}</a>
+        </If>
+      </div>
+
 
       <Button
         type="submit"

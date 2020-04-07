@@ -13,19 +13,17 @@
             </div>
         </div>
 
-        {#        <div class="row">#}
-        {#            <div class="col-3">#}
-        {#                <form method="get" class="d-flex mb-3">#}
-        {#                    <input class="form-control mr-2" type="text" name="search" />#}
-        {#                    <input type="hidden" name="page" value="{{ app.request.get('page') }}">#}
-        {#                    <input class="btn btn-primary" type="submit" value="{{ 'Search'|trans }}" />#}
-        {#                </form>#}
-        {#            </div>#}
-        {#        </div>#}
-
         <div class="row mb-3">
-            <div class="col-12">
+            <div class="col-12 d-flex justify-content-between">
                 <a class="btn btn-primary" href="{{ path('user_new') }}">{{ "New"|trans }}</a>
+
+                <form method="get" class="d-flex"
+                      action="{{ path(app.request.attributes.get('_route'), app.request.query.all) }}">
+                    <input class="form-control mr-2" type="text" name="query" value="{{ app.request.get('query') }}"/>
+                    <input class="btn btn-primary mr-2" type="submit" value="{{ 'Search'|trans }}" />
+                    <a class="btn btn-secondary"
+                       href="{{ path(app.request.attributes.get('_route')) }}">{{ 'Reset'|trans }}</a>
+                </form>
             </div>
         </div>
 
@@ -34,11 +32,14 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th>{{ 'Email'|trans }}</th>
+                        <th>
+                            {{ sort_link('email', 'Email')|raw }}
+                        </th>
                         <th class="d-none d-sm-table-cell">{{ 'Roles'|trans }}</th>
-                        <th class="d-none d-sm-table-cell">{{ 'Created'|trans }}</th>
-                        <th class="d-none d-sm-table-cell text-center">{{ 'Active'|trans }}</th>
-                        <th class="text-center">{{ 'Actions'|trans }}</th>
+                        <th class="d-none d-sm-table-cell text-center">{{sort_link('active', 'Active')|raw }}</th>
+                        <th class="d-none d-sm-table-cell text-center">{{ sort_link('verified', 'Verified')|raw }}</th>
+                        <th class="d-none d-sm-table-cell">{{ sort_link('created', 'Created')|raw }}</th>
+                        <th class="text-center" style="width: 120px">{{ 'Actions'|trans }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,9 +52,6 @@
                                         class="badge badge-secondary">{{ role|replace({'ROLE_': '' })|capitalize|trans }}</span>
                                 {% endfor %}
                             </td>
-                            <td class="d-none d-sm-table-cell">
-                                {% include 'components/date-field.html.twig' with {date: user.createdAt} only %}
-                            </td>
                             <td class="d-none d-sm-table-cell text-center">
                                 {% if user.active %}
                                     <span class="badge badge-success">{{ 'Yes'|trans }}</span>
@@ -61,8 +59,19 @@
                                     <span class="badge badge-danger">{{ 'No'|trans }}</span>
                                 {% endif %}
                             </td>
+                            <td class="d-none d-sm-table-cell text-center">
+                                {% if user.verified %}
+                                    <span class="badge badge-success">{{ 'Yes'|trans }}</span>
+                                {% else %}
+                                    <span class="badge badge-danger">{{ 'No'|trans }}</span>
+                                {% endif %}
+                            </td>
+                            <td class="d-none d-sm-table-cell">
+                                {% include 'components/date-field.html.twig' with {date: user.createdAt} only %}
+                            </td>
                             <td class="d-flex justify-content-center">
-                                <a class="btn btn-outline-primary mr-2 edit-button" href="{{ path('user_edit', {'id': user.id}) }}">
+                                <a class="btn btn-outline-primary mr-2 edit-button"
+                                   href="{{ path('user_edit', {'id': user.id}) }}">
                                     <i class="fas fa-edit"></i></i>
                                 </a>
                                 <div class="float-right">

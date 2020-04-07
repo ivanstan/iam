@@ -8,8 +8,6 @@ use App\Service\MailerService;
 use App\Service\Traits\TranslatorAwareTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-use Symfony\Component\Mailer\MailerInterface;
 
 class SecurityMailerService
 {

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Model\CollectionSpecification;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\NonUniqueResultException;
@@ -44,7 +45,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $builder->orderBy('u.email', 'ASC');
 
         if ($query !== null) {
-            $builder->andWhere('u.email LIKE :query')->setParameter('query', '%'.$query.'%');
+            $builder->andWhere('u.email LIKE :query')->setParameter('query', '%' . $query . '%');
         }
 
         return $builder;
@@ -81,26 +82,21 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
     */
 
-    public function search(?string $name): QueryBuilder
+    public function collection(CollectionSpecification $specification): QueryBuilder
     {
-        $queryBuilder = $this->createQueryBuilder('u');
-        $queryBuilder
-            ->addOrderBy('u.email')
-            ->addOrderBy('u.active');
+        $builder = $this->createQueryBuilder('u');
 
-        return $queryBuilder;
+        if ($specification->getQuery() !== null) {
+            $builder
+                ->where(
+                    $builder->expr()->orX(
+                        $builder->expr()->like('u.email', $builder->expr()->literal('%' . $specification->getQuery() . '%'))
+                    )
+                );
+        }
 
-//        if (empty($name)) {
-//            return $queryBuilder;
-//        }
-//
-//        return $queryBuilder
-//            ->where(
-//                $queryBuilder->expr()->andX(
-//                    $queryBuilder->expr()->eq('u.email', 'name')
-//                )
-//            )
-//            ->setParameter('name', $name);
+        $builder->orderBy('u.' . $specification->getSort(), $specification->getSortDirection());
+
+        return $builder;
     }
-
 }

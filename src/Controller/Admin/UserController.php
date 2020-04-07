@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\UserEditForm;
+use App\Model\CollectionSpecification;
 use App\Repository\UserRepository;
 use App\Security\SecurityMailerService;
 use App\Service\Traits\TranslatorAwareTrait;
@@ -26,7 +27,19 @@ class UserController extends AbstractController
      */
     public function users(Request $request, UserRepository $repository): Response
     {
-        $query = $repository->search($request->query->get('search', ''));
+        $query = $repository->collection(
+            (new CollectionSpecification())
+                ->setQuery(
+                    $request->query->get('query')
+                )
+                ->setSort(
+                    $request->query->get('sort', 'email')
+                )
+                ->setSortDirection(
+                    $request->query->get('sort-dir')
+                )
+        );
+
         $pager = new Pagerfanta(new DoctrineORMAdapter($query));
         $pager->setCurrentPage($request->query->get('page', 1));
 
@@ -61,7 +74,7 @@ class UserController extends AbstractController
             if (isset($form['invite']) && $form['invite']->getData()) {
                 try {
                     $recovery->invite($user);
-                } catch (\Exception $e) {
+                } catch (\Exception $exception) {
                     $this->addFlash('danger', $this->translator->trans('Unable to send mail.'));
                 }
             }

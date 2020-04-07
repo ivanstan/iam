@@ -10,6 +10,8 @@
 * Better mail preview ?
 * Test for optional registration
 * Admin should not be able to set its account inactive
+* Secure /account page with password for 15 minutes
+* Migrate symfony translations to front end translations
 
 # Tasks
 
