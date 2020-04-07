@@ -7,10 +7,10 @@
 {% block content %}
     <tr>
         <td>
-            <p>{{ "verify.heading"|trans({'%app_name%': app_name}, 'email') }}</p>
-            <p>{{ "verify.explanation"|trans({}, 'email') }}</p>
-            <a class="btn btn-primary" href="{{ url }}">{{ 'verify.cta'|trans({}, 'email') }}</a>
-            <p>{{ "verify.footer"|trans({}, 'email') }}</p>
+            <h2 class="text-left">{{ "Email verification"|trans() }}</h2>
+            <p class="text-left">{{ "Thanks for creating account at %app_name%. To continue, please verify your email address by clicking the button bellow:"|trans({'%app_name%': app_name}) }}</p>
+            <a class="cta" href="{{ url }}">{{ 'VERIFY'|trans({}) }}</a>
+            <p class="text-left">{{ "If you didn't create account, no further action is requeired."|trans({}) }}</p>
         </td>
     </tr>
 {% endblock %}

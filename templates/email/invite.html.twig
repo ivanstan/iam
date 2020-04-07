@@ -7,10 +7,10 @@
 {% block content %}
     <tr>
         <td>
-            <p>{{ "invite.heading"|trans({'%app_name%': app_name}, 'email') }}</p>
-            <p>{{ "invite.explanation"|trans({}, 'email') }}</p>
-            <a class="btn btn-primary" href="{{ url }}">{{ 'invite.cta'|trans({}, 'email') }}</a>
-            <p>{{ "invite.footer"|trans({}, 'email') }}</p>
+            <h2 class="text-left">{{ "You've been invited"|trans({}) }}</h2>
+            <p class="text-left">{{ "We are sending you this email because you've been invited to join %app_name%. We need you to confirm your your account before you start using %app_name% platform."|trans({'%app_name%': app_name}) }}</p>
+            <a class="cta" href="{{ url }}">{{ 'ACCEPT INVITATION'|trans({}) }}</a>
+            <p class="text-left">{{ "If you don't want to accept invitation, or believe it was sent by mistake, please ignore this email. Your account won't be created until you access the link above and set your password."|trans({}) }}</p>
         </td>
     </tr>
 {% endblock %}

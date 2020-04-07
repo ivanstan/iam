@@ -24,6 +24,7 @@ const useStyles: any = theme => ({
     minWidth: 250,
   },
   appTitle: {
+    color: '#fff',
     '&:hover': {
       color: '#fff',
       textDecoration: 'none',
@@ -134,7 +135,8 @@ class NavBar extends React.Component<any, any> {
           <If condition={user !== null}>
             <div>
               <span className="pr-2" data-test="user-email">{user?.email}</span>
-              <IconButton data-test="user-menu" aria-label="menu" color="inherit" edge="start" onClick={this.handleClick}
+              <IconButton data-test="user-menu" aria-label="menu" color="inherit" edge="start"
+                          onClick={this.handleClick}
                           aria-controls="simple-menu" aria-haspopup="true">
 
                 <AccountCircled />

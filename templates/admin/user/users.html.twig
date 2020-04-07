@@ -35,7 +35,7 @@
                         <th>
                             {{ sort_link('email', 'Email')|raw }}
                         </th>
-                        <th class="d-none d-sm-table-cell">{{ 'Roles'|trans }}</th>
+                        <th class="d-none d-sm-table-cell">{{sort_link('roles', 'Roles')|raw }}</th>
                         <th class="d-none d-sm-table-cell text-center">{{sort_link('active', 'Active')|raw }}</th>
                         <th class="d-none d-sm-table-cell text-center">{{ sort_link('verified', 'Verified')|raw }}</th>
                         <th class="d-none d-sm-table-cell">{{ sort_link('created', 'Created')|raw }}</th>

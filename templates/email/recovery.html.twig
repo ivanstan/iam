@@ -7,10 +7,10 @@
 {% block content %}
     <tr>
         <td>
-            <p>{{ "recovery.heading"|trans({'%app_name%': app_name}, 'email') }}</p>
-            <p>{{ "recovery.explanation"|trans({}, 'email') }}</p>
-            <a class="btn btn-primary" href="{{ url }}">{{ 'recovery.cta'|trans({}, 'email') }}</a>
-            <p>{{ "recovery.footer"|trans({}, 'email') }}</p>
+            <h2 class="text-left">{{ "Reset your password"|trans({}) }}</h2>
+            <p class="text-left">{{ "Someone recently requested to reset password for your %app_name% account. If this was you your can set a new password here:"|trans({'%app_name%': app_name}) }}</p>
+            <a class="cta" href="{{ url }}">{{ 'RESET PASSWORD'|trans({}) }}</a>
+            <p class="text-left">{{ "If you don't want to change password or didn't request this, just ignore and delete this message."|trans({}) }}</p>
         </td>
     </tr>
 {% endblock %}
