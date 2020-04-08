@@ -12,7 +12,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class UserCreateCommand extends Command
+final class UserCreateCommand extends Command
 {
     protected static $defaultName = 'user:create';
 

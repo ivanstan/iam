@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route(path="/admin")
  */
-class MailBoxController extends AbstractController
+final class MailBoxController extends AbstractController
 {
     /**
      * @Route("/mailbox", name="admin_mailbox")

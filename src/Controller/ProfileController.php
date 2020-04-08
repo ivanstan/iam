@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
-class ProfileController extends AbstractController
+final class ProfileController extends AbstractController
 {
     use TranslatorAwareTrait;
 
