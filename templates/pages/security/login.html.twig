@@ -1,22 +1,27 @@
-{% extends 'card.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}{{ 'Login'|trans }} {{ parent() }}{% endblock %}
 
-{% block card %}
-    <h1 class="h3 mb-3">{% trans %}Login{% endtrans %}</h1>
-{#    {{ include('components/messages.html.twig') }}#}
+{% block body %}
+    {#    <h1 class="h3 mb-3">{% trans %}Login{% endtrans %}</h1>#}
+    {#    {{ include('components/messages.html.twig') }}#}
 
-{#    {% if error %}#}
-{#        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData) }}</div>#}
-{#    {% endif %}#}
-
-    <div class="h-100"
-         id="login-form"
-         data-csrf="{{ csrf_token('authenticate') }}"
-         data-email="{{ last_username }}"
-         data-registration-allowed="{{ registration_allowed }}"
-         data-error="{{ error ? error.messageKey|trans(error.messageData) : null }}"
-    ></div>
+    {#    {% if error %}#}
+    {#        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData) }}</div>#}
+    {#    {% endif %}#}
+    <div class="container vertical-center">
+        <div class="row">
+            <div class="col-lg-5 max-w-sm rounded overflow-hidden shadow-lg mx-auto">
+                <div class="h-100"
+                     id="login-form"
+                     data-csrf="{{ csrf_token('authenticate') }}"
+                     data-email="{{ last_username }}"
+                     data-registration-allowed="{{ registration_allowed }}"
+                     data-error="{{ error ? error.messageKey|trans(error.messageData) : null }}"
+                ></div>
+            </div>
+        </div>
+    </div>
 
     {#    {% include 'pages/security/_login_form.html.twig' %}#}
 {% endblock %}

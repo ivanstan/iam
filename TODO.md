@@ -10,17 +10,21 @@
 * Better mail preview ?
 * Test for optional registration
 * Admin should not be able to set its account inactive
-* Secure /account page with password for 15 minutes
+* Secure account page with password for 15 minutes
 * Migrate symfony translations to front end translations
 * Active sessions
 * Admin dashboard
 * Make invitation permanent
+* Create react forms for registration and recovery
+* Set default sort on user page
+* Fix user edit form
+* Add last and first name to user entity, use display name
+* React loading indicator
 
 # Tasks
 
 ### User list improvements
 - Sortable columns
-- Search
 
 ### Timezone feature flag
 
@@ -31,6 +35,7 @@
 - Connect mailbox recipient and sender to user
 
 ### Contact form
+
 - Create feature flag in admin settings
 - Create page `/contact` that shows form containing:
   email, subject, body, optional name and last name

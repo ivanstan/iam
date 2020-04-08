@@ -31,9 +31,9 @@ class LoginForm extends React.Component<LoginFormPropsInterface, any> {
   readonly state: any = {
     dirty: false,
     email: '',
-    emailError: null,
+    emailError: '',
     password: '',
-    passwordError: null,
+    passwordError: '',
     loading: false,
     formError: '',
   };
@@ -42,6 +42,7 @@ class LoginForm extends React.Component<LoginFormPropsInterface, any> {
     super(props, context);
 
     this.state.formError = props.error;
+    this.state.email = props.email;
 
     this.form = React.createRef<HTMLFormElement>();
     this.email = React.createRef<HTMLInputElement>();
@@ -119,67 +120,74 @@ class LoginForm extends React.Component<LoginFormPropsInterface, any> {
     const { t, classes, registrationAllowed, error } = this.props;
     const { email, password, emailError, passwordError, dirty, formError } = this.state;
 
-    return <form method="post" ref={ref => this.form = ref}>
-      <FormHelperText error={true} style={{ marginBottom: 30, marginTop: 15 }}>
-        {formError || error || ' '}
-      </FormHelperText>
+    return <>
+      <div className="p-5">
+        <h1 className="h3 mb-3">Login</h1>
+        <form method="post" ref={ref => this.form = ref}>
+          <FormHelperText error={true} style={{ marginBottom: 30, marginTop: 15 }}>
+            {formError || error || ' '}
+          </FormHelperText>
 
-      <TextField
-        id="login-form-email"
-        className={classes?.spacerBottom}
-        InputProps={{ autoComplete: 'email' } as FilledInputProps}
-        autoFocus
-        name={'email'}
-        label={t('Email')}
-        variant="outlined"
-        value={email}
-        fullWidth
-        onKeyPress={this.onEmailFieldKeyPress}
-        error={dirty && (emailError !== null)}
-        helperText={dirty && (emailError || ' ')}
-        onChange={e => this.handleChange('email', e)}
-        ref={input => this.email = input}
-      />
+          {/*<Alert severity="error">*/}
+          {/*  {formError || error || ' '}*/}
+          {/*</Alert>*/}
 
-      <PasswordField
-        id="login-form-password"
-        name={'password'}
-        label={t('Password')}
-        variant="outlined" value={password}
-        fullWidth
-        onChange={(e: Event) => this.handleChange('password', e)}
-        onKeyPress={this.onPasswordFieldKeyPress}
-        error={dirty && (passwordError !== null)}
-        helperText={passwordError}
-        inputRef={ref => this.password = ref}
-        className={classes?.spacerBottom}
-      />
+          <TextField
+            id="login-form-email"
+            className={classes?.spacerBottom}
+            InputProps={{ autoComplete: 'email' } as FilledInputProps}
+            autoFocus
+            name={'email'}
+            label={t('Email')}
+            variant="outlined"
+            value={email}
+            fullWidth
+            onKeyPress={this.onEmailFieldKeyPress}
+            error={dirty && (emailError !== '')}
+            helperText={dirty && (emailError || ' ')}
+            onChange={e => this.handleChange('email', e)}
+            ref={input => this.email = input}
+          />
 
-      <input type="hidden" name="_csrf_token" value={this.props.csrf} />
-      <input type="checkbox" name="_remember_me" defaultChecked className="d-none" />
+          <PasswordField
+            id="login-form-password"
+            name={'password'}
+            label={t('Password')}
+            variant="outlined" value={password}
+            fullWidth
+            onChange={(e: Event) => this.handleChange('password', e)}
+            onKeyPress={this.onPasswordFieldKeyPress}
+            error={dirty && (passwordError !== '')}
+            helperText={passwordError}
+            inputRef={ref => this.password = ref}
+            className={classes?.spacerBottom}
+          />
 
+          <input type="hidden" name="_csrf_token" value={this.props.csrf} />
+          <input type="checkbox" name="_remember_me" defaultChecked className="d-none" />
 
-      <div>
-        <a href="/recovery">{t('Forgot your password?')}</a>
-
-        <If condition={registrationAllowed}>
-          <a href="/register" data-test="register-link">{t('Register')}</a>
-        </If>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            size="large"
+            disabled={!this.isSubmitEnabled()}
+            data-test="submit"
+          >
+            {t('Login')}
+          </Button>
+        </form>
       </div>
 
-
-      <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        color="primary"
-        size="large"
-        disabled={!this.isSubmitEnabled()}
-        data-test="submit"
-      >
-        {t('Login')}
-      </Button>
-    </form>;
+      <div className="d-flex px-5 pb-5 justify-content-between">
+        <Button color="primary" href="/recovery">{t('Forgot your password?')}</Button>
+        <If condition={registrationAllowed}>
+          <Button variant="contained" color="primary" href="/register"
+                  data-test="register-link">{t('Register')}</Button>
+        </If>
+      </div>
+    </>;
   }
 }
 
