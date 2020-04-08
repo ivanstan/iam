@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/admin")
  */
-class BlockController extends AbstractController
+final class BlockController extends AbstractController
 {
     /**
      * @Route("/block", name="block_index")

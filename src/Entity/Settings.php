@@ -7,21 +7,42 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SettingsRepository")
+ * @ORM\Table(indexes={
+ *  @ORM\Index(name="default", columns={"namespace","name"}),
+ * })
  */
 class Settings
 {
+    public const DEFAULT_NAMESPACE = 'root';
+
     /**
      * @ORM\Id()
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string")
      * @Assert\NotBlank();
      * @Assert\NotNull();
      */
-    private string $name;
+    protected string $name;
+
+    /**
+     * @ORM\Id()
+     * @ORM\Column(type="string")
+     */
+    protected string $namespace = self::DEFAULT_NAMESPACE;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $value;
+    protected ?string $value = null;
+
+    public function getNamespace(): string
+    {
+        return $this->namespace;
+    }
+
+    public function setNamespace(string $namespace): void
+    {
+        $this->namespace = $namespace;
+    }
 
     public function getName(): string
     {

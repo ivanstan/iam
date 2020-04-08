@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route(path="/admin")
  */
-class UserController extends AbstractController
+final class UserController extends AbstractController
 {
     use TranslatorAwareTrait;
 

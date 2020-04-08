@@ -11,6 +11,7 @@ class SettingsRepository extends ServiceEntityRepository
     public const REGISTRATION_ENABLED = 'registration_enabled';
 
     private array $cache = [];
+    private string $namespace = Settings::DEFAULT_NAMESPACE;
 
     public function __construct(ManagerRegistry $registry)
     {
@@ -19,26 +20,36 @@ class SettingsRepository extends ServiceEntityRepository
 
     public function isRegistrationEnabled(): bool
     {
-        return (bool) ($this->get(self::REGISTRATION_ENABLED, true) ?? true);
+        return (bool) $this->getSettings('registration')->get('enabled', true);
+    }
+
+    public function getSettings(string $namespace): self
+    {
+        $this->namespace = $namespace;
+
+        return $this;
     }
 
     public function set(string $name, $value): void
     {
         /** @var Settings $entity */
-        $entity = $this->find($name);
+        $entity = $this->cache[$this->namespace][$name] ?? null;
 
         if ($entity === null) {
             $entity = new Settings();
             $entity->setName($name);
+            $entity->setNamespace($this->namespace);
 
             $this->getEntityManager()->persist($entity);
         }
 
         $entity->setValue($value);
 
-        $this->cache[$name] = $entity;
+        $this->cache[$this->namespace][$name] = $entity;
 
         $this->getEntityManager()->flush();
+
+        $this->namespace = Settings::DEFAULT_NAMESPACE;
     }
 
     /**
@@ -47,18 +58,20 @@ class SettingsRepository extends ServiceEntityRepository
      *
      * @return mixed
      */
-    public function get(string $name, $default)
+    public function get(string $name, $default = null)
     {
         if (empty($this->cache)) {
             $this->warmup();
         }
 
         /** @var Settings $entity */
-        $entity = $this->cache[$name] ?? $this->find($name);
+        $entity = $this->cache[$this->namespace][$name] ?? null;
 
         if ($entity === null) {
             return $default;
         }
+
+        $this->namespace = Settings::DEFAULT_NAMESPACE;
 
         return $entity->getValue();
     }
@@ -67,7 +80,7 @@ class SettingsRepository extends ServiceEntityRepository
     {
         /** @var Settings $setting */
         foreach ($this->findAll() as $setting) {
-            $this->cache[$setting->getName()] = $setting;
+            $this->cache[$setting->getNamespace()][$setting->getName()] = $setting;
         }
     }
 }

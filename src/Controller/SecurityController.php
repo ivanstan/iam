@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Validator\Constraints\Email;
 
-class SecurityController extends AbstractController implements LoggerAwareInterface
+final class SecurityController extends AbstractController implements LoggerAwareInterface
 {
     use TranslatorAwareTrait;
     use LoggerAwareTrait;

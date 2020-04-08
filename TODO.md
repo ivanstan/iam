@@ -7,7 +7,6 @@
 * Write last user access in session table on Kernel shutdown
 * Add option for user avatar
 * Create language selector
-* Better mail preview ?
 * Test for optional registration
 * Admin should not be able to set its account inactive
 * Secure account page with password for 15 minutes
@@ -33,6 +32,7 @@
 ### Mailbox improvements
 - Search
 - Connect mailbox recipient and sender to user
+- Better mail preview
 
 ### Contact form
 
