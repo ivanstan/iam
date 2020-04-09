@@ -22,6 +22,7 @@
 * React settings form
 * Password complexity on settings form
 * Google, Facebook OAuth login
+* Test sending email
 
 # Bugs
 * Fix request verification link.
