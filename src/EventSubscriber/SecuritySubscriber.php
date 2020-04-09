@@ -4,10 +4,10 @@ namespace App\EventSubscriber;
 
 use App\Entity\Lock;
 use App\Entity\User;
+use App\Service\Traits\LoggerAwareTrait;
 use App\Service\Traits\TranslatorAwareTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;

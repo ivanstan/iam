@@ -47,7 +47,7 @@ final class DoctrineReloadCommand extends Command
         $helper = $this->getHelper('question');
         $question = new ChoiceQuestion('All data will be lost. Do you wish to continue?', self::$choices, false);
 
-        if (!\in_array($this->env, self::$envs, true)) {
+        if (!$input->getOption('force') && !\in_array($this->env, self::$envs, true)) {
             $io->warning('This is intended only for use in dev or test environment.');
 
             return 1;

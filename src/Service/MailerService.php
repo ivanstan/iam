@@ -3,8 +3,9 @@
 namespace App\Service;
 
 use App\Entity\Mail;
+use App\Service\Traits\LoggerAwareTrait;
 use Doctrine\ORM\EntityManagerInterface;
-use Psr\Log\LoggerAwareTrait;
+use Psr\Log\LoggerAwareInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
@@ -12,7 +13,7 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Twig\Environment;
 
-class MailerService
+class MailerService implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
