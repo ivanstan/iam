@@ -20,6 +20,7 @@
 * Add last and first name to user entity, use display name
 * React loading indicator
 * Password complexity on settings form
+* Google, Facebook OAuth login
 
 # Tasks
 
