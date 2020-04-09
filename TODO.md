@@ -19,6 +19,10 @@
 * Fix user edit form
 * Add last and first name to user entity, use display name
 * React loading indicator
+* React settings form
+
+# Bugs
+* Fix request verification link.
 
 # Tasks
 
