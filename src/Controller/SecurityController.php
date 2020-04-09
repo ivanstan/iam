@@ -159,15 +159,12 @@ final class SecurityController extends AbstractController implements LoggerAware
      * Endpoint that enables user to request new verification email. Redirects to app_index.
      *
      * @Route("/verify", name="security_verify", methods={"POST"})
+     * @IsGranted("ROLE_USER")
      */
     public function verify(Request $request): RedirectResponse
     {
         /** @var User $user */
         $user = $this->getUser();
-
-        if ($user === null) {
-            return $this->redirectToRoute('app_index');
-        }
 
         if (!$this->isCsrfTokenValid('verify' . $user->getId(), $request->request->get('_token'))) {
             return $this->redirectToRoute('app_index');
