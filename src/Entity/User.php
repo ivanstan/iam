@@ -37,19 +37,10 @@ class User implements UserInterface
     protected $email;
 
     /**
-     * @ORM\Column(type="boolean", options={"default" : 1})
+     * @var string The hashed password
+     * @ORM\Column(type="string", nullable=true)
      */
-    protected bool $active = true;
-
-    /**
-     * @ORM\Column(type="boolean", options={"default" : 0})
-     */
-    protected bool $verified = false;
-
-    /**
-     * @ORM\Column(type="boolean", options={"default" : 0})
-     */
-    protected bool $banned = false;
+    protected $password;
 
     /** @var string */
     protected $plainPassword;
@@ -60,23 +51,28 @@ class User implements UserInterface
     protected array $roles = [];
 
     /**
-     * @var string The hashed password
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $password;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\UserPreference", cascade={"persist", "remove"}, fetch="EAGER")
-     * @ORM\JoinColumn(onDelete="CASCADE")
-     */
-    protected $preference;
-
-    /**
-     * @var string
+     * Used to indicate if user is active. Inactive users are pending for account delete or have set their account for temporary
+     * inactivity.
+     * Use to hide user's content or profile when set inactive.
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="boolean", options={"default" : 1})
      */
-    protected $avatar;
+    protected bool $active = true;
+
+    /**
+     * If true user is indeed owner of account self::email.
+     * Use to restrict publishing of content created by users that are not verified.
+     *
+     * @ORM\Column(type="boolean", options={"default" : 0})
+     */
+    protected bool $verified = false;
+
+    /**
+     * Used for denying misbehaving users access to platform. If true user won't be able to login.
+     *
+     * @ORM\Column(type="boolean", options={"default" : 0})
+     */
+    protected bool $banned = false;
 
     /**
      * @var string
@@ -91,6 +87,19 @@ class User implements UserInterface
      * @ORM\Column(type="string", nullable=true)
      */
     protected $lastName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $avatar;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\UserPreference", cascade={"persist", "remove"}, fetch="EAGER")
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    protected $preference;
 
     /**
      * @var Session[]
