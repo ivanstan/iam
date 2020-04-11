@@ -6,6 +6,7 @@ import { ThemeProvider } from '@material-ui/core';
 import { LoginFormPortal } from './security/LoginFormPortal';
 import { NavBarPortal } from './components/navbar/NavBarPortal';
 import DeleteConfirmation from './components/DeleteConfirmation';
+import { EmailChangeFormPortal } from './components/EmailChangeForm';
 
 const theme = createMuiTheme({
   palette: {
@@ -23,6 +24,7 @@ class Application extends React.Component<any, any> {
             <DeleteConfirmation />
             <NavBarPortal id="react-navbar" />
             <LoginFormPortal id="login-form" />
+            <EmailChangeFormPortal id="react-email-change-form" />
           </ThemeProvider>
         </I18n>
       </>
