@@ -2,10 +2,13 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Token\UserEmailChangeToken;
+use App\Entity\Token\UserToken;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Security\SecurityMailerService;
 use App\Service\Traits\TranslatorAwareTrait;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +32,7 @@ class AccountApiController extends AbstractApiController
      * @Route("/email", name="api_account_email", methods={"POST"})
      * @IsGranted("ROLE_USER")
      */
-    public function email(UserRepository $repository, SecurityMailerService $service): JsonResponse
+    public function email(UserRepository $repository, SecurityMailerService $service, EntityManagerInterface $em): JsonResponse
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -55,6 +58,13 @@ class AccountApiController extends AbstractApiController
 
             return new JsonResponse($error, Response::HTTP_BAD_REQUEST);
         }
+
+        // remove any previous requests
+        $tokens = $em->getRepository(UserToken::class)->getUserTokens($user, UserEmailChangeToken::class);
+        foreach ($tokens as $token) {
+            $em->remove($token);
+        }
+        $em->flush();
 
         $service->requestMailChange($user, $email);
 

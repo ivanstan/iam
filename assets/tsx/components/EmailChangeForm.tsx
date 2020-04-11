@@ -6,8 +6,11 @@ import { FilledInputProps } from '@material-ui/core/FilledInput';
 import * as EmailValidator from 'email-validator';
 import { If } from 'react-if';
 import { Alert } from '@material-ui/lab';
+import { activity } from '../services/ActivityStore';
 
 class EmailChangeForm extends React.Component<any, any> {
+
+  private static ACTIVITY = 'change.email';
 
   public readonly state: any = {
     dirty: true,
@@ -24,7 +27,7 @@ class EmailChangeForm extends React.Component<any, any> {
 
   private onKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && this.isSubmitEnabled()) {
-      // this.submit();
+      this.submit();
     }
   };
 
@@ -49,6 +52,9 @@ class EmailChangeForm extends React.Component<any, any> {
 
   private submit = async () => {
     const { t } = this.props;
+
+    activity.add(EmailChangeForm.ACTIVITY);
+
     const response = await fetch('/api/account/email',
       {
         method: 'POST',
@@ -64,9 +70,12 @@ class EmailChangeForm extends React.Component<any, any> {
     } else {
       this.setState({
         errorMessage: null,
-        message: t('Email change request accepted. Confirmation mail is sent to %{email}', { email: this.state.value })
+        message: t('Email change request accepted. Confirmation mail is sent to %{email}', { email: this.state.value }),
+        value: '',
       });
     }
+
+    activity.remove(EmailChangeForm.ACTIVITY);
   };
 
   render = () => {
