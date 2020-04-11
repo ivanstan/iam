@@ -42,6 +42,12 @@ class Session
     private $lifetime;
 
     /**
+     * @var \DateTime
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $lastAccess;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
@@ -123,5 +129,15 @@ class Session
     public function setUserAgent(string $userAgent): void
     {
         $this->userAgent = $userAgent;
+    }
+
+    public function getLastAccess(): ?\DateTime
+    {
+        return $this->lastAccess;
+    }
+
+    public function setLastAccess(\DateTime $lastAccess): void
+    {
+        $this->lastAccess = $lastAccess;
     }
 }
