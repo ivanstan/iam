@@ -52,6 +52,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.13.0",
-      "@material-ui/lab": "latest"
+      "@material-ui/lab": "latest",
+      "computed-async-mobx": "latest"
     }
 }
