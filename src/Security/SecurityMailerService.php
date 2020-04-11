@@ -98,4 +98,29 @@ class SecurityMailerService
 
         $this->mailer->send($email);
     }
+
+    /**
+     * @throws \Exception
+     */
+    public function requestMailChange(User $user, string $newEmail): void
+    {
+        $token = new Token\UserEmailChangeToken($user);
+        $token->setData($newEmail);
+        $this->em->persist($token);
+        $this->em->flush();
+
+        $subject = $this->translator->trans('You have requested email change | %app_name%', ['%app_name%' => $this->appName]);
+        $email = (new TemplatedEmail())
+            ->to($user->getEmail())
+            ->subject($subject)
+            ->htmlTemplate('email/change-email.html.twig')
+            ->context(
+                [
+                    'url' => $this->generator->generateUrl($token),
+                    'subject' => $subject,
+                ]
+            );
+
+        $this->mailer->send($email);
+    }
 }

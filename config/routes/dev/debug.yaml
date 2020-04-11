@@ -15,3 +15,9 @@ dev_mail_verify:
     controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController
     defaults:
         template: email/verify.html.twig
+
+dev_mail_email_change:
+    path:         /_mail/change
+    controller:   Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        template: email/change-email.html.twig

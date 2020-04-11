@@ -37,9 +37,7 @@ abstract class Token
 
     /**
      * @var \DateInterval
-     * @ORM\Column(name="`interval`", type="dateinterval")
-     * @Assert\NotNull
-     * @Assert\NotBlank
+     * @ORM\Column(name="`interval`", type="dateinterval", nullable=true)
      */
     private $interval;
 
@@ -60,6 +58,10 @@ abstract class Token
      */
     public function isValid(\DateTime $date): bool
     {
+        if ($this->interval === null) {
+            return true;
+        }
+
         return $this->getCreatedAt()->add($this->interval) >= $date;
     }
 

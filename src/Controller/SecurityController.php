@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Token\UserEmailChangeToken;
+use App\Entity\Token\UserToken;
 use App\Entity\User;
 use App\Form\PasswordRepeatType;
 use App\Form\RegistrationForm;
@@ -9,6 +11,7 @@ use App\Repository\SettingsRepository;
 use App\Security\Role;
 use App\Security\SecurityMailerService;
 use App\Security\SecurityService;
+use App\Service\DateTimeService;
 use App\Service\Traits\LoggerAwareTrait;
 use App\Service\Traits\TranslatorAwareTrait;
 use Doctrine\ORM\EntityManagerInterface;
@@ -328,5 +331,45 @@ final class SecurityController extends AbstractController implements LoggerAware
                 'form' => $form->createView(),
             ]
         );
+    }
+
+    /**
+     * @Route("/user/email/change/{token}", name="security_email_change_token")
+     * @IsGranted("ROLE_USER")
+     */
+    public function emailChange(Request $request, string $token, EntityManagerInterface $em): RedirectResponse
+    {
+        /** @var UserEmailChangeToken $token */
+        $token = $em->getRepository(UserToken::class)->getToken($token, UserEmailChangeToken::class);
+
+        if ($token === null || !$token->isValid(DateTimeService::getCurrentUTC())) {
+            $this->addFlash(
+                'danger',
+                $this->translator->trans(
+                    'Email change request is either invalid or expired. Please try requesting email change again.'
+                )
+            );
+
+            return $this->redirectToRoute('user_profile_security');
+        }
+
+        /** @var User $user */
+        $user = $this->getUser();
+        $user->setEmail($token->getData());
+
+        $em->remove($token);
+        $em->flush();
+
+        $this->addFlash(
+            'success',
+            $this->translator->trans(
+                'You have successfully changed your email. From now on your email is %email%',
+                [
+                    '%email%' => $user->getEmail(),
+                ]
+            )
+        );
+
+        return $this->redirectToRoute('app_index');
     }
 }

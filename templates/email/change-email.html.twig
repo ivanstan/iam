@@ -1,0 +1,17 @@
+{% extends 'email/base.html.twig' %}
+
+{% set url = url|default('#') %}
+{% set email = email|default('example@domain.com') %}
+
+{% block title %}{{ subject|default('Email') }} {{ parent() }}{% endblock %}
+
+{% block content %}
+    <tr>
+        <td>
+            <h2 class="text-left">{{ "You have requested email change"|trans({}) }}</h2>
+            <p class="text-left">{{ "You have requested to change your account email on %app_name% platform. To proceed click the button bellow and your account email will be changed to <b>%email%</b>"|trans({'%app_name%': app_name, '%email%': email})|raw }}</p>
+            <a class="cta" href="{{ url }}">{{ 'CHANGE MY PASSWORD'|trans({}) }}</a>
+            <p class="text-left">{{ "If you don't want to make change or belive this was sent by mistake, just ignore this email."|trans({}) }}</p>
+        </td>
+    </tr>
+{% endblock %}

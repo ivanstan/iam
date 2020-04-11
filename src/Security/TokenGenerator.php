@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Entity\Token\Token;
+use App\Entity\Token\UserEmailChangeToken;
 use App\Entity\Token\UserInvitationToken;
 use App\Entity\Token\UserRecoveryToken;
 use App\Entity\Token\UserVerificationToken;
@@ -19,6 +20,7 @@ class TokenGenerator
         UserInvitationToken::class => 'security_invitation_token',
         UserVerificationToken::class => 'security_verification_token',
         UserRecoveryToken::class => 'security_recovery_token',
+        UserEmailChangeToken::class => 'security_email_change_token',
     ];
 
     public function __construct(UrlGeneratorInterface $generator)
