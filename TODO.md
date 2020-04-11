@@ -4,7 +4,6 @@
 * Inform user of changed password
 * Two factor authentication on new devices
 * Inform user when someone tries to login as him
-* Write last user access in session table on Kernel shutdown
 * Add option for user avatar
 * Create language selector
 * Test for optional registration
