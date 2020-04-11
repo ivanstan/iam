@@ -26,7 +26,7 @@ class User implements UserInterface
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -34,31 +34,36 @@ class User implements UserInterface
      * @Assert\NotBlank();
      * @Assert\NotNull();
      */
-    private $email;
+    protected $email;
 
     /**
      * @ORM\Column(type="boolean", options={"default" : 1})
      */
-    private bool $active = true;
+    protected bool $active = true;
 
     /**
      * @ORM\Column(type="boolean", options={"default" : 0})
      */
-    private bool $verified = false;
+    protected bool $verified = false;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default" : 0})
+     */
+    protected bool $banned = false;
 
     /** @var string */
-    private $plainPassword;
+    protected $plainPassword;
 
     /**
      * @ORM\Column(type="json")
      */
-    private array $roles = [];
+    protected array $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string", nullable=true)
      */
-    private $password;
+    protected $password;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\UserPreference", cascade={"persist", "remove"}, fetch="EAGER")
@@ -74,11 +79,25 @@ class User implements UserInterface
     protected $avatar;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $firstName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $lastName;
+
+    /**
      * @var Session[]
      * @ORM\OneToMany(targetEntity="App\Entity\Session", mappedBy="user", cascade={"remove"})
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
-    private $sessions;
+    protected $sessions;
 
     /**
      * @ORM\PrePersist
@@ -102,47 +121,9 @@ class User implements UserInterface
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function eraseCredentials(): void
     {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
-    }
-
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
-    {
-        return $this->email;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = Role::USER;
-
-        return array_values(array_unique($roles));
-    }
-
-    public function setRoles(array $roles): self
-    {
-        if (!\in_array(Role::USER, $roles, true)) {
-            $roles[] = Role::USER;
-        }
-
-        $this->roles = $roles;
-
-        return $this;
+        //        $this->plainPassword = null;
     }
 
     /**
@@ -158,16 +139,6 @@ class User implements UserInterface
         $this->password = $password;
 
         return $this;
-    }
-
-    public function getSalt()
-    {
-        // not needed when using the "bcrypt" algorithm in security.yaml
-    }
-
-    public function eraseCredentials(): void
-    {
-        //        $this->plainPassword = null;
     }
 
     public function isActive(): bool
@@ -207,6 +178,63 @@ class User implements UserInterface
         return (string)json_encode($user, JSON_THROW_ON_ERROR);
     }
 
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = Role::USER;
+
+        return array_values(array_unique($roles));
+    }
+
+    public function setRoles(array $roles): self
+    {
+        if (!\in_array(Role::USER, $roles, true)) {
+            $roles[] = Role::USER;
+        }
+
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getDisplayName(): string
+    {
+        if ($this->firstName && $this->lastName) {
+            return $this->firstName . ' ' . $this->lastName;
+        }
+
+        return $this->getEmail();
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return $this->email;
+    }
+
     public function isVerified(): bool
     {
         return $this->verified;
@@ -231,8 +259,33 @@ class User implements UserInterface
         $this->preference = $preference;
     }
 
-    public function getDisplayName(): string
+    public function getLastName(): ?string
     {
-        return $this->getEmail();
+        return $this->lastName;
+    }
+
+    public function setLastName(?string $lastName): void
+    {
+        $this->lastName = $lastName;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(?string $firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    public function isBanned(): bool
+    {
+        return $this->banned;
+    }
+
+    public function setBanned(bool $banned): void
+    {
+        $this->banned = $banned;
     }
 }

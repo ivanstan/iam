@@ -5,6 +5,7 @@ namespace App\Command;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -29,16 +30,21 @@ final class DoctrineReloadCommand extends Command
         $this->env = $env;
     }
 
-    /** @noinspection PhpMissingParentCallCommonInspection */
     protected function configure(): void
     {
         $this
             ->setName('doctrine:reload')
-            ->setDescription('Purge database, execute migrations and load fixtures');
+            ->setDescription('Purge database, execute migrations and load fixtures')
+            ->addOption(
+                'force',
+                'f',
+                InputOption::VALUE_OPTIONAL,
+                'Force execution even in production environment',
+                false
+            );
     }
 
     /**
-     * @noinspection PhpMissingParentCallCommonInspection
      * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -46,8 +52,9 @@ final class DoctrineReloadCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $helper = $this->getHelper('question');
         $question = new ChoiceQuestion('All data will be lost. Do you wish to continue?', self::$choices, false);
+        $force = $input->getOption('force') !== false;
 
-        if (!$input->getOption('force') && !\in_array($this->env, self::$envs, true)) {
+        if (!$force && !\in_array($this->env, self::$envs, true)) {
             $io->warning('This is intended only for use in dev or test environment.');
 
             return 1;

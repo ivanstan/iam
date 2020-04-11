@@ -21,8 +21,8 @@ class SettingsApiController extends AbstractApiController
     public function collection(Request $request, SettingsRepository $repository): Response
     {
         return $this->response(
-            $this->serializer->serialize($repository->findAll(), 'json'),
-            );
+            $this->serializer->serialize($repository->findAll(), 'json')
+        );
     }
 
     /**

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200408163654 extends AbstractMigration
+final class Version20200411153250 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -24,10 +24,10 @@ final class Version20200408163654 extends AbstractMigration
 
         $this->addSql('CREATE TABLE `lock` (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, value INT NOT NULL, data VARCHAR(255) NOT NULL, expire DATETIME DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE mail (id INT AUTO_INCREMENT NOT NULL, `from` VARCHAR(255) NOT NULL, `to` VARCHAR(255) NOT NULL, `subject` VARCHAR(255) DEFAULT NULL, body LONGTEXT DEFAULT NULL, created DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE session (id VARCHAR(128) NOT NULL, user_id INT DEFAULT NULL, data LONGBLOB DEFAULT NULL, date DATETIME NOT NULL, lifetime VARCHAR(255) NOT NULL COMMENT \'(DC2Type:dateinterval)\', ip VARCHAR(255) DEFAULT NULL, user_agent LONGTEXT DEFAULT NULL, INDEX IDX_D044D5D4A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE session (id VARCHAR(128) NOT NULL, user_id INT DEFAULT NULL, data LONGBLOB DEFAULT NULL, date DATETIME NOT NULL, lifetime VARCHAR(255) NOT NULL COMMENT \'(DC2Type:dateinterval)\', last_access DATETIME DEFAULT NULL, ip VARCHAR(255) DEFAULT NULL, user_agent LONGTEXT DEFAULT NULL, INDEX IDX_D044D5D4A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE settings (name VARCHAR(255) NOT NULL, namespace VARCHAR(255) NOT NULL, value LONGTEXT NOT NULL, INDEX `default` (namespace, name), PRIMARY KEY(name, namespace)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE token (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, token VARCHAR(255) NOT NULL, `interval` VARCHAR(255) NOT NULL COMMENT \'(DC2Type:dateinterval)\', created DATETIME NOT NULL, type VARCHAR(255) NOT NULL, INDEX IDX_5F37A13BA76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, preference_id INT DEFAULT NULL, email VARCHAR(180) NOT NULL, active TINYINT(1) DEFAULT \'1\' NOT NULL, verified TINYINT(1) DEFAULT \'0\' NOT NULL, roles JSON NOT NULL, password VARCHAR(255) DEFAULT NULL, avatar VARCHAR(255) DEFAULT NULL, created DATETIME NOT NULL, updated DATETIME NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), UNIQUE INDEX UNIQ_8D93D649D81022C0 (preference_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, preference_id INT DEFAULT NULL, email VARCHAR(180) NOT NULL, active TINYINT(1) DEFAULT \'1\' NOT NULL, verified TINYINT(1) DEFAULT \'0\' NOT NULL, banned TINYINT(1) DEFAULT \'0\' NOT NULL, roles JSON NOT NULL, password VARCHAR(255) DEFAULT NULL, avatar VARCHAR(255) DEFAULT NULL, first_name VARCHAR(255) DEFAULT NULL, last_name VARCHAR(255) DEFAULT NULL, created DATETIME NOT NULL, updated DATETIME NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), UNIQUE INDEX UNIQ_8D93D649D81022C0 (preference_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user_preference (id INT AUTO_INCREMENT NOT NULL, timezone VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE session ADD CONSTRAINT FK_D044D5D4A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE token ADD CONSTRAINT FK_5F37A13BA76ED395 FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE');
