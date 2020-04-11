@@ -5,6 +5,7 @@
 * Two factor authentication on new devices
 * Inform user when someone tries to login as him
 * Add option for user avatar
+* Elevated privilege mode
 * Create language selector
 * Test for optional registration
 * Admin should not be able to set its account inactive
