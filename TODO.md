@@ -20,6 +20,12 @@
 
 # Tasks
 
+### Session management
+* User can see his active sessions
+* User can delete session
+* Admin can see and delete any session
+* Admin can ban ip from session
+
 ### User avatar
 * When user is logged in and has avatar it is displayed as button of user menu
   in primary nav bar.
@@ -29,6 +35,7 @@
   without uploading.
 * Once user is satisfied with the image he can save it to server and use it
   as avatar image.
+* There should be a file entity and image entity that extends it.
 
 ### Elevated privilege mode
 * Before entering page `/user/account`, user should be offered to enter password
@@ -42,12 +49,6 @@
 * All translations on backend should be available to frontend as well.
 * Create a command that will convert symfony yaml translations to json that
   are suitable for use on frontend.
-
-### Session management
-* User can see his active sessions
-* User can delete session
-* Admin can see and delete any session
-* Admin can ban ip from session
 
 ### User list improvements
 * Set default sort on user page
