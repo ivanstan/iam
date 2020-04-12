@@ -104,6 +104,14 @@ class UserEditForm extends AbstractType
 
                 $form->add('verified', CheckboxType::class, $verifiedOptions);
 
+                $form->add('banned', CheckboxType::class, [
+                    'required' => false,
+                    'disabled' => $user->getId() === $this->user->getId(),
+                    'attr' => [
+                        'data-test' => 'user-banned',
+                    ],
+                ]);
+
                 if ($isNew) {
                     $form->add(
                         'invite',

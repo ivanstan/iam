@@ -38,6 +38,7 @@
                         <th class="d-none d-sm-table-cell">{{sort_link('roles', 'Roles')|raw }}</th>
                         <th class="d-none d-sm-table-cell text-center">{{sort_link('active', 'Active')|raw }}</th>
                         <th class="d-none d-sm-table-cell text-center">{{ sort_link('verified', 'Verified')|raw }}</th>
+                        <th class="d-none d-sm-table-cell text-center">{{ sort_link('banned', 'Banned')|raw }}</th>
                         <th class="d-none d-sm-table-cell">{{ sort_link('created', 'Created')|raw }}</th>
                         <th class="text-center" style="width: 120px">{{ 'Actions'|trans }}</th>
                     </tr>
@@ -61,6 +62,13 @@
                             </td>
                             <td class="d-none d-sm-table-cell text-center align-baseline">
                                 {% if user.verified %}
+                                    <span class="badge badge-success">{{ 'Yes'|trans }}</span>
+                                {% else %}
+                                    <span class="badge badge-danger">{{ 'No'|trans }}</span>
+                                {% endif %}
+                            </td>
+                            <td class="d-none d-sm-table-cell text-center align-baseline">
+                                {% if user.banned %}
                                     <span class="badge badge-success">{{ 'Yes'|trans }}</span>
                                 {% else %}
                                     <span class="badge badge-danger">{{ 'No'|trans }}</span>

@@ -59,6 +59,12 @@ class SecurityService
         $this->eventDispatcher->dispatch($event);
     }
 
+    public function logout(): void
+    {
+        $this->tokenStorage->setToken();
+        $this->session->invalidate();
+    }
+
     public function verify(string $token): ?User
     {
         return $this->useToken(
@@ -81,10 +87,10 @@ class SecurityService
      * @return User|null
      * @throws \Exception
      */
-    private function useToken(?UserToken $token): ?User {
+    private function useToken(?UserToken $token): ?User
+    {
         if (!$token || !$token->isValid(DateTimeService::getCurrentUTC())) {
             return null;
-
             // ToDo throw exception here
         }
 

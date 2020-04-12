@@ -82,8 +82,8 @@ class FormAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
             throw new CustomUserMessageAuthenticationException($this->translator->trans('Incorrect email or password.'));
         }
 
-        if (!$user->isActive()) {
-            throw new CustomUserMessageAuthenticationException($this->translator->trans('Your account was suspended. Please contact administrator.'));
+        if ($user->isBanned()) {
+            throw new CustomUserMessageAuthenticationException($this->translator->trans('Your account was banned. Please contact administrator.'));
         }
 
         return $user;

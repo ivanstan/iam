@@ -13,7 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
  *     UserVerificationToken::TYPE = "App\Entity\Token\UserVerificationToken",
  *     UserRecoveryToken::TYPE = "App\Entity\Token\UserRecoveryToken",
  *     UserInvitationToken::TYPE = "App\Entity\Token\UserInvitationToken",
- *     UserAccessToken::TYPE = "App\Entity\Token\UserAccessToken"
+ *     UserAccessToken::TYPE = "App\Entity\Token\UserAccessToken",
+ *     UserEmailChangeToken::TYPE = "App\Entity\Token\UserEmailChangeToken",
+ *     UserDeleteToken::TYPE = "App\Entity\Token\UserDeleteToken"
  * })
  */
 abstract class UserToken extends Token
@@ -27,6 +29,11 @@ abstract class UserToken extends Token
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private User $user;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $data;
 
     /**
      * @throws \Exception
@@ -43,5 +50,15 @@ abstract class UserToken extends Token
     public function getUser(): User
     {
         return $this->user;
+    }
+
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    public function setData($data): void
+    {
+        $this->data = $data;
     }
 }

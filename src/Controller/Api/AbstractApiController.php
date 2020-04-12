@@ -22,7 +22,7 @@ class AbstractApiController extends AbstractController
         $this->serializer = $serializer;
     }
 
-    public function response($response): Response
+    protected function response($response): Response
     {
         return new Response(
             $response,
@@ -32,5 +32,16 @@ class AbstractApiController extends AbstractController
                 'Access-Control-Allow-Origin' => '*',
             ]
         );
+    }
+
+    protected function getPayload(): array
+    {
+        $request = $this->container->get('request_stack')->getCurrentRequest();
+
+        if ($request === null) {
+            return [];
+        }
+
+        return json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
     }
 }
