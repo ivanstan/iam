@@ -25,6 +25,7 @@
 <div class="card pt-3 pl-3 mb-3">
     {{ form_row(form.active) }}
     {{ form_row(form.verified) }}
+    {{ form_row(form.banned) }}
     {% if form.invite is defined %}
         {{ form_row(form.invite) }}
     {% endif %}
