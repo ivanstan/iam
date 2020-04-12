@@ -69,8 +69,22 @@ class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterfa
     {
         $user = $event->getAuthenticationToken()->getUser();
 
-        if ($user instanceof User) {
-            $this->logger->warning(sprintf('Open session for user %s', $user->getEmail()));
+        if (!$user instanceof User) {
+            return;
+        }
+
+        $this->logger->warning(sprintf('Open session for user %s', $user->getEmail()));
+
+        if ($user && !$user->isActive()) {
+            $user->setActive(true);
+            $this->em->flush();
+
+            $session = $this->request->getCurrentRequest()->getSession();
+            $session->getFlashBag()->add(
+                'success',
+                $this->translator->trans('Welcome back, your account is active again.')
+            );
+            // ToDo: delete any pending account delete requests.
         }
     }
 
@@ -96,7 +110,10 @@ class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterfa
 
                 $session->getFlashBag()->add(
                     'danger',
-                    $this->translator->trans('You have %attempts_left% attempts left. You risk being denied access.', ['%attempts_left%' => $attemptsLeft])
+                    $this->translator->trans(
+                        'You have %attempts_left% attempts left. You risk being denied access.',
+                        ['%attempts_left%' => $attemptsLeft]
+                    )
                 );
             }
         }

@@ -27,5 +27,29 @@
                 <div id="react-email-change-form"></div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="alert alert-warning">
+                    <p>{{ "You can temporarly deactivate account"|trans }}</p>
+
+                    <form method="post" action="{{ path('api_account_decativate') }}">
+                        <button type="submit" class="btn btn-warning">{{ 'Deactivate'|trans }}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="alert alert-danger">
+                    <p>{{ "Delete accout. This action cannot be undone."|trans }}</p>
+
+                    <form method="post" action="{{ path('api_account_delete') }}">
+                        <button type="submit" class="btn btn-danger">{{ 'Delete'|trans }}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

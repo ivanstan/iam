@@ -14,7 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
  *     UserRecoveryToken::TYPE = "App\Entity\Token\UserRecoveryToken",
  *     UserInvitationToken::TYPE = "App\Entity\Token\UserInvitationToken",
  *     UserAccessToken::TYPE = "App\Entity\Token\UserAccessToken",
- *     UserEmailChangeToken::TYPE = "App\Entity\Token\UserEmailChangeToken"
+ *     UserEmailChangeToken::TYPE = "App\Entity\Token\UserEmailChangeToken",
+ *     UserDeleteToken::TYPE = "App\Entity\Token\UserDeleteToken"
  * })
  */
 abstract class UserToken extends Token
