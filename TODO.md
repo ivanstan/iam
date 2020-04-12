@@ -84,6 +84,7 @@
 * Log file should be selected depending on environment from
   `.env` file
 * Page should list log newest first with ability to search.
+* Consider https://github.com/ddtraceweb/monolog-parser
 
 ### Ban IP permanent
 * Create a ban button on `/admin/ban` page that will open
