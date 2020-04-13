@@ -25,6 +25,7 @@
 * User can delete session
 * Admin can see and delete any session
 * Admin can ban ip from session
+* Use https://github.com/yzalis/UAParser
 
 ### User avatar
 * When user is logged in and has avatar it is displayed as button of user menu
@@ -36,6 +37,7 @@
 * Once user is satisfied with the image he can save it to server and use it
   as avatar image.
 * There should be a file entity and image entity that extends it.
+* Use: https://github.com/nhn/toast-ui.react-image-editor
 
 ### Elevated privilege mode
 * Before entering page `/user/account`, user should be offered to enter password
