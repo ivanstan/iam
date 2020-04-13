@@ -2,6 +2,7 @@
 
 namespace App\EventSubscriber;
 
+use App\Controller\Api\BanApiController;
 use App\Entity\Lock;
 use App\Entity\User;
 use App\Service\Traits\LoggerAwareTrait;
@@ -53,7 +54,24 @@ class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterfa
             $event->getRequest()->getClientIp()
         );
 
+        $ban = false;
+
         if ($lock && $lock->getValue() > self::LOGIN_ATTEMPTS_BAN) {
+            $ban = true;
+        }
+
+        $lock = $this->em->getRepository(Lock::class)->findOneBy(
+            [
+                'data' => $event->getRequest()->getClientIp(),
+                'name' => BanApiController::ADMIN_BAN
+            ]
+        );
+
+        if ($lock !== null) {
+            $ban = true;
+        }
+
+        if ($ban) {
             throw new AccessDeniedHttpException(
                 $this->translator->trans(
                     'You have been denied access. If you believe this was a mistake, please contact administrator.',

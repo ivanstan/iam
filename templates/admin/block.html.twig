@@ -12,6 +12,13 @@
     </div>
 
     <div class="container-fluid py-3">
+
+        <div class="row mb-3">
+            <div class="col-12">
+                <button class="ban-dialog-button btn btn-primary">Ban</button>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-12">
                 <table class="table">
@@ -20,7 +27,7 @@
                         <th>{{ 'Reason'|trans }}</th>
                         <th>{{ 'IP'|trans }}</th>
                         <th class="d-none d-sm-table-cell">{{ 'Expire'|trans }}</th>
-                        <th style="width: 110px;" class="text-center">{{ 'Active'|trans }}</th>
+{#                        <th style="width: 110px;" class="text-center">{{ 'Active'|trans }}</th>#}
                         <th style="width: 50px;"></th>
                     </tr>
                     </thead>
@@ -30,13 +37,13 @@
                             <td>{{ item.lock.name }}</td>
                             <td>{{ item.lock.data }}</td>
                             <td class="d-none d-sm-table-cell">{{ item.lock.expire ? item.lock.expire|date : '-' }}</td>
-                            <td class="text-center">
-                                {% if item.active %}
-                                    <span class="badge badge-success">{{ 'Yes'|trans }}</span>
-                                {% else %}
-                                    <span class="badge badge-danger">{{ 'No'|trans }}</span>
-                                {% endif %}
-                            </td>
+{#                            <td class="text-center">#}
+{#                                {% if item.active %}#}
+{#                                    <span class="badge badge-success">{{ 'Yes'|trans }}</span>#}
+{#                                {% else %}#}
+{#                                    <span class="badge badge-danger">{{ 'No'|trans }}</span>#}
+{#                                {% endif %}#}
+{#                            </td>#}
                             <td>
                                 {% include 'components/delete-button.html.twig' with {
                                     'action': path('block_delete', {'id': item.lock.id}),

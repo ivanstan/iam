@@ -86,7 +86,7 @@ class Lock
         return $this->expire;
     }
 
-    public function setExpire(\DateTime $expire): void
+    public function setExpire(?\DateTime $expire): void
     {
         $this->expire = $expire;
     }

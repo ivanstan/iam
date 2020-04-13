@@ -9,6 +9,7 @@ import { NavBarPortal } from './components/navbar/NavBarPortal';
 import DeleteConfirmation from './components/DeleteConfirmation';
 import { EmailChangeFormPortal } from './components/EmailChangeForm';
 import { activity } from './services/ActivityStore';
+import BanIpDialog from './components/BanIpDialog';
 
 const theme = createMuiTheme({
   palette: {
@@ -26,9 +27,10 @@ class Application extends React.Component<any, any> {
         <I18n allowMissing locale={'en'} messages={{}}>
           <ThemeProvider theme={theme}>
             <If condition={activity.isPending({ activity: null })}>
-              <LinearProgress color="secondary"/>
+              <LinearProgress color="secondary" />
             </If>
             <DeleteConfirmation />
+            <BanIpDialog />
             <NavBarPortal id="react-navbar" />
             <LoginFormPortal id="login-form" />
             <EmailChangeFormPortal id="react-email-change-form" />

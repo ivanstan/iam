@@ -34,7 +34,7 @@ class DeleteConfirmation extends React.Component<any, any> {
     this.setState({ open: false });
   };
 
-  confirm = () => {
+  submit = () => {
     const item: any = this.state.item;
     const token = item.getAttribute('data-token');
 
@@ -63,7 +63,7 @@ class DeleteConfirmation extends React.Component<any, any> {
         <Button onClick={this.close} color="primary" data-test="no">
           {t('No')}
         </Button>
-        <Button onClick={this.confirm} color="primary" autoFocus data-test="yes">
+        <Button onClick={this.submit} color="primary" autoFocus data-test="yes">
           {t('Yes, delete')}
         </Button>
       </DialogActions>
