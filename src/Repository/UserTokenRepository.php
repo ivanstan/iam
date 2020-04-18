@@ -30,10 +30,8 @@ class UserTokenRepository extends ServiceEntityRepository
         $builder = $this->createQueryBuilder('t')
             ->select('t', 'u')
             ->join('t.user', 'u')
-            ->where('t.token = :token')->setParameter(
-                'token',
-                $token
-            )//            ->andWhere('t INSTANCE OF :type')->setParameter('type', $this->getEntityManager()->getClassMetadata($type))
+            ->where('t.token = :token')->setParameter('token', $token)
+            //->andWhere('t INSTANCE OF :type')->setParameter('type', $this->getEntityManager()->getClassMetadata($type))
         ;
 
         $result = $builder->getQuery()->getResult();
