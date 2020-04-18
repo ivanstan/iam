@@ -6,6 +6,7 @@ import { FilledInputProps } from '@material-ui/core/FilledInput';
 import { translate, TranslateProps } from 'react-polyglot';
 import { withStyles } from '@material-ui/core/styles';
 import { If } from 'react-if';
+import { SettingService } from '../services/SettingService';
 
 const useStyles: any = theme => ({
   container: {
@@ -20,7 +21,6 @@ interface LoginFormPropsInterface extends TranslateProps, StyledComponentProps {
   csrf: string,
   error: string,
   email: string,
-  registrationAllowed: boolean,
 }
 
 class LoginForm extends React.Component<LoginFormPropsInterface, any> {
@@ -117,8 +117,10 @@ class LoginForm extends React.Component<LoginFormPropsInterface, any> {
   };
 
   render() {
-    const { t, classes, registrationAllowed, error } = this.props;
+    const { t, classes, error } = this.props;
     const { email, password, emailError, passwordError, dirty, formError } = this.state;
+
+    const registrationAllowed = SettingService.get('registration', 'enable', true);
 
     return <>
       <div className="p-5">

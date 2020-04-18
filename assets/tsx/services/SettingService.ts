@@ -1,19 +1,15 @@
-import { computed, observable } from 'mobx';
-import { promisedComputed } from 'computed-async-mobx';
+import { observable } from 'mobx';
+import { BackendService } from './BackendService';
 
-class SettingsStore {
+class Settings extends BackendService {
 
-  @observable settings = {};
+  @observable
+  settings = {};
 
   queue: any[] = [];
 
-  @computed get init() {
-    return this.getMessagesAsync.get();
-  }
-
-  protected getMessagesAsync = promisedComputed({}, async () => {
-    const response = await fetch(`/admin/settings`);
-    const data = await response.json();
+  public async init() {
+    const data = await this.request(`/api/settings`);
 
     for (let i in data) {
       if (!data.hasOwnProperty(i)) {
@@ -30,11 +26,8 @@ class SettingsStore {
 
       settings[namespace][name] = data;
     }
+  }
 
-    return data;
-  });
-
-  @observable
   public get(namespace: string, name: string, missing: any = null) {
     if (!this.settings.hasOwnProperty(namespace)) {
       return missing;
@@ -53,17 +46,14 @@ class SettingsStore {
       name: name,
       value: value,
     });
-
-    this.settings[namespace][name] = {
-      namespace: namespace,
-      name: name,
-      value: value,
-    };
   }
 
-  public flush() {
+  public async flush() {
 
+
+
+    await this.init();
   }
 }
 
-export const Settings = new SettingsStore();
+export const SettingService = new Settings();

@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Settings } from '../../services/SettingsStore';
+import { SettingService } from '../../services/SettingService';
 
 export class SettingsForm extends React.Component<any, any> {
   render = () => {
-    const test = Settings.get('registration', 'enabled', true);
+    const test = SettingService.get('registration', 'enabled', true);
 
     console.log(test);
 

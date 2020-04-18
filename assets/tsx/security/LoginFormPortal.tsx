@@ -10,7 +10,6 @@ export class LoginFormPortal extends React.Component<any, any> {
           csrf={element.getAttribute('data-csrf')}
           error={element.getAttribute('data-error')}
           email={element.getAttribute('data-email')}
-          registrationAllowed={element.getAttribute('data-registration-allowed')}
         />
       );
 

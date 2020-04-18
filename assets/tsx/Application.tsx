@@ -11,6 +11,7 @@ import { EmailChangeFormPortal } from './components/EmailChangeForm';
 import { activity } from './services/ActivityStore';
 import BanIpDialog from './components/BanIpDialog';
 import { UserService } from './services/UserService';
+import { SettingService } from './services/SettingService';
 
 const theme = createMuiTheme({
   palette: {
@@ -28,6 +29,8 @@ class Application extends React.Component<any, any> {
 
   componentDidMount = async () => {
     const user = await UserService.me();
+
+    await SettingService.init();
 
     if (user !== null) {
       console.info('Logged in as: ' + user.email);
