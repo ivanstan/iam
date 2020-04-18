@@ -4,16 +4,6 @@ configure({ enforceActions: 'never' });
 
 class Store {
 
-  @action me = () => {
-    const App: any = window['App'];
-
-    if (!App.user) {
-      return null;
-    }
-
-    return JSON.parse(App.user);
-  };
-
   locale = () => {
     const settings: any = window['App']?.settings;
 

@@ -6,11 +6,13 @@ namespace App\Controller\Api;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class AbstractApiController extends AbstractController
 {
     protected SerializerInterface $serializer;
+    protected NormalizerInterface $normalizer;
 
     /**
      * @required
@@ -20,6 +22,16 @@ class AbstractApiController extends AbstractController
     public function setSerializer(SerializerInterface $serializer): void
     {
         $this->serializer = $serializer;
+    }
+
+    /**
+     * @required
+     *
+     * @param NormalizerInterface $serializer
+     */
+    public function setNormalizer(NormalizerInterface $normalizer): void
+    {
+        $this->normalizer = $normalizer;
     }
 
     protected function response($response): Response

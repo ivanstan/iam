@@ -3,7 +3,6 @@
         appName: "{{ app_name }}",
         baseUrl: "{{ app.request.baseUrl ? app.request.baseUrl : '/' }}",
         locale: "{{ app.request.locale }}",
-        user: '{{ app.user ? app.user|raw : null }}',
         settings: {
             registrationEnabled: {{ settings.isRegistrationEnabled ? 'true' : 'false' }}
         }

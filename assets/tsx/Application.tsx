@@ -10,6 +10,7 @@ import DeleteConfirmation from './components/DeleteConfirmation';
 import { EmailChangeFormPortal } from './components/EmailChangeForm';
 import { activity } from './services/ActivityStore';
 import BanIpDialog from './components/BanIpDialog';
+import { UserService } from './services/UserService';
 
 const theme = createMuiTheme({
   palette: {
@@ -20,6 +21,22 @@ const theme = createMuiTheme({
 class Application extends React.Component<any, any> {
 
   // LinearProgress should have position fixed
+
+  public state: any = {
+    init: false,
+  };
+
+  componentDidMount = async () => {
+    const user = await UserService.me();
+
+    if (user !== null) {
+      console.info('Logged in as: ' + user.email);
+    } else {
+      console.info('Logged in as: Anonymous');
+    }
+
+    this.setState({ init: true });
+  };
 
   render() {
     return (

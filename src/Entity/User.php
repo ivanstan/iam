@@ -9,6 +9,7 @@ use App\Service\DateTimeService;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -25,6 +26,7 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("read")
      */
     protected $id;
 
@@ -33,6 +35,7 @@ class User implements UserInterface
      * @Assert\Email();
      * @Assert\NotBlank();
      * @Assert\NotNull();
+     * @Groups("read")
      */
     protected $email;
 
@@ -42,11 +45,15 @@ class User implements UserInterface
      */
     protected $password;
 
-    /** @var string */
+    /**
+     * @var string
+     * @Groups("read")
+     */
     protected $plainPassword;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups("read")
      */
     protected array $roles = [];
 
@@ -56,6 +63,7 @@ class User implements UserInterface
      * Use to hide user's content or profile when set inactive.
      *
      * @ORM\Column(type="boolean", options={"default" : 1})
+     * @Groups("read")
      */
     protected bool $active = true;
 
@@ -64,6 +72,7 @@ class User implements UserInterface
      * Use to restrict publishing of content created by users that are not verified.
      *
      * @ORM\Column(type="boolean", options={"default" : 0})
+     * @Groups("read")
      */
     protected bool $verified = false;
 
@@ -71,6 +80,7 @@ class User implements UserInterface
      * Used for denying misbehaving users access to platform. If true user won't be able to login.
      *
      * @ORM\Column(type="boolean", options={"default" : 0})
+     * @Groups("read")
      */
     protected bool $banned = false;
 
@@ -172,19 +182,6 @@ class User implements UserInterface
         }
 
         $this->plainPassword = $plainPassword;
-    }
-
-    public function __toString(): string
-    {
-        $user = [
-            'id' => $this->id,
-            'email' => $this->email,
-            'roles' => $this->getRoles(),
-            'active' => $this->active,
-            'displayName' => $this->getDisplayName(),
-        ];
-
-        return (string)json_encode($user, JSON_THROW_ON_ERROR);
     }
 
     /**

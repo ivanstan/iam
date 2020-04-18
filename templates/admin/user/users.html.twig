@@ -45,7 +45,7 @@
                     </thead>
                     <tbody>
                     {% for user in pager.currentPageResults %}
-                        <tr data-user="edit-user-{{ user.email }}">
+                        <tr data-test="edit-user-{{ user.email }}">
                             <td class="align-baseline">{{ user.email }}</td>
                             <td class="d-none d-sm-table-cell align-baseline">
                                 {% for role in user.roles %}
