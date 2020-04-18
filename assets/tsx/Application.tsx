@@ -27,18 +27,8 @@ class Application extends React.Component<any, any> {
     init: false,
   };
 
-  componentDidMount = async () => {
-    const user = await UserService.me();
-
-    await SettingService.init();
-
-    if (user !== null) {
-      console.info('Logged in as: ' + user.email);
-    } else {
-      console.info('Logged in as: Anonymous');
-    }
-
-    this.setState({ init: true });
+  componentDidMount = () => {
+    Promise.all([UserService.me(), SettingService.init()]).then(() => this.setState({ init: true }));
   };
 
   render() {

@@ -9,7 +9,7 @@ class Settings extends BackendService {
   queue: any[] = [];
 
   public async init() {
-    const data = await this.request(`/api/settings`);
+    const data = await this.request(`api/settings`);
 
     for (let i in data) {
       if (!data.hasOwnProperty(i)) {
@@ -20,7 +20,7 @@ class Settings extends BackendService {
       let namespace = settings.namespace;
       let name = settings.name;
 
-      if (this.settings.hasOwnProperty(namespace)) {
+      if (!this.settings.hasOwnProperty(namespace)) {
         settings[namespace] = {};
       }
 
