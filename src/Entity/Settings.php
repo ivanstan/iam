@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -20,17 +21,20 @@ class Settings
      * @ORM\Column(type="string")
      * @Assert\NotBlank();
      * @Assert\NotNull();
+     * @Groups("read")
      */
     protected string $name;
 
     /**
      * @ORM\Id()
      * @ORM\Column(type="string")
+     * @Groups("read")
      */
     protected string $namespace = self::DEFAULT_NAMESPACE;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups("read")
      */
     protected ?string $value = null;
 
