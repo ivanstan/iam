@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\UserEditForm;
-use App\Model\CollectionSpecification;
+use App\Model\Api\CollectionSpecification;
 use App\Repository\UserRepository;
 use App\Security\SecurityMailerService;
 use App\Service\Traits\TranslatorAwareTrait;

@@ -1,24 +1,11 @@
 <?php
 
-namespace App\Model;
+namespace App\Model\Api;
 
-class CollectionSpecification
+trait SortableCollectionTrait
 {
-    protected ?string $query = null;
     protected ?string $sort = null;
     protected string $sortDirection = 'ASC';
-
-    public function getQuery(): ?string
-    {
-        return $this->query;
-    }
-
-    public function setQuery(?string $query): self
-    {
-        $this->query = $query;
-
-        return $this;
-    }
 
     public function getSort(): ?string
     {
