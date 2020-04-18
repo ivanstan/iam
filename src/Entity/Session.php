@@ -12,11 +12,20 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Session
 {
     /**
-     * @var string
+     * @var int
+     *
      * @ORM\Id()
-     * @ORM\Column(type="string", length=128, unique=true)
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     * @Groups("read")
      */
     private $id;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=128, unique=true)
+     */
+    private $sessionId;
 
     /**
      * @var User
@@ -33,12 +42,14 @@ class Session
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
+     * @Groups("read")
      */
     private $date;
 
     /**
      * @var \DateInterval
      * @ORM\Column(type="dateinterval")
+     * @Groups("read")
      */
     private $lifetime;
 
@@ -61,6 +72,7 @@ class Session
      * @var string
      *
      * @ORM\Column(type="text", nullable=true)
+     * @Groups("read")
      */
     private $userAgent;
 
@@ -72,6 +84,16 @@ class Session
     public function setId(string $id): void
     {
         $this->id = $id;
+    }
+
+    public function getSessionId(): string
+    {
+        return $this->sessionId;
+    }
+
+    public function setSessionId(string $sessionId): void
+    {
+        $this->sessionId = $sessionId;
     }
 
     public function getUser(): ?User

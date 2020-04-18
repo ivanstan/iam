@@ -34,7 +34,7 @@ class SessionFixtures extends Fixture implements DependentFixtureInterface
         foreach ($users as $user) {
             for ($i = 0; $i < 4; $i++) {
                 $session = new Session();
-                $session->setId(session_create_id('test'));
+                $session->setSessionId(session_create_id('test'));
                 $session->setUser($user);
                 $session->setIp('127.0.0.' . $i);
                 $session->setLastAccess(DateTimeService::getCurrentUTC());

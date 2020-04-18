@@ -30,9 +30,9 @@ class DoctrineSessionHandler implements \SessionHandlerInterface
         return true;
     }
 
-    public function destroy($id): bool
+    public function destroy($sessionId): bool
     {
-        $this->repository->remove($id);
+        $this->repository->remove($sessionId);
 
         return true;
     }
@@ -44,14 +44,14 @@ class DoctrineSessionHandler implements \SessionHandlerInterface
         return true;
     }
 
-    public function open($path, $id): bool
+    public function open($path, $sessionId): bool
     {
         return true;
     }
 
-    public function read($id)
+    public function read($sessionId)
     {
-        $session = $this->repository->get($id);
+        $session = $this->repository->get($sessionId);
 
         if (!$session || $session->getData() === null) {
             return '';
@@ -62,17 +62,15 @@ class DoctrineSessionHandler implements \SessionHandlerInterface
         return \is_resource($resource) ? stream_get_contents($resource) : $resource;
     }
 
-    public function write($id, $data): bool
+    public function write($sessionId, $data): bool
     {
         $lifeTime = (int)ini_get('session.gc_maxlifetime');
 
-        $interval = new \DateInterval('PT' . $lifeTime . 'S');
-
-        $session = $this->repository->get($id);
+        $session = $this->repository->get($sessionId);
 
         $session->setData($data);
         $session->setDate(DateTimeService::getCurrentUTC());
-        $session->setLifetime($interval);
+        $session->setLifetime(new \DateInterval('PT' . $lifeTime . 'S'));
         $session->setUser($this->getUser());
 
         if ($request = $this->requestStack->getMasterRequest()) {

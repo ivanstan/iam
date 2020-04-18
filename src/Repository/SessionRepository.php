@@ -24,13 +24,13 @@ class SessionRepository extends ServiceEntityRepository
         return $builder->getQuery()->getResult();
     }
 
-    public function get(string $id): Session
+    public function get(string $sessionId): Session
     {
-        $session = $this->findOneBy(['id' => $id]);
+        $session = $this->findOneBy(['sessionId' => $sessionId]);
 
         if ($session === null) {
             $session = new Session();
-            $session->setId($id);
+            $session->setSessionId($sessionId);
         }
 
         return $session;

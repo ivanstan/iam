@@ -31,7 +31,7 @@ class UserActivitySubscriber implements EventSubscriberInterface
     public function onKernelTerminate(TerminateEvent $event): void
     {
         $sessionId = $event->getRequest()->getSession()->getId();
-        $session = $this->repository->findOneBy(['id' => $sessionId]);
+        $session = $this->repository->findOneBy(['sessionId' => $sessionId]);
 
         if ($session !== null) {
             $session->setLastAccess(DateTimeService::getCurrentUTC());

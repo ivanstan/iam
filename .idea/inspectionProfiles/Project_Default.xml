@@ -78,7 +78,6 @@
     </inspection_tool>
     <inspection_tool class="InvertedIfElseConstructsInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="LongInheritanceChainInspection" enabled="true" level="WARNING" enabled_by_default="true" />
-    <inspection_tool class="MultipleReturnStatementsInspection" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="NestedAssignmentsUsageInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
     <inspection_tool class="OffsetOperationsInspection" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ParameterDefaultValueIsNotNullInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
