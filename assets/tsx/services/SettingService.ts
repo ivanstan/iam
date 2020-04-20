@@ -1,10 +1,9 @@
-import { observable } from 'mobx';
+import { action, computed, observable } from 'mobx';
 import { BackendService } from './BackendService';
 
 class Settings extends BackendService {
 
-  @observable
-  settings = {};
+  @observable settings = {};
 
   queue: any[] = [];
 
@@ -48,6 +47,7 @@ class Settings extends BackendService {
     });
   }
 
+  @action
   public async flush() {
 
 

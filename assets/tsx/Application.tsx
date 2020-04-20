@@ -13,6 +13,7 @@ import BanIpDialog from './components/BanIpDialog';
 import { UserService } from './services/UserService';
 import { SettingService } from './services/SettingService';
 import MainPortal from './components/main/Main';
+import { Provider } from 'mobx-react';
 
 const theme = createMuiTheme({
   palette: {
@@ -37,6 +38,8 @@ class Application extends React.Component<any, any> {
       <>
         <I18n allowMissing locale={'en'} messages={{}}>
           <ThemeProvider theme={theme}>
+            <Provider settings={SettingService}>
+
             <If condition={activity.isPending({ activity: null })}>
               <LinearProgress color="secondary" />
             </If>
@@ -49,7 +52,7 @@ class Application extends React.Component<any, any> {
             <If condition={this.state.init}>
               <MainPortal id="root" />
             </If>
-
+            </Provider>
 
           </ThemeProvider>
         </I18n>

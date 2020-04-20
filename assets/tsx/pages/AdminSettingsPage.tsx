@@ -1,10 +1,30 @@
 import React from 'react';
+import { FormControlLabel, Switch } from '@material-ui/core';
+import { SettingService } from '../services/SettingService';
+import { inject, observer } from 'mobx-react';
 
+@inject('settings')
+@observer
 export default class AdminSettingsPage extends React.Component<any, any> {
-  render = (): any => {
-    return <div>
-      <h1>Settings</h1>
 
+  public onBooleanChange(namespace: string, name: string, value: boolean) {
+
+    console.log(namespace, name, value);
+
+  }
+
+  render = (): any => {
+    const { settings } = this.props;
+
+    return <div className="container mt-3">
+      <div className="card pt-3 px-3 mb-3">
+        <FormControlLabel
+          control={<Switch
+            checked={settings.get('registration', 'enabled', false)}
+            onChange={(event) => this.onBooleanChange('registration', 'enabled', event.target.checked)} />}
+          label="Enable registration"
+        />
+      </div>
     </div>;
   };
 }
