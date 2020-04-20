@@ -16,7 +16,6 @@ class SettingsApiController extends AbstractApiController
 {
     /**
      * @Route("/settings", name="api_settings_collection", methods={"GET"})
-     * @IsGranted("ROLE_ADMIN")
      */
     public function collection(Request $request, SettingsRepository $repository): Response
     {

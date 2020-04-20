@@ -14,7 +14,6 @@ class UserController extends AbstractApiController
 {
     /**
      * @Route("/user/me", name="api_user_me", methods={"GET"})
-     * @IsGranted("ROLE_USER")
      */
     public function save(Request $request): JsonResponse
     {
