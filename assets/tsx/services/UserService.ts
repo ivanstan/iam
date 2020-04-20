@@ -1,5 +1,7 @@
 import { observable } from 'mobx';
 import { BackendService } from './BackendService';
+import { UserModel } from '../model/UserModel';
+import {plainToClass} from "class-transformer";
 
 class User extends BackendService {
 
@@ -7,7 +9,9 @@ class User extends BackendService {
 
   me = async () => {
     try {
-      this.current = await this.request('api/user/me');
+      const response = await this.request('api/user/me');
+
+      this.current = plainToClass(UserModel, response);
     } catch (e) {
       this.current = null;
     }

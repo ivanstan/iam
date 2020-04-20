@@ -12,6 +12,7 @@ import { activity } from './services/ActivityStore';
 import BanIpDialog from './components/BanIpDialog';
 import { UserService } from './services/UserService';
 import { SettingService } from './services/SettingService';
+import MainPortal from './components/main/Main';
 
 const theme = createMuiTheme({
   palette: {
@@ -44,6 +45,12 @@ class Application extends React.Component<any, any> {
             <NavBarPortal id="react-navbar" />
             <LoginFormPortal id="login-form" />
             <EmailChangeFormPortal id="react-email-change-form" />
+
+            <If condition={this.state.init}>
+              <MainPortal id="root" />
+            </If>
+
+
           </ThemeProvider>
         </I18n>
       </>
