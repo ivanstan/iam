@@ -1,6 +1,6 @@
 import { observable } from 'mobx';
-import { BackendService } from './BackendService';
-import { UserModel } from '../model/UserModel';
+import { BackendService } from '../BackendService';
+import { UserModel } from '../../model/UserModel';
 import {plainToClass} from "class-transformer";
 
 class User extends BackendService {
@@ -20,4 +20,4 @@ class User extends BackendService {
   };
 }
 
-export const UserService = new User();
+export const UserStore = new User();

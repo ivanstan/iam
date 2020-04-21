@@ -53,7 +53,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.13.0",
         "@material-ui/lab": "latest",
-        "computed-async-mobx": "latest",
+        "computed-async-mobx": "^4.1.1",
         "react-router-dom": "^5.1.2"
     }
 }

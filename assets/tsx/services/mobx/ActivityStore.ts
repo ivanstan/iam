@@ -1,7 +1,7 @@
 import { action, computed, observable } from "mobx";
 import { createTransformer } from "mobx-utils";
 
-class ActivityStore {
+class Activity {
 
   @observable private _pending: string[] = [];
 
@@ -23,4 +23,4 @@ class ActivityStore {
 
 }
 
-export const activity = new ActivityStore();
+export const ActivityStore = new Activity();

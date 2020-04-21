@@ -18,7 +18,7 @@ import { translate } from 'react-polyglot';
 import { withStyles } from '@material-ui/core/styles';
 import { AccountCircled, MenuIcon } from '../icons';
 import { If } from 'react-if';
-import { UserService } from '../../services/UserService';
+import { UserStore } from '../../services/mobx/UserStore';
 
 const useStyles: any = theme => ({
   adminMenu: {
@@ -79,7 +79,7 @@ class NavBar extends React.Component<any, any> {
   };
 
   public isAdmin = (): boolean => {
-    const user = UserService.current;
+    const user = UserStore.current;
 
     if (user === null || !user.hasOwnProperty('roles')) {
       return false;
@@ -89,7 +89,7 @@ class NavBar extends React.Component<any, any> {
   };
 
   render = () => {
-    const user = UserService.current;
+    const user = UserStore.current;
     const win: any = window;
     const { classes, t } = this.props;
 

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router, Switch } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute';
-import { UserService } from '../../services/UserService';
+import { UserStore } from '../../services/mobx/UserStore';
 import { Role } from '../../model/Role';
 import { observer } from 'mobx-react';
 import AdminSettingsPage from '../../pages/AdminSettingsPage';
@@ -13,7 +13,7 @@ class Main extends React.Component<any, any> {
     return <Router>
       <Switch>
         <ProtectedRoute path="/admin/settings" exact
-                        condition={UserService.current && UserService.current.hasRole(Role.Admin)}>
+                        condition={UserStore.current && UserStore.current.hasRole(Role.Admin)}>
           <AdminSettingsPage />
         </ProtectedRoute>
 

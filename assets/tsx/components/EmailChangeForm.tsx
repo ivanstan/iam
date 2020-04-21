@@ -6,7 +6,7 @@ import { FilledInputProps } from '@material-ui/core/FilledInput';
 import * as EmailValidator from 'email-validator';
 import { If } from 'react-if';
 import { Alert } from '@material-ui/lab';
-import { activity } from '../services/ActivityStore';
+import { ActivityStore } from '../services/mobx/ActivityStore';
 
 class EmailChangeForm extends React.Component<any, any> {
 
@@ -53,7 +53,7 @@ class EmailChangeForm extends React.Component<any, any> {
   private submit = async () => {
     const { t } = this.props;
 
-    activity.add(EmailChangeForm.ACTIVITY);
+    ActivityStore.add(EmailChangeForm.ACTIVITY);
 
     const response = await fetch('/api/account/email',
       {
@@ -75,7 +75,7 @@ class EmailChangeForm extends React.Component<any, any> {
       });
     }
 
-    activity.remove(EmailChangeForm.ACTIVITY);
+    ActivityStore.remove(EmailChangeForm.ACTIVITY);
   };
 
   render = () => {

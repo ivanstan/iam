@@ -8,10 +8,10 @@ import { LoginFormPortal } from './security/LoginFormPortal';
 import { NavBarPortal } from './components/navbar/NavBarPortal';
 import DeleteConfirmation from './components/DeleteConfirmation';
 import { EmailChangeFormPortal } from './components/EmailChangeForm';
-import { activity } from './services/ActivityStore';
+import { ActivityStore } from './services/mobx/ActivityStore';
 import BanIpDialog from './components/BanIpDialog';
-import { UserService } from './services/UserService';
-import { SettingService } from './services/SettingService';
+import { UserStore } from './services/mobx/UserStore';
+import { SettingsStore } from './services/mobx/SettingsStore';
 import MainPortal from './components/main/Main';
 import { Provider } from 'mobx-react';
 
@@ -30,7 +30,7 @@ class Application extends React.Component<any, any> {
   };
 
   componentDidMount = () => {
-    Promise.all([UserService.me(), SettingService.init()]).then(() => this.setState({ init: true }));
+    Promise.all([UserStore.me(), SettingsStore.getSettings]).then(() => this.setState({ init: true }));
   };
 
   render() {
@@ -38,20 +38,22 @@ class Application extends React.Component<any, any> {
       <>
         <I18n allowMissing locale={'en'} messages={{}}>
           <ThemeProvider theme={theme}>
-            <Provider settings={SettingService}>
+            <Provider settings={SettingsStore} activity={ActivityStore} user={UserStore}>
 
-            <If condition={activity.isPending({ activity: null })}>
-              <LinearProgress color="secondary" />
-            </If>
-            <DeleteConfirmation />
-            <BanIpDialog />
-            <NavBarPortal id="react-navbar" />
-            <LoginFormPortal id="login-form" />
-            <EmailChangeFormPortal id="react-email-change-form" />
+              <If condition={ActivityStore.isPending({ activity: null })}>
+                <LinearProgress color="secondary" />
+              </If>
 
-            <If condition={this.state.init}>
-              <MainPortal id="root" />
-            </If>
+              <DeleteConfirmation />
+              <BanIpDialog />
+              <NavBarPortal id="react-navbar" />
+
+              <EmailChangeFormPortal id="react-email-change-form" />
+
+              <If condition={this.state.init}>
+                <LoginFormPortal id="login-form" />
+                <MainPortal id="root" />
+              </If>
             </Provider>
 
           </ThemeProvider>

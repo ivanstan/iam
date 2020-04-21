@@ -1,7 +1,7 @@
 import { computed, observable } from 'mobx';
 import { promisedComputed } from "computed-async-mobx";
 
-class LocaleStore {
+class Locale {
   private _messages: any = {};
 
   @observable current = window.localStorage.getItem('locale') || 'en';
@@ -24,4 +24,4 @@ class LocaleStore {
   });
 }
 
-export const locale = new LocaleStore();
+export const LocaleStore = new Locale();
