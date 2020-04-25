@@ -1,9 +1,8 @@
 import React from 'react';
 import { I18n } from 'react-polyglot';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme, withStyles } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 import { LinearProgress, ThemeProvider } from '@material-ui/core';
-import { If } from 'react-if';
 import { LoginFormPortal } from './security/LoginFormPortal';
 import { NavBarPortal } from './components/navbar/NavBarPortal';
 import DeleteConfirmation from './components/DeleteConfirmation';
@@ -14,6 +13,7 @@ import { UserStore } from './services/mobx/UserStore';
 import { SettingsStore } from './services/mobx/SettingsStore';
 import MainPortal from './components/main/Main';
 import { Provider } from 'mobx-react';
+import { If } from 'react-if';
 
 const theme = createMuiTheme({
   palette: {
@@ -21,19 +21,30 @@ const theme = createMuiTheme({
   },
 });
 
+const useStyles: any = theme => ({
+  top: {
+    position: 'fixed',
+    width: '100%',
+    zIndex: 10,
+  },
+});
+
 class Application extends React.Component<any, any> {
 
-  // LinearProgress should have position fixed
-
-  public state: any = {
+  public readonly state: any = {
     init: false,
   };
 
   componentDidMount = () => {
-    Promise.all([UserStore.me(), SettingsStore.getSettings]).then(() => this.setState({ init: true }));
+    Promise.all([UserStore.me(), SettingsStore.getSettings.get()]).then(() => {
+      this.setState({ init: true });
+    });
   };
 
-  render() {
+  render = () => {
+    const { init } = this.state;
+    const { classes } = this.props;
+
     return (
       <>
         <I18n allowMissing locale={'en'} messages={{}}>
@@ -41,7 +52,7 @@ class Application extends React.Component<any, any> {
             <Provider settings={SettingsStore} activity={ActivityStore} user={UserStore}>
 
               <If condition={ActivityStore.isPending({ activity: null })}>
-                <LinearProgress color="secondary" />
+                <LinearProgress color="secondary" className={classes.top} />
               </If>
 
               <DeleteConfirmation />
@@ -50,17 +61,16 @@ class Application extends React.Component<any, any> {
 
               <EmailChangeFormPortal id="react-email-change-form" />
 
-              <If condition={this.state.init}>
-                <LoginFormPortal id="login-form" />
-                <MainPortal id="root" />
-              </If>
+              {init && <LoginFormPortal id="login-form" />}
+              {init && <MainPortal id="root" />}
+
             </Provider>
 
           </ThemeProvider>
         </I18n>
       </>
     );
-  }
+  };
 }
 
-export default Application;
+export default (withStyles(useStyles)(Application));

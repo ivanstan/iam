@@ -1,4 +1,4 @@
-import { computed, configure, observable, toJS } from 'mobx';
+import { action, computed, configure, observable, toJS } from 'mobx';
 import { BackendService } from '../BackendService';
 import { createTransformer } from 'mobx-utils';
 import { promisedComputedInternal } from 'computed-async-mobx/built/src/promisedComputed';
@@ -12,13 +12,19 @@ export class Settings extends BackendService {
   queue: any[] = [];
 
   public getSettings = promisedComputedInternal({}, async () => {
-    const data = await this.request(`api/settings`);
-
     if (Object.keys(this.settings).length !== 0) {
       return this.settings;
     }
 
+    this.settings = await this.refresh();
+
+    return this.settings;
+  });
+
+  public async refresh() {
     let result = {};
+
+    const data = await this.request(`api/settings`);
 
     for (let i in data) {
       if (!data.hasOwnProperty(i)) {
@@ -36,29 +42,28 @@ export class Settings extends BackendService {
       result[namespace][name] = settings;
     }
 
-    this.settings = result;
+    return result;
+  }
 
-    return this.settings;
-  });
+  public set(item: any, value: any) {
+    this.queue.push({
+      namespace: item.namespace,
+      name: item.name,
+      value: value,
+    });
+  }
 
-  // @computed public get registrationEnabled() {
-  //   return this.getValue('registration', 'enabled', false);
-  // }
-  //
-  // public set(namespace: string, name: string, value) {
-  //   this.queue.push({
-  //     namespace: namespace,
-  //     name: name,
-  //     value: value,
-  //   });
-  // }
-  //
-  // @action
-  // public async flush() {
-  //
-  //
-  //   // await this.init();
-  // }
+  @action
+  public async flush() {
+    await this.request('api/settings', {
+      method: 'POST',
+      body: JSON.stringify(this.queue),
+    });
+
+    this.queue = [];
+
+    await this.refresh();
+  }
 
   @computed
   public get value() {
@@ -66,11 +71,11 @@ export class Settings extends BackendService {
       const settings = toJS(this.getSettings.get());
 
       if (!settings.hasOwnProperty(param.namespace)) {
-        return param.missing;
+        return param.default;
       }
 
       if (!settings[param.namespace].hasOwnProperty(param.name)) {
-        return param.missing;
+        return param.default;
       }
 
       return settings[param.namespace][param.name].value;

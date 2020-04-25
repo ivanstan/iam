@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { If } from 'react-if';
 import { Settings } from '../services/mobx/SettingsStore';
 import { inject, observer } from 'mobx-react';
+import { RegistrationEnabledSettings } from '../model/Settings';
 
 const useStyles: any = theme => ({
   container: {
@@ -124,9 +125,7 @@ class LoginForm extends React.Component<LoginFormPropsInterface, any> {
     const { t, classes, error } = this.props;
     const { email, password, emailError, passwordError, dirty, formError } = this.state;
 
-    const registrationAllowed = this.props.settings.value({
-      namespace: 'registration', name: 'enabled', missing: false
-    });
+    const registrationAllowed = this.props.settings.value(RegistrationEnabledSettings);
 
     return <>
       <div className="p-5">

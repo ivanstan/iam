@@ -77,6 +77,14 @@ class SettingsRepository extends ServiceEntityRepository
         return $entity->getValue();
     }
 
+    public function getEntity(string $name): ?Settings {
+        if (empty($this->cache)) {
+            $this->warmup();
+        }
+
+        return $this->cache[$this->namespace][$name] ?? null;
+    }
+
     private function warmup(): void
     {
         /** @var Settings $setting */

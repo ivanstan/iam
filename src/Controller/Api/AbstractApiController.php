@@ -4,8 +4,10 @@
 namespace App\Controller\Api;
 
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -13,6 +15,7 @@ class AbstractApiController extends AbstractController
 {
     protected SerializerInterface $serializer;
     protected NormalizerInterface $normalizer;
+    protected EntityManagerInterface $em;
 
     /**
      * @required
@@ -34,6 +37,16 @@ class AbstractApiController extends AbstractController
         $this->normalizer = $normalizer;
     }
 
+    /**
+     * @required
+     *
+     * @param EntityManagerInterface $em
+     */
+    public function setEntityManager(EntityManagerInterface $em): void
+    {
+        $this->em = $em;
+    }
+
     protected function response($response): Response
     {
         return new Response(
@@ -51,9 +64,13 @@ class AbstractApiController extends AbstractController
         $request = $this->container->get('request_stack')->getCurrentRequest();
 
         if ($request === null) {
-            return [];
+            throw new BadRequestHttpException('Missing request data.');
         }
 
-        return json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
+        try {
+            return json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
+        } catch (\JsonException $e) {
+            throw new BadRequestHttpException('Unable to parse json data.');
+        }
     }
 }

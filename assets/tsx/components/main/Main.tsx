@@ -1,35 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter as Router, Switch } from 'react-router-dom';
-import ProtectedRoute from '../ProtectedRoute';
-import { UserStore } from '../../services/mobx/UserStore';
-import { Role } from '../../model/Role';
-import { observer } from 'mobx-react';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 import AdminSettingsPage from '../../pages/AdminSettingsPage';
+import { inject, observer } from 'mobx-react';
+import ProtectedRoute from '../ProtectedRoute';
+import { Role } from '../../model/Role';
 
-@observer
+@inject('user')
 class Main extends React.Component<any, any> {
   render = () => {
+    const { user } = this.props;
+
     return <Router>
       <Switch>
         <ProtectedRoute path="/admin/settings" exact
-                        condition={UserStore.current && UserStore.current.hasRole(Role.Admin)}>
+                        condition={user.current && user.current.hasRole(Role.Admin)}>
           <AdminSettingsPage />
         </ProtectedRoute>
-
-        {/*<Route path={'/admin/settings'} component={AdminSettingsPage}/>*/}
       </Switch>
     </Router>;
   };
 }
 
 export default class MainPortal extends React.Component<any, any> {
-  render() {
+  render = () => {
     const element = document.getElementById(this.props.id);
+
     if (element) {
       return ReactDOM.createPortal(<Main />, element);
     }
 
     return null;
-  }
+  };
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { observer } from 'mobx-react'
+import { inject, observer } from 'mobx-react';
 import {
   AppBar,
   Button,
@@ -18,7 +18,6 @@ import { translate } from 'react-polyglot';
 import { withStyles } from '@material-ui/core/styles';
 import { AccountCircled, MenuIcon } from '../icons';
 import { If } from 'react-if';
-import { UserStore } from '../../services/mobx/UserStore';
 
 const useStyles: any = theme => ({
   adminMenu: {
@@ -39,6 +38,7 @@ const ToolBarButton = withStyles(theme => ({
   },
 }))(Button);
 
+@inject('user')
 @observer
 class NavBar extends React.Component<any, any> {
 
@@ -79,7 +79,7 @@ class NavBar extends React.Component<any, any> {
   };
 
   public isAdmin = (): boolean => {
-    const user = UserStore.current;
+    const user = this.props.user.current;
 
     if (user === null || !user.hasOwnProperty('roles')) {
       return false;
@@ -89,7 +89,7 @@ class NavBar extends React.Component<any, any> {
   };
 
   render = () => {
-    const user = UserStore.current;
+    const user = this.props.user.current;
     const win: any = window;
     const { classes, t } = this.props;
 

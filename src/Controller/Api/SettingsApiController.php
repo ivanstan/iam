@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Settings;
 use App\Repository\SettingsRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -30,6 +31,17 @@ class SettingsApiController extends AbstractApiController
      */
     public function save(Request $request): JsonResponse
     {
+        /** @var SettingsRepository $repository */
+        $repository = $this->em->getRepository(Settings::class);
+
+        foreach ($this->getPayload() as $data) {
+            if ($setting = $repository->getSettings($data['namespace'])->getEntity($data['name'])) {
+                $setting->setValue($data['value']);
+            }
+        }
+
+        $this->em->flush();
+
         return new JsonResponse();
     }
 }
