@@ -6,7 +6,6 @@ import { LinearProgress, ThemeProvider } from '@material-ui/core';
 import { LoginFormPortal } from './security/LoginFormPortal';
 import { NavBarPortal } from './components/navbar/NavBarPortal';
 import DeleteConfirmation from './components/DeleteConfirmation';
-import { EmailChangeFormPortal } from './components/EmailChangeForm';
 import { ActivityStore } from './services/mobx/ActivityStore';
 import BanIpDialog from './components/BanIpDialog';
 import { UserStore } from './services/mobx/UserStore';
@@ -14,6 +13,7 @@ import { SettingsStore } from './services/mobx/SettingsStore';
 import MainPortal from './components/main/Main';
 import { Provider } from 'mobx-react';
 import { If } from 'react-if';
+import { AccountPagePortal } from './pages/AccountPage';
 
 const theme = createMuiTheme({
   palette: {
@@ -59,7 +59,7 @@ class Application extends React.Component<any, any> {
               <BanIpDialog />
               <NavBarPortal id="react-navbar" />
 
-              <EmailChangeFormPortal id="react-email-change-form" />
+              <AccountPagePortal id="react-account-page" />
 
               {init && <LoginFormPortal id="login-form" />}
               {init && <MainPortal id="root" />}

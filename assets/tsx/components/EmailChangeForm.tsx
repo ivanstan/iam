@@ -1,6 +1,5 @@
 import React from 'react';
 import { translate } from 'react-polyglot';
-import ReactDOM from 'react-dom';
 import { Button, TextField } from '@material-ui/core';
 import { FilledInputProps } from '@material-ui/core/FilledInput';
 import * as EmailValidator from 'email-validator';
@@ -121,15 +120,4 @@ class EmailChangeForm extends React.Component<any, any> {
   };
 }
 
-const EmailChangeFormTranslated = translate()(EmailChangeForm);
-
-export class EmailChangeFormPortal extends React.Component<any, any> {
-  render() {
-    const element = document.getElementById(this.props.id);
-    if (element) {
-      return ReactDOM.createPortal(<EmailChangeFormTranslated />, element);
-    }
-
-    return null;
-  }
-}
+export default translate()(EmailChangeForm);
