@@ -60,10 +60,7 @@ class Application extends React.Component<any, any> {
               <NavBarPortal id="react-navbar" />
 
               {init && <AccountPagePortal id="react-account-page" />}
-
               {init && <LoginFormPortal id="login-form" />}
-              {init && <MainPortal id="root" />}
-
             </Provider>
 
           </ThemeProvider>
