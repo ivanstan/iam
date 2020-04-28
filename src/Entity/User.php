@@ -108,6 +108,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\UserPreference", cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinColumn(onDelete="CASCADE")
+     * @Groups("read")
      */
     protected $preference;
 
@@ -115,6 +116,7 @@ class User implements UserInterface
      * @var Session[]
      * @ORM\OneToMany(targetEntity="App\Entity\Session", mappedBy="user", cascade={"remove"})
      * @ORM\JoinColumn(onDelete="CASCADE")
+     * @Groups("read")
      */
     protected $sessions;
 
@@ -293,5 +295,13 @@ class User implements UserInterface
     public function setBanned(bool $banned): void
     {
         $this->banned = $banned;
+    }
+
+    /**
+     * @return Session[]
+     */
+    public function getSessions(): array
+    {
+        return $this->sessions->toArray();
     }
 }

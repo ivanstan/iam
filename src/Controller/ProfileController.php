@@ -3,16 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\PasswordRepeatType;
 use App\Form\UserProfileForm;
 use App\Service\Traits\TranslatorAwareTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 
 final class ProfileController extends AbstractController
 {
@@ -60,45 +57,9 @@ final class ProfileController extends AbstractController
      * @Route("/user/account", name="user_profile_security")
      * @IsGranted("ROLE_USER")
      */
-    public function account(Request $request): Response
+    public function account(): Response
     {
-        /** @var User $user */
-        $user = $this->getUser();
-
-        $builder = $this->createFormBuilder()
-            ->add(
-                'currentPassword',
-                PasswordType::class,
-                [
-                    'constraints' => new UserPassword(),
-                    'label' => false,
-                    'attr' => ['placeholder' => 'Current password', 'data-test' => 'current-password'],
-                ]
-            )
-            ->add('password', PasswordRepeatType::class, ['label' => false]);
-
-        $form = $builder->getForm();
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $user->setPlainPassword($data['password']);
-            $user->setUpdated();
-
-            $em = $this->getDoctrine()->getManager();
-            $em->flush();
-
-            $this->addFlash('success', $this->translator->trans('Password has been successfully changed.'));
-
-            return $this->redirectToRoute('user_profile_security');
-        }
-
-        return $this->render(
-            'pages/user/account.html.twig',
-            [
-                'form' => $form->createView(),
-            ]
-        );
+        return $this->render('pages/user/account.html.twig',);
     }
 
 }

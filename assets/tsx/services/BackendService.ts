@@ -6,6 +6,12 @@ export class BackendService {
   public request = async (url: string, init?: RequestInit): Promise<Response> => {
     const response = await fetch(BackendService.url + url, init);
 
+    if (response.status !== 200) {
+      const data = await response.json();
+
+      throw data.response;
+    }
+
     return await response.json();
   };
 

@@ -59,7 +59,7 @@ class Application extends React.Component<any, any> {
               <BanIpDialog />
               <NavBarPortal id="react-navbar" />
 
-              <AccountPagePortal id="react-account-page" />
+              {init && <AccountPagePortal id="react-account-page" />}
 
               {init && <LoginFormPortal id="login-form" />}
               {init && <MainPortal id="root" />}

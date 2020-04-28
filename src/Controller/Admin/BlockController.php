@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Lock;
+use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,6 +21,7 @@ final class BlockController extends AbstractController
      */
     public function index(Request $request): Response
     {
+        /** @var QueryBuilder $builder */
         $builder = $this->getDoctrine()->getRepository(Lock::class)->findAll();
 
         $pager = new Pagerfanta(new DoctrineORMAdapter($builder));

@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Sessions'|trans }} {{ parent() }}{% endblock %}
+
+{% block body %}
+    {% include 'components/navbar.html.twig' %}
+
+    <div class="row">
+        <div class="col-12">
+            {% include 'components/messages.html.twig' %}
+        </div>
+    </div>
+
+    <div class="container-fluid py-3">
+        <div class="row mb-3">
+            <div class="col-12 d-flex justify-content-end">
+                <form method="get" class="d-flex"
+                      action="{{ path(app.request.attributes.get('_route'), app.request.query.all) }}">
+                    <input class="form-control mr-2" type="text" name="query" value="{{ app.request.get('query') }}"/>
+                    <input class="btn btn-primary mr-2" type="submit" value="{{ 'Search'|trans }}" />
+                    <a class="btn btn-secondary"
+                       href="{{ path(app.request.attributes.get('_route')) }}">{{ 'Reset'|trans }}</a>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>{{ 'User'|trans }}</th>
+                        <th>{{ 'IP'|trans }}</th>
+                        <th>{{ 'Last Access'|trans }}</th>
+                        <th class="d-none d-sm-table-cell" style="width: 400px;">{{ 'User agent'|trans }}</th>
+                        <th class="text-center" style="width: 120px">{{ 'Actions'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in pager.currentPageResults %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('user_edit', {id: item.user.id}) }}">{{ item.user.email }}</a>
+                            </td>
+                            <td>{{ item.ip }}</td>
+                            <td>{{ item.lastAccess|date }}</td>
+                            <td class="d-none d-sm-table-cell">{{ item.userAgent }}</td>
+                            <td class="d-flex justify-content-center align-baseline">
+                                <div class="float-right">
+                                    {% include 'components/delete-button.html.twig' with {
+                                        'action': path('admin_session_delete', {'id': item.id}),
+                                        'csrf': csrf_token('delete' ~ item.id),
+                                        'entity': 'user'
+                                    } only %}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                {% include 'components/pager.html.twig' with {pager: pager} only %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

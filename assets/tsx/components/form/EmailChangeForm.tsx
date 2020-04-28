@@ -84,11 +84,11 @@ class EmailChangeForm extends React.Component<any, any> {
 
     return (<div className="my-3">
 
-      <If condition={this.state.message}>
+      <If condition={Boolean(this.state.message)}>
         <Alert severity="success">{this.state.message}</Alert>
       </If>
 
-      <If condition={this.state.errorMessage}>
+      <If condition={Boolean(this.state.errorMessage)}>
         <Alert severity="error">{this.state.errorMessage}</Alert>
       </If>
 
@@ -106,7 +106,6 @@ class EmailChangeForm extends React.Component<any, any> {
         onChange={e => this.handleChange('value', e.target.value)}
       />
       <Button
-        fullWidth
         variant="contained"
         color="primary"
         size="large"
@@ -114,7 +113,7 @@ class EmailChangeForm extends React.Component<any, any> {
         data-test="submit"
         onClick={this.submit}
       >
-        {t('Change')}
+        {t('Change Email')}
       </Button>
     </div>);
   };

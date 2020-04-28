@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, FormHelperText, StyledComponentProps, TextField } from '@material-ui/core';
-import { PasswordField } from '../components/PasswordField';
+import { PasswordInput } from '../components/PasswordInput';
 import * as EmailValidator from 'email-validator';
 import { FilledInputProps } from '@material-ui/core/FilledInput';
 import { translate, TranslateProps } from 'react-polyglot';
@@ -9,6 +9,7 @@ import { If } from 'react-if';
 import { Settings } from '../services/mobx/SettingsStore';
 import { inject, observer } from 'mobx-react';
 import { RegistrationEnabledSettings } from '../model/Settings';
+import FormError from '../components/form/FormError';
 
 const useStyles: any = theme => ({
   container: {
@@ -131,9 +132,7 @@ class LoginForm extends React.Component<LoginFormPropsInterface, any> {
       <div className="p-5">
         <h1 className="h3 mb-3">Login</h1>
         <form method="post" ref={ref => this.form = ref}>
-          <FormHelperText error={true} style={{ marginBottom: 30, marginTop: 15 }}>
-            {formError || error || ' '}
-          </FormHelperText>
+          <FormError text={formError || error}/>
 
           {/*<Alert severity="error">*/}
           {/*  {formError || error || ' '}*/}
@@ -156,7 +155,7 @@ class LoginForm extends React.Component<LoginFormPropsInterface, any> {
             ref={input => this.email = input}
           />
 
-          <PasswordField
+          <PasswordInput
             id="login-form-password"
             name={'password'}
             label={t('Password')}

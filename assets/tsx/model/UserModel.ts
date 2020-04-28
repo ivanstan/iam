@@ -5,6 +5,7 @@ export class UserModel {
   public active: boolean;
   public created: string;
   public updated: string;
+  public sessions: any;
 
   constructor() {
     this.id = null;

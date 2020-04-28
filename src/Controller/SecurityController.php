@@ -263,6 +263,7 @@ final class SecurityController extends AbstractController implements LoggerAware
      */
     public function recover(Request $request, EntityManagerInterface $em): Response
     {
+        /** @var User $user */
         $user = $this->getUser();
 
         if ($user === null) {

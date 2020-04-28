@@ -4,14 +4,14 @@ import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
-import {Visibility, VisibilityOff} from './icons';
+import { Visibility, VisibilityOff } from './icons';
 import _ from 'lodash';
 import { FormHelperText } from '@material-ui/core';
 
 interface PasswordFieldPropsInterface {
   onChange: Function,
   onKeyPress?: Function,
-  value: string,
+  value: string | null,
   variant?: 'standard' | 'outlined' | 'filled';
   required?: boolean,
   fullWidth?: boolean,
@@ -24,28 +24,38 @@ interface PasswordFieldPropsInterface {
   id?: string,
 }
 
-export class PasswordField extends React.Component<PasswordFieldPropsInterface, any> {
+export class PasswordInput extends React.Component<PasswordFieldPropsInterface, any> {
 
   readonly state: any = {
     value: '',
-    show: false
+    show: false,
   };
 
-  componentDidMount(): void {
+  componentDidMount = (): void => {
     this.setState({
-      value: this.props.value
+      value: this.props.value,
     });
+  };
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.value !== state.value) {
+      return {
+        value: props.value,
+      };
+    }
+
+    return null;
   }
 
   handleClickShowPassword = () => {
     this.setState({ show: !this.state.show });
   };
 
-  onChange(e: any) {
+  onChange = (e: any) => {
     this.setState({ value: e.target.value });
 
     this.props.onChange(e);
-  }
+  };
 
   render() {
     const { value, show } = this.state;
@@ -60,7 +70,7 @@ export class PasswordField extends React.Component<PasswordFieldPropsInterface, 
         </InputLabel>
         <OutlinedInput
           {..._.pick(this.props, ['inputRef', 'error', 'name'])}
-          inputProps={{id: this.props?.id}}
+          inputProps={{ id: this.props?.id }}
           endAdornment={(
             <InputAdornment position="end">
               <IconButton
@@ -68,7 +78,7 @@ export class PasswordField extends React.Component<PasswordFieldPropsInterface, 
                 onClick={this.handleClickShowPassword}
                 onMouseDown={e => e.preventDefault()}
               >
-                {show ? <Visibility/> : <VisibilityOff/>}
+                {show ? <Visibility /> : <VisibilityOff />}
               </IconButton>
             </InputAdornment>
           )}

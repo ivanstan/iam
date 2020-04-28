@@ -3,9 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\Session;
+use App\Entity\User;
+use App\Model\Api\CollectionSpecification;
 use App\Service\DateTimeService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 class SessionRepository extends ServiceEntityRepository
 {
@@ -22,6 +25,35 @@ class SessionRepository extends ServiceEntityRepository
         $builder = $this->createQueryBuilder('session', 'session.id');
 
         return $builder->getQuery()->getResult();
+    }
+
+    public function collection(CollectionSpecification $specification): QueryBuilder
+    {
+        $builder = $this->createQueryBuilder('session', 'session.id');
+        $builder->join('session.user', 'user');
+
+        if ($specification->getQuery() !== null) {
+            $builder
+                ->where(
+                    $builder->expr()->orX(
+                        $builder->expr()->like('user.email', $builder->expr()->literal('%' . $specification->getQuery() . '%')),
+                        $builder->expr()->like('session.ip', $builder->expr()->literal('%' . $specification->getQuery() . '%'))
+                    )
+                );
+        }
+
+        $builder->orderBy('session.' . $specification->getSort(), $specification->getSortDirection());
+
+        return $builder;
+    }
+
+    public function getUserSessions(User $user): QueryBuilder
+    {
+        $builder = $this->createQueryBuilder('session');
+        $builder->where('session.user = :user')->setParameter('user', $user);
+        $builder->orderBy('session.ip');
+
+        return $builder;
     }
 
     public function get(string $sessionId): Session
