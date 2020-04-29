@@ -1,7 +1,6 @@
 import React from 'react';
 import { I18n } from 'react-polyglot';
-import { createMuiTheme, withStyles } from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue';
+import { withStyles } from '@material-ui/core/styles';
 import { LinearProgress, ThemeProvider } from '@material-ui/core';
 import { LoginFormPortal } from './security/LoginFormPortal';
 import { NavBarPortal } from './components/navbar/NavBarPortal';
@@ -10,16 +9,10 @@ import { ActivityStore } from './services/mobx/ActivityStore';
 import BanIpDialog from './components/BanIpDialog';
 import { UserStore } from './services/mobx/UserStore';
 import { SettingsStore } from './services/mobx/SettingsStore';
-import MainPortal from './components/main/Main';
 import { Provider } from 'mobx-react';
 import { If } from 'react-if';
 import { AccountPagePortal } from './pages/AccountPage';
-
-const theme = createMuiTheme({
-  palette: {
-    primary: blue,
-  },
-});
+import { theme } from './components/Theme';
 
 const useStyles: any = theme => ({
   top: {

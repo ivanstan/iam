@@ -5,18 +5,32 @@ import PasswordChangeForm from '../components/form/PasswordChangeForm';
 import DeactivateAccount from '../components/DeactivateAccount';
 import DeleteAccount from '../components/DeleteAccount';
 import UserSessions from '../components/UserSessions';
-import { UserStore } from '../services/mobx/UserStore';
+import NavBar from '../components/navbar/NavBar';
+import { inject, observer } from 'mobx-react';
+import { If } from 'react-if';
 
-class AccountPage extends React.Component<any, any> {
-  render(): React.ReactNode {
-    return <>
-      <UserSessions user={UserStore.current} />
-      <PasswordChangeForm />
-      <EmailChangeForm />
-      <DeactivateAccount />
-      <DeleteAccount />
-    </>;
-  }
+@inject('user')
+@observer
+export class AccountPage extends React.Component<any, any> {
+
+  render = (): React.ReactNode => {
+    const { user } = this.props;
+
+    console.log(user);
+
+    return (
+      <>
+        <NavBar />
+        <If condition={user.current}>
+          <UserSessions user={user.current} />
+          <PasswordChangeForm />
+          <EmailChangeForm />
+          <DeactivateAccount />
+          <DeleteAccount />
+        </If>
+      </>
+    );
+  };
 }
 
 export class AccountPagePortal extends React.Component<any, any> {

@@ -13,6 +13,6 @@ final class IndexController extends AbstractController
      */
     public function login(): Response
     {
-        return $this->render('index.html.twig');
+        return $this->render('pages/react.html.twig');
     }
 }
