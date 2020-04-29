@@ -54,9 +54,7 @@ export class ReactApplication extends React.Component<any, any> {
             <Router>
               <Switch>
                 <ProtectedRoute exact path="/user/account" condition={true} component={<AccountPage />} />
-                <Route exact path="/">
-                  <HomePage />
-                </Route>
+                <Route exact path="/" component={HomePage} />
               </Switch>
             </Router>
 
