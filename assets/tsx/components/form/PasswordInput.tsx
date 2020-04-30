@@ -4,7 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
-import { Visibility, VisibilityOff } from './icons';
+import { Visibility, VisibilityOff } from '../icons';
 import _ from 'lodash';
 import { FormHelperText } from '@material-ui/core';
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { translate } from 'react-polyglot';
-import { PasswordInput } from '../PasswordInput';
-import AbstractComponent from '../AbstractComponent';
+import { PasswordInput } from '../../components/form/PasswordInput';
+import AbstractComponent from '../../components/AbstractComponent';
 import { Button } from '@material-ui/core';
-import PasswordRepeatInput from '../PasswordRepeatInput';
+import PasswordRepeatInput from '../../components/form/PasswordRepeatInput';
 import UserService from '../../services/UserService';
 import { If } from 'react-if';
 import { Alert } from '@material-ui/lab';
@@ -64,7 +64,7 @@ class PasswordChangeForm extends AbstractComponent<any, any> {
     });
   };
 
-  render = (): React.ReactNode => {
+  render(): React.ReactNode {
     const { current, password, error, message } = this.state;
     const { t } = this.props;
 

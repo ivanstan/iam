@@ -1,15 +1,16 @@
 import React from 'react';
-import { UserModel } from '../model/UserModel';
+import { UserModel } from '../../model/UserModel';
 import Each from 'react-each';
 import { translate } from 'react-polyglot';
 import { IconButton } from '@material-ui/core';
-import { DeleteIcon } from './icons';
-import ConfirmationDialog from './ConfirmationDialog';
-import UserService from '../services/UserService';
+import { DeleteIcon } from '../../components/icons';
+import ConfirmationDialog from '../../components/dialog/ConfirmationDialog';
+import UserService from '../../services/UserService';
 
 interface UserSessionsPropsInterface {
   user: UserModel;
 }
+
 
 class UserSessions extends React.Component<UserSessionsPropsInterface, any> {
 
@@ -50,7 +51,7 @@ class UserSessions extends React.Component<UserSessionsPropsInterface, any> {
     }
   };
 
-  render = (): React.ReactNode => {
+  render(): React.ReactNode {
     return (
       <div>
         <ConfirmationDialog
@@ -61,8 +62,8 @@ class UserSessions extends React.Component<UserSessionsPropsInterface, any> {
         <table className={'table'}>
           <tbody>
           <Each items={this.state.sessions}
-                renderItem={(item) =>
-                  (<tr>
+                renderItem={(item, index) =>
+                  (<tr key={index}>
                     <td>{item.lastAccess}</td>
                     <td>{item.ip}</td>
                     <td>{item.userAgent}</td>

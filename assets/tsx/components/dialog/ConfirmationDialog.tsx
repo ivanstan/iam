@@ -12,7 +12,7 @@ class ConfirmationDialog extends React.Component<any, any> {
 
   };
 
-  render = (): React.ReactNode => {
+  render(): React.ReactNode {
     const { t, open, text, onCancel, onConfirm } = this.props;
 
     return (

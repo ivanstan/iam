@@ -68,7 +68,7 @@ class PasswordRepeatInput extends React.Component<PasswordRepeatInputPropsInterf
     return result;
   };
 
-  render = (): React.ReactNode => {
+  render(): React.ReactNode {
     const { t } = this.props;
     const { password, repeat, repeatError } = this.state;
 

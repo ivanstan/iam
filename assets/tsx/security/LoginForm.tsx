@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, FormHelperText, StyledComponentProps, TextField } from '@material-ui/core';
-import { PasswordInput } from '../components/PasswordInput';
+import { PasswordInput } from '../components/form/PasswordInput';
 import * as EmailValidator from 'email-validator';
 import { FilledInputProps } from '@material-ui/core/FilledInput';
 import { translate, TranslateProps } from 'react-polyglot';

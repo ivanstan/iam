@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import { translate } from 'react-polyglot';
 
-class DeleteConfirmation extends React.Component<any, any> {
+class DeleteConfirmationDialog extends React.Component<any, any> {
 
   public readonly state = {
     item: {},
@@ -71,4 +71,4 @@ class DeleteConfirmation extends React.Component<any, any> {
   };
 }
 
-export default translate()(withTheme(DeleteConfirmation));
+export default translate()(withTheme(DeleteConfirmationDialog));

@@ -4,14 +4,13 @@ import { withStyles } from '@material-ui/core/styles';
 import { LinearProgress, ThemeProvider } from '@material-ui/core';
 import { LoginFormPortal } from './security/LoginFormPortal';
 import { NavBarPortal } from './components/navbar/NavBarPortal';
-import DeleteConfirmation from './components/DeleteConfirmation';
+import DeleteConfirmation from './components/dialog/DeleteConfirmationDialog';
 import { ActivityStore } from './services/mobx/ActivityStore';
-import BanIpDialog from './components/BanIpDialog';
+import BanIpDialog from './components/dialog/BanIpDialog';
 import { UserStore } from './services/mobx/UserStore';
 import { SettingsStore } from './services/mobx/SettingsStore';
 import { Provider } from 'mobx-react';
 import { If } from 'react-if';
-import { AccountPagePortal } from './pages/AccountPage';
 import { theme } from './components/Theme';
 
 const useStyles: any = theme => ({
@@ -52,7 +51,6 @@ class Application extends React.Component<any, any> {
               <BanIpDialog />
               <NavBarPortal id="react-navbar" />
 
-              {init && <AccountPagePortal id="react-account-page" />}
               {init && <LoginFormPortal id="login-form" />}
             </Provider>
 
