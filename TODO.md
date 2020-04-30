@@ -28,6 +28,8 @@
 * [ ] Move register form to react
 * [ ] Move password recovery form to react
 * [ ] Move set new password after recovery form to react
+* [ ] Link react user account page in menu
+* [ ] Fix and link react admin settings form to menu
 
 ### Session management
 * [x] User can see his active sessions
