@@ -62,7 +62,7 @@
   are suitable for use on frontend.
 
 ### User list improvements
-* [ ] Set default sort on user page
+* [x] Set default sort on user page
 * [ ] Add last access column
 
 ### Timezone feature flag
