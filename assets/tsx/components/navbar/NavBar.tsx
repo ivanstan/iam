@@ -168,7 +168,7 @@ class NavBar extends React.Component<any, any> {
 
           <If condition={user !== null}>
             <MenuItem onClick={() => {
-              this.userNavigate('/user/account');
+              this.userNavigate('/#/user/account');
             }}>{t('Account')}</MenuItem>
           </If>
 

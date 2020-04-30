@@ -33,7 +33,7 @@
                     <thead>
                     <tr>
                         <th>
-                            {{ sort_link('email', 'Email')|raw }}
+                            {{ sort_link('email', 'Email', {'sort': 'email', 'sort-dir': 'asc'})|raw }}
                         </th>
                         <th class="d-none d-sm-table-cell">{{sort_link('roles', 'Roles')|raw }}</th>
                         <th class="d-none d-sm-table-cell text-center">{{sort_link('active', 'Active')|raw }}</th>

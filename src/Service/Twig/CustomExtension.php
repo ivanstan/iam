@@ -37,7 +37,7 @@ class CustomExtension extends AbstractExtension
         return "data-test=$attribute";
     }
 
-    public function sortLink(string $name, string $title): string
+    public function sortLink(string $name, string $title, $default = []): string
     {
         $request = $this->request->getMasterRequest();
 
@@ -47,6 +47,13 @@ class CustomExtension extends AbstractExtension
             $query['sort'] = $name;
             $query['sort-dir'] = 'asc';
             $icon = '<i class="fas fa-sort"></i>';
+
+            if (!empty($default)) {
+                $query['sort'] = $default['sort'];
+                $query['sort-dir'] = $default['sort-dir'] === 'desc' ? 'asd' : 'desc';
+                $icon = '<i class="fas fa-sort-up"></i>';
+            }
+
         } elseif ($query['sort'] === $name) {
             if ($query['sort-dir'] === 'asc') {
                 $query['sort-dir'] = 'desc';
