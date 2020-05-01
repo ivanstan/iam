@@ -21,14 +21,15 @@
 
 # Tasks
 * [x] Fix and link react admin settings form to menu
+* [ ] Fix loading progress and fist load bar
 * [ ] Add delete and deactivate account confirmation with password
 * [ ] Consider new frontend translation library
 * [ ] Move user/profile page to react
 * [ ] Move user edit/new form to react
 * [ ] Move register form to react
 * [ ] Move password recovery form to react
-* [ ] Move set new password after recovery form to react
-* [ ] Set navbar shaddow in react
+* [ ] Move set a new password after recovery form to react
+* [ ] Set navbar shadow in react
 
 ### Session management
 * [x] User can see his active sessions
