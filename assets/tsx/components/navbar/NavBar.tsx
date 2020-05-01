@@ -62,7 +62,7 @@ class NavBar extends React.Component<any, any> {
   };
 
   public adminNavigate = (url) => {
-    window.location.replace(url);
+    window.location.href = url;
   };
 
   public userNavigate = (url) => {
@@ -111,7 +111,7 @@ class NavBar extends React.Component<any, any> {
             <ListItemText primary={'Block'} onClick={() => this.adminNavigate('/admin/block')} />
           </ListItem>
           <ListItem button>
-            <ListItemText primary={'Settings'} onClick={() => this.adminNavigate('/admin/settings')} />
+            <ListItemText primary={'Settings'} onClick={() => this.adminNavigate('/#/admin/settings')} />
           </ListItem>
         </List>
       </div>
