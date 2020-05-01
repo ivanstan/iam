@@ -2,13 +2,11 @@ import React from 'react';
 import { BooleanSettings } from './BooleanSettings';
 import { RegistrationEnabledSettings } from '../../model/Settings';
 import { translate } from 'react-polyglot';
-import { observer } from 'mobx-react';
 import NavBar from '../../components/navbar/NavBar';
 
-@observer
 class AdminSettingsPage extends React.Component<any, any> {
 
-  render = (): any => {
+  render(): React.ReactNode {
     const { t } = this.props;
 
     return (

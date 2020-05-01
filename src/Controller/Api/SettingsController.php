@@ -5,7 +5,6 @@ namespace App\Controller\Api;
 use App\Entity\Settings;
 use App\Repository\SettingsRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/api")
  */
-class SettingsApiController extends AbstractApiController
+class SettingsController extends AbstractApiController
 {
     /**
      * @Route("/settings", name="api_settings_collection", methods={"GET"})
@@ -29,7 +28,7 @@ class SettingsApiController extends AbstractApiController
      * @Route("/settings", name="api_settings_save", methods={"POST"})
      * @IsGranted("ROLE_ADMIN")
      */
-    public function save(Request $request): JsonResponse
+    public function save(Request $request): Response
     {
         /** @var SettingsRepository $repository */
         $repository = $this->em->getRepository(Settings::class);
@@ -37,11 +36,18 @@ class SettingsApiController extends AbstractApiController
         foreach ($this->getPayload() as $data) {
             if ($setting = $repository->getSettings($data['namespace'])->getEntity($data['name'])) {
                 $setting->setValue($data['value']);
+            } else {
+                $setting = new Settings();
+                $setting->setNamespace($data['namespace']);
+                $setting->setName($data['name']);
+                $setting->setValue($data['value']);
+
+                $this->em->persist($setting);
             }
         }
 
         $this->em->flush();
 
-        return new JsonResponse();
+        return $this->forward(self::class . '::collection');
     }
 }

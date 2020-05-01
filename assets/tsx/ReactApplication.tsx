@@ -31,7 +31,7 @@ export class ReactApplication extends React.Component<any, any> {
   };
 
   componentDidMount = () => {
-    Promise.all([UserStore.me(), SettingsStore.getSettings.get()]).then(() => {
+    Promise.all([UserStore.me(), SettingsStore.refresh()]).then(() => {
       this.setState({ init: true });
     });
   };

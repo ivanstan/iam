@@ -9,22 +9,20 @@ export class BooleanSettings extends React.Component<any, any> {
   public async onChange(item: any, value: boolean) {
     const { settings, activity } = this.props;
 
-    settings.set(item, value);
-
-    const activityName = this.getActivityName(item);
-
+    const activityName = BooleanSettings.getActivityName(item);
     activity.add(activityName);
 
+    settings.set(item, value);
     await settings.flush();
 
     activity.remove(activityName);
   }
 
-  private getActivityName(item): string {
+  private static getActivityName(item): string {
     return `update-${item.namespace}-${item.name}-setting`;
   }
 
-  render = (): any => {
+  render(): React.ReactNode {
     const { item, settings, label, activity } = this.props;
 
     // ToDo: right margin should exist
@@ -32,7 +30,7 @@ export class BooleanSettings extends React.Component<any, any> {
     return <FormControlLabel
       control={
         <Switch
-          disabled={activity.isPending(this.getActivityName(item))}
+          disabled={activity.isPending(BooleanSettings.getActivityName(item))}
           checked={settings.value(item)}
           onChange={(event) => this.onChange(item, event.target.checked)} />
       }

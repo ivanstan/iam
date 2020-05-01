@@ -1,5 +1,5 @@
 export const RegistrationEnabledSettings = {
   namespace: 'registration',
-  label: 'enabled',
+  name: 'enabled',
   default: false,
 };
