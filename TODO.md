@@ -20,7 +20,7 @@
 * [ ] User session user agents should be parsed
 
 # Tasks
-* [ ] Fix and link react admin settings form to menu
+* [x] Fix and link react admin settings form to menu
 * [ ] Add delete and deactivate account confirmation with password
 * [ ] Consider new frontend translation library
 * [ ] Move user/profile page to react
