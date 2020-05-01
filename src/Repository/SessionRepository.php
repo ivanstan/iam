@@ -31,6 +31,7 @@ class SessionRepository extends ServiceEntityRepository
     {
         $builder = $this->createQueryBuilder('session', 'session.id');
         $builder->join('session.user', 'user');
+        $builder->select('session', 'user');
 
         if ($specification->getQuery() !== null) {
             $builder

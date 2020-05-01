@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Session;
 use App\Model\Api\CollectionSpecification;
 use App\Repository\SessionRepository;
+use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,7 +36,7 @@ final class SessionController extends AbstractController
                 )
         );
 
-        $pager = new Pagerfanta(new DoctrineORMAdapter($builder));
+        $pager = new Pagerfanta(new ArrayAdapter($builder->getQuery()->getResult()));
         $pager->setCurrentPage($request->get('page', 1));
 
         return $this->render(

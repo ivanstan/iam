@@ -8,7 +8,7 @@ use App\Model\Api\CollectionSpecification;
 use App\Repository\UserRepository;
 use App\Security\SecurityMailerService;
 use App\Service\Traits\TranslatorAwareTrait;
-use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,7 +40,7 @@ final class UserController extends AbstractController
                 )
         );
 
-        $pager = new Pagerfanta(new DoctrineORMAdapter($query));
+        $pager = new Pagerfanta(new ArrayAdapter($query->getQuery()->getResult()));
         $pager->setCurrentPage($request->query->get('page', 1));
 
         return $this->render(
