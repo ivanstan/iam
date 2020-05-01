@@ -20,6 +20,7 @@
 * [ ] User session user agents should be parsed
 
 # Tasks
+* [ ] Fix and link react admin settings form to menu
 * [ ] Add delete and deactivate account confirmation with password
 * [ ] Consider new frontend translation library
 * [ ] Move user/profile page to react
@@ -27,7 +28,6 @@
 * [ ] Move register form to react
 * [ ] Move password recovery form to react
 * [ ] Move set new password after recovery form to react
-* [ ] Fix and link react admin settings form to menu
 
 ### Session management
 * [x] User can see his active sessions
@@ -48,13 +48,17 @@
 * [ ] There should be a file entity and image entity that extends it.
 * [ ] Use: https://github.com/nhn/toast-ui.react-image-editor
 
-### Elevated privilege mode
+### Elevated privilege mode ???
 * [ ] Before entering page `/user/account`, user should be offered to enter password
   for safety.
 * [ ] Flag is set in session with timestamp when password was entered last time,
   during period of n minutes from entering password user can change settings on
   account page (this is refereed to as privileged mode)
 * [ ] Entering old password on password change form is now no longer necessary.
+
+### Status report
+* [ ] Check Drupal status page
+* [ ] Use https://github.com/outcompute/PHPInfo
 
 ### Migrate symfony translations to front end translations
 * [ ] All translations on backend should be available to frontend as well.
