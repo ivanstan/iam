@@ -66,7 +66,7 @@ class NavBar extends React.Component<any, any> {
   };
 
   public userNavigate = (url) => {
-    window.location.replace(url);
+    window.location.href = url;
     this.handleClose();
   };
 

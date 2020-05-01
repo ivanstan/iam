@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import EmailChangeForm from './EmailChangeForm';
 import PasswordChangeForm from './PasswordChangeForm';
 import DeactivateAccount from './DeactivateAccount';
@@ -18,11 +17,33 @@ export class AccountPage extends React.Component<any, any> {
     return (
       <>
         <NavBar />
-        <UserSessions user={user.current} />
-        <PasswordChangeForm />
-        <EmailChangeForm />
-        <DeactivateAccount />
-        <DeleteAccount />
+
+        <div className="container">
+
+          <div className="row">
+            <div className="col-md-6">
+              <PasswordChangeForm />
+            </div>
+            <div className="col-md-6">
+              <EmailChangeForm />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-md-6">
+              <DeactivateAccount />
+            </div>
+            <div className="col-md-6">
+              <DeleteAccount />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-12">
+              <UserSessions user={user.current} />
+            </div>
+          </div>
+        </div>
       </>
     );
   };

@@ -20,8 +20,6 @@
 * [ ] User session user agents should be parsed
 
 # Tasks
-* [ ] Link react user account page in menu
-* [ ] Fix user/account page
 * [ ] Add delete and deactivate account confirmation with password
 * [ ] Consider new frontend translation library
 * [ ] Move user/profile page to react
