@@ -28,6 +28,7 @@
 * [ ] Move register form to react
 * [ ] Move password recovery form to react
 * [ ] Move set new password after recovery form to react
+* [ ] Set navbar shaddow in react
 
 ### Session management
 * [x] User can see his active sessions
