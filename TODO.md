@@ -20,6 +20,7 @@
 * [ ] User session user agents should be parsed
 
 # Tasks
+* [ ] Link react user account page in menu
 * [ ] Fix user/account page
 * [ ] Add delete and deactivate account confirmation with password
 * [ ] Consider new frontend translation library
@@ -28,7 +29,6 @@
 * [ ] Move register form to react
 * [ ] Move password recovery form to react
 * [ ] Move set new password after recovery form to react
-* [ ] Link react user account page in menu
 * [ ] Fix and link react admin settings form to menu
 
 ### Session management
