@@ -12,6 +12,7 @@ import { SettingsStore } from './services/mobx/SettingsStore';
 import { Provider } from 'mobx-react';
 import { If } from 'react-if';
 import { theme } from './components/Theme';
+import LoaderTop from './components/LoaderTop';
 
 const useStyles: any = theme => ({
   top: {
@@ -30,6 +31,7 @@ class Application extends React.Component<any, any> {
   componentDidMount = () => {
     Promise.all([UserStore.me(), SettingsStore.refresh()]).then(() => {
       this.setState({ init: true });
+      ActivityStore.remove('init');
     });
   };
 
@@ -43,9 +45,7 @@ class Application extends React.Component<any, any> {
           <ThemeProvider theme={theme}>
             <Provider settings={SettingsStore} activity={ActivityStore} user={UserStore}>
 
-              <If condition={ActivityStore.isPending({ activity: null })}>
-                <LinearProgress color="secondary" className={classes.top} />
-              </If>
+              <LoaderTop/>
 
               <DeleteConfirmation />
               <BanIpDialog />
