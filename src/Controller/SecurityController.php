@@ -143,7 +143,7 @@ final class SecurityController extends AbstractController implements LoggerAware
                 'success',
                 $this->translator->trans(
                     'You have requested account recovery. Email will be sent to: %email% with further instructions.',
-                    ['email' => $data['email']]
+                    ['%email%' => $data['email']]
                 )
             );
 
