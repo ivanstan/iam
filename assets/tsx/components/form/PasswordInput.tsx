@@ -61,6 +61,14 @@ export class PasswordInput extends React.Component<PasswordFieldPropsInterface, 
     const { value, show } = this.state;
     const { className, variant, label, fullWidth, required, onKeyPress, error } = this.props;
 
+    const inputProps = {
+      id: this.props?.id
+    };
+
+    if (this.props.hasOwnProperty('data-test')) {
+      inputProps['data-test'] = this.props['data-test']
+    }
+
     return (
       <FormControl fullWidth={fullWidth} required={required} variant={variant} className={className}>
         <InputLabel htmlFor="standard-adornment-password" variant={variant}
@@ -70,7 +78,7 @@ export class PasswordInput extends React.Component<PasswordFieldPropsInterface, 
         </InputLabel>
         <OutlinedInput
           {..._.pick(this.props, ['inputRef', 'error', 'name'])}
-          inputProps={{ id: this.props?.id }}
+          inputProps={inputProps}
           endAdornment={(
             <InputAdornment position="end">
               <IconButton

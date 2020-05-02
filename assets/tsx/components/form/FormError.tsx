@@ -10,7 +10,7 @@ export default class FormError extends React.Component<FormErrorPropsInterface, 
     const { text } = this.props;
 
     return (
-      <FormHelperText error={true} style={{ marginBottom: 30, marginTop: 15 }}>
+      <FormHelperText data-test="alert-danger" error={true} style={{ marginBottom: 30, marginTop: 15 }}>
         {text || ' '}
       </FormHelperText>
     );
