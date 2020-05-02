@@ -14,18 +14,11 @@ yarn watch
 yarn run cypress open
 ```
 
-## Load database fixtures
-Will create database, execute migrations and load fixtures
-```
-bin/console doctrine:reload
-```
-
-## Create admin user
-```
-bin/console user:create
-```
-
-## Deployment
-```
-dep deploy stage
-```
+## Other commands
+| Command | Description |
+|---|---|
+|`dep deploy stage`| Deploy code to stage environment |
+|`bin/console cron:run`| Run cron task |
+|`bin/console user:create`| Creates new user |
+|`bin/console doctrine:reload`| Create database and load fixtures |
+|`bin/console settings:default`| Reset settings to defaults |
