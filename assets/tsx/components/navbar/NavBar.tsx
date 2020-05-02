@@ -91,7 +91,7 @@ class NavBar extends React.Component<any, any> {
   render = () => {
     const user = this.props.user.current;
     const win: any = window;
-    const { classes, t } = this.props;
+    const { classes, t, elevation } = this.props;
 
     const adminMenu = (
       <div>
@@ -119,7 +119,7 @@ class NavBar extends React.Component<any, any> {
 
     // eslint-disable-next-line react/jsx-no-undef
     return (
-      <AppBar position="static" elevation={0}>
+      <AppBar position="static" elevation={typeof elevation === 'undefined' ? 4 : elevation}>
         <Toolbar>
 
           <If condition={this.isAdmin()}>
