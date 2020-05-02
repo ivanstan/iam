@@ -17,7 +17,6 @@
 * [ ] Create helper text for certain options
 * [ ] Improve texts
 * [ ] Start documenting code (events, features)
-* [ ] User session user agents should be parsed
 
 # Tasks
 * [x] Fix and link react admin settings form to menu
@@ -36,10 +35,11 @@
 * [x] User can delete session
 * [ ] Admin can see and delete any session
 * [ ] Admin can ban ip from session
-* [ ] Use https://github.com/yzalis/UAParser
+* [ ] User session user agents should be parsed, use https://github.com/yzalis/UAParser
 
 ### User avatar
-* [ ] When user is logged in and has avatar it is displayed as button of user menu
+* [ ] Implement resource entity, can be a local file or remote
+* [ ] When user is signed in and has the avatar it is displayed as button of user menu
   in primary nav bar.
 * [ ] On page `/user/profile` there is an option to upload image to be displayed as
   avatar.
@@ -63,9 +63,9 @@
 * [ ] Use https://github.com/outcompute/PHPInfo
 
 ### Migrate symfony translations to front end translations
-* [ ] All translations on backend should be available to frontend as well.
+* [ ] All translations on a backend should be available to frontend as well.
 * [ ] Create a command that will convert symfony yaml translations to json that
-  are suitable for use on frontend.
+  are suitable for use on the frontend.
 
 ### User list improvements
 * [x] Set default sort on user page
@@ -117,7 +117,7 @@
 * [x] Create feature flag in admin settings
 * [x] Create ban field on User and use it instead of active
 * [x] Add ability for user to deactivate account on account page
-* [x] Use active field for activating/deactivating
+* [x] Use the active field for activating/deactivating
 * [x] Set account activated when user logs in
 
 ### Self account delete
