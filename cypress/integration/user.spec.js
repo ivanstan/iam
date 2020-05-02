@@ -38,7 +38,7 @@ describe('User', function() {
       cy.navigate('/admin/mailbox');
 
       // attempt to use invitation link
-      cy.get('[data-test="mailbox-body"] .btn-primary').invoke('attr', 'href').then(url => {
+      cy.get('[data-test="mailbox-body"] .cta').invoke('attr', 'href').then(url => {
           url = url.replace(Cypress.env('baseUrl'), '');
 
           cy.logout();

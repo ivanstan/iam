@@ -68,7 +68,7 @@ describe('Security', function() {
     // get invitation link from mailbox
     cy.navigate('/admin/mailbox');
 
-    cy.get('[data-test="mailbox-body"] .btn-primary')
+    cy.get('[data-test="mailbox-body"] .cta')
       .invoke('attr', 'href')
       .then(url => {
         // attempt to use invitation link
@@ -95,7 +95,7 @@ describe('Security', function() {
     // get password reset link from mailbox
     cy.navigate('/admin/mailbox');
 
-    cy.get('[data-test="mailbox-body"] .btn-primary')
+    cy.get('[data-test="mailbox-body"] .cta')
       .invoke('attr', 'href')
       .then(url => {
         // attempt to use invitation link
