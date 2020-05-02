@@ -28,6 +28,7 @@
 * [ ] Move register form to react
 * [ ] Move password recovery form to react
 * [ ] Move set a new password after recovery form to react
+* [ ] Fix bug in NavBar menu
 
 ### Session management
 * [x] User can see his active sessions
