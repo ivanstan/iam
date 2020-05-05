@@ -43,7 +43,7 @@ Cypress.Commands.add('deleteUser', email => {
   cy.login('admin@example.com', 'test123');
 
   cy.navigate('/admin/users');
-  cy.get(`[data-user="edit-user-${email}"] .delete-button`).click();
+  cy.get(`[data-test="edit-user-${email}"] .delete-button`).click();
 
   cy.get('[data-test="yes"]').click();
 

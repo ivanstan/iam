@@ -31,7 +31,7 @@ describe('Security', function() {
       cy.get('[name="password"]').type('test123');
       cy.get('[type="submit"]').should('be.enabled');
       cy.get('[type="submit"]').click();
-      cy.get('header [data-test="user-email"]').contains('admin@example.com');
+      cy.get('[data-test="user-email"]').contains('admin@example.com');
 
       cy.url().should('include', Cypress.env('baseUrl'));
     });
@@ -55,7 +55,7 @@ describe('Security', function() {
     cy.get('[name="email"]').type('test@example.com');
     cy.get('[name="password"]').type('test123');
     cy.get('[data-test="submit"]').click();
-    cy.get('header [data-test="user-email"]').contains('test@example.com');
+    cy.get('[data-test="user-email"]').contains('test@example.com');
 
     // request verification mail
     cy.get('[data-test="verify-notification"]').should('be.visible');
@@ -112,7 +112,7 @@ describe('Security', function() {
         cy.wait(2000);
         cy.logout();
         cy.login('user3@example.com', 'qwe123');
-        cy.get('header [data-test="user-email"]').contains('user3@example.com');
+        cy.get('[data-test="user-email"]').contains('user3@example.com');
         cy.get('[data-test="verify-notification"]').should('not.exist');
       });
   });

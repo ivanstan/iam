@@ -18,7 +18,7 @@ describe('User', function() {
       // attempt login with new user
       cy.login('test1@example.com', 'test123');
       cy.url().should('include', Cypress.env('baseUrl'));
-      cy.get('header [data-test="user-email"]').contains('test1@example.com');
+      cy.get('[data-test="user-email"]').contains('test1@example.com');
 
       cy.logout();
       // login with admin and delete user
@@ -52,7 +52,7 @@ describe('User', function() {
           // attempt to login with new password
           cy.logout();
           cy.login('test2@example.com', 'test123');
-          cy.get('header [data-test="user-email"]').contains('test2@example.com');
+          cy.get('[data-test="user-email"]').contains('test2@example.com');
         }
       );
     });

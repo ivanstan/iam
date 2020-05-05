@@ -11,7 +11,7 @@ describe('Profile', function() {
 
       cy.logout();
       cy.login('user4@example.com', 'qwe123');
-      cy.get('header [data-test="user-email"]').contains('user4@example.com');
+      cy.get('[data-test="user-email"]').contains('user4@example.com');
     });
   });
 });

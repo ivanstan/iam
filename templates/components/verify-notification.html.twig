@@ -1,5 +1,5 @@
 {% if app.user is not null and app.user.verified == false %}
-    <div class="alert alert-warning mb-0 sticky-bottom" role="alert" data-test="verify-notification">
+    <div class="alert alert-warning mb-0 sticky-top" role="alert" data-test="verify-notification">
         {{ "Your account is not verified."|trans({'%email%': app.user.email})|raw }}
 
         <form class="d-inline-block" method="post" action="{{ path('security_verify') }}">
