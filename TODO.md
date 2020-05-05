@@ -110,6 +110,10 @@
 * [ ] During account recovery user should not be able to enter any of the previous
   passwords.
 
+### Private messages
+### Notifications
+### Node tree
+
 ## Done
 
 ### Self account deactivate
