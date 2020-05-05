@@ -39,6 +39,7 @@ class UserFixtures extends Fixture
         $user->setEmail('user1@example.com');
         $user->setRoles([Role::USER]);
         $user->setActive(false);
+        $user->setBanned(true);
         $user->setPassword($password);
         $manager->persist($user);
 

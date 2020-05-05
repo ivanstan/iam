@@ -82,7 +82,7 @@ class EmailChangeForm extends React.Component<any, any> {
     const { t } = this.props;
     const { value, dirty, error } = this.state;
 
-    return (<div className="my-3">
+    return (<div className="my-3 email-change-form">
 
       <If condition={Boolean(this.state.message)}>
         <Alert severity="success">{this.state.message}</Alert>

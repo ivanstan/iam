@@ -68,7 +68,7 @@ class PasswordChangeForm extends AbstractComponent<any, any> {
     const { current, password, error, message } = this.state;
     const { t } = this.props;
 
-    return <div className="my-3">
+    return <div className="my-3 password-change-form">
       <If condition={Boolean(this.state.error)}>
         <Alert severity="error">{this.state.error}</Alert>
       </If>
