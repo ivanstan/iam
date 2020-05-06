@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Mail;
 use App\Repository\MailRepository;
-use Pagerfanta\Adapter\ArrayAdapter;
+use App\Repository\UserRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -23,7 +23,7 @@ final class MailBoxController extends AbstractController
      * @Route("/mailbox/{mail}", name="admin_mailbox_read")
      * @IsGranted("ROLE_ADMIN")
      */
-    public function mailbox(Request $request, MailRepository $repository, Mail $mail = null): Response
+    public function mailbox(Request $request, MailRepository $repository, UserRepository $userRepository, Mail $mail = null): Response
     {
         $query = $repository->findAll();
         $pager = new Pagerfanta(new DoctrineORMAdapter($query));
@@ -40,6 +40,8 @@ final class MailBoxController extends AbstractController
             [
                 'mail' => $mail,
                 'pager' => $pager,
+                'from' => $userRepository->findByEmail($mail->getFrom()),
+                'to' => $userRepository->findByEmail($mail->getTo()),
             ]
         );
     }

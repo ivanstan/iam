@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container mx-auto vertical-center d-flex">
-    <div class="max-w-sm rounded overflow-hidden shadow-lg mx-auto p-5">
-        {% block card %}{% endblock %}
+    <div class="container mx-auto vertical-center d-flex">
+        <div class="max-w-sm rounded overflow-hidden shadow-lg mx-auto p-5">
+            {% block card %}{% endblock %}
+        </div>
     </div>
-</div>
+    <div id="root"></div>
 {% endblock %}

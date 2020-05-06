@@ -19,6 +19,7 @@
 * [ ] Start documenting code (events, features)
 
 # Tasks
+* [ ] Move login to react router
 * [ ] Move register form to react
 * [ ] Move password recovery form to react
 * [ ] Fix loading progress and fist load bar
@@ -84,7 +85,7 @@
 ### Mailbox improvements
 * [ ] Sort by date
 * [ ] Search
-* [ ] Connect mailbox recipient and sender to user
+* [x] Connect mailbox recipient and sender to user
 * [ ] Better mail preview
 
 ### Contact form

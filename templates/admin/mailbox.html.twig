@@ -42,11 +42,23 @@
                         </tr>
                         <tr>
                             <th>{{ "From"|trans }}</th>
-                            <td>{{ mail.from }}</td>
+                            <td>
+                                {% if from is not null %}
+                                    <a href="{{ path('user_edit', {id: from.id}) }}">{{ mail.from }}</a>
+                                {% else %}
+                                    {{ mail.from }}
+                                {% endif %}
+                            </td>
                         </tr>
                         <tr>
                             <th>{{ "To"|trans }}</th>
-                            <td>{{ mail.to }}</td>
+                            <td>
+                                {% if to is not null %}
+                                    <a href="{{ path('user_edit', {id: to.id}) }}">{{ mail.to }}</a>
+                                {% else %}
+                                    {{ mail.to }}
+                                {% endif %}
+                            </td>
                         </tr>
                         <tr>
                             <th>{{ "Date"|trans }}</th>
