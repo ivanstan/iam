@@ -19,7 +19,12 @@ class Activity {
   }
 
   @observable
-  public isPending = createTransformer(() => {
+  public isPending = createTransformer((name: string = '') => {
+
+    if (name) {
+      return this._pending.indexOf(name) !== -1;
+    }
+
     return this._pending.length > 0;
   });
 

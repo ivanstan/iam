@@ -14,6 +14,7 @@ import HomePage from './pages/HomePage';
 import { AccountPage } from './pages/AccountPage';
 import AdminSettingsPage from './pages/AdminSettingsPage';
 import LoaderTop from './components/LoaderTop';
+import RegistrationPage from './pages/RegistrationPage';
 
 @observer
 export class ReactApplication extends React.Component<any, any> {
@@ -34,19 +35,17 @@ export class ReactApplication extends React.Component<any, any> {
       <I18n allowMissing locale={'en'} messages={{}}>
         <Provider settings={SettingsStore} activity={ActivityStore} user={UserStore}>
           <ThemeProvider theme={theme}>
-
             <LoaderTop />
-
             <If condition={!ActivityStore.isPending('init')}>
               <Router>
                 <Switch>
                   <ProtectedRoute exact path="/admin/settings" condition={isAdmin} component={<AdminSettingsPage />} />
                   <ProtectedRoute exact path="/user/account" condition={isUser} component={<AccountPage />} />
                   <Route exact path="/" component={HomePage} />
+                  <Route exact path="/register" component={RegistrationPage} />
                 </Switch>
               </Router>
             </If>
-
           </ThemeProvider>
         </Provider>
       </I18n>

@@ -18,7 +18,7 @@ class LoaderTop extends React.Component<any> {
   render() {
     const { classes } = this.props;
 
-    return <If condition={ActivityStore.isPending('init')}>
+    return <If condition={ActivityStore.isPending('')}>
       <LinearProgress color="secondary" className={classes.top} />
     </If>;
   }
