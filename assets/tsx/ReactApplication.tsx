@@ -15,12 +15,13 @@ import { AccountPage } from './pages/AccountPage';
 import AdminSettingsPage from './pages/AdminSettingsPage';
 import LoaderTop from './components/LoaderTop';
 import RegistrationPage from './pages/RegistrationPage';
+import { FlashMessageStore } from './services/mobx/FlashMessageStore';
 
 @observer
 export class ReactApplication extends React.Component<any, any> {
 
   componentDidMount = () => {
-    Promise.all([UserStore.me(), SettingsStore.refresh()]).then(() => {
+    Promise.all([UserStore.me(), SettingsStore.refresh(), FlashMessageStore.init()]).then(() => {
       ActivityStore.remove('init');
     });
   };

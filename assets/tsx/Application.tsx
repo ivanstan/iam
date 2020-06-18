@@ -13,6 +13,8 @@ import { Provider } from 'mobx-react';
 import { If } from 'react-if';
 import { theme } from './components/Theme';
 import LoaderTop from './components/LoaderTop';
+import { RegisterFormPortal } from './security/RegisterFormPortal';
+import { FlashMessageStore } from './services/mobx/FlashMessageStore';
 
 const useStyles: any = theme => ({
   top: {
@@ -29,7 +31,7 @@ class Application extends React.Component<any, any> {
   };
 
   componentDidMount = () => {
-    Promise.all([UserStore.me(), SettingsStore.refresh()]).then(() => {
+    Promise.all([UserStore.me(), SettingsStore.refresh(), FlashMessageStore.init()]).then(() => {
       this.setState({ init: true });
       ActivityStore.remove('init');
     });
@@ -52,6 +54,7 @@ class Application extends React.Component<any, any> {
               <NavBarPortal id="react-navbar" />
 
               {init && <LoginFormPortal id="login-form" />}
+              {init && <RegisterFormPortal id="register-form" />}
             </Provider>
 
           </ThemeProvider>

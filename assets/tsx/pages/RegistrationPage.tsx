@@ -7,7 +7,7 @@ class RegistrationPage extends React.Component<any, any> {
     const { t } = this.props;
 
     return (
-      <div className="container mx-auto vertical-center d-flex">
+      <div className="container mx-auto d-flex">
         <div className="max-w-sm rounded overflow-hidden shadow-lg mx-auto p-5">
           <RegistrationForm />
         </div>
