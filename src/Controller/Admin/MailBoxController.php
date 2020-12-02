@@ -40,8 +40,8 @@ final class MailBoxController extends AbstractController
             [
                 'mail' => $mail,
                 'pager' => $pager,
-                'from' => $userRepository->findByEmail($mail->getFrom()),
-                'to' => $userRepository->findByEmail($mail->getTo()),
+                'from' => $mail ? $userRepository->findByEmail($mail->getFrom())  : null,
+                'to' => $mail ? $userRepository->findByEmail($mail->getTo()) : null,
             ]
         );
     }
