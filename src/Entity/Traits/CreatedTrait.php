@@ -20,3 +20,4 @@ trait CreatedTrait
         $this->created = $created;
     }
 }
+
