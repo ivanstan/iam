@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Repository\ApplicationRepository;
 use App\Repository\UserRepository;
 use App\Security\JwtTokenService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +26,8 @@ class JwtController extends AbstractController
     public function messages(
         Request $request,
         UserPasswordEncoderInterface $encoder,
-        UserRepository $repository,
+        UserRepository $userRepository,
+        ApplicationRepository $applicationRepository,
         JwtTokenService $service
     ): JsonResponse {
         $validator = Validation::createValidator();
@@ -37,6 +39,7 @@ class JwtController extends AbstractController
                 [
                     'email' => new Assert\Email(),
                     'password' => new Assert\Length(['min' => 6]),
+                    'app' => new Assert\Uuid(),
                 ]
             )
         );
@@ -45,7 +48,12 @@ class JwtController extends AbstractController
             throw new BadRequestHttpException($violations->get(0)->getMessage());
         }
 
-        $user = $repository->findByEmail($params['email']);
+        $app = $applicationRepository->findOneBy(['uuid' => $params['app']]);
+        if ($app === null) {
+            throw new AccessDeniedHttpException(\sprintf('Application [%s] not found', $params['app']));
+        }
+
+        $user = $userRepository->findByEmail($params['email']);
         if ($user === null) {
             throw new AccessDeniedHttpException(\sprintf('User [%s] not found', $params['email']));
         }
@@ -54,7 +62,7 @@ class JwtController extends AbstractController
             throw new AccessDeniedHttpException('Invalid password');
         }
 
-        $token = $service->issueToken($user);
+        $token = $service->issueToken($user, $app);
 
         return new JsonResponse(
             [

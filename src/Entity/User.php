@@ -28,7 +28,7 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("read")
+     * @Groups({"read", "jwt"})
      */
     protected $id;
 
@@ -37,7 +37,7 @@ class User implements UserInterface
      * @Assert\Email();
      * @Assert\NotBlank();
      * @Assert\NotNull();
-     * @Groups("read")
+     * @Groups({"read", "jwt"})
      */
     protected $email;
 
@@ -55,7 +55,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="json")
-     * @Groups("read")
+     * @Groups({"read", "jwt"})
      */
     protected array $roles = [];
 
@@ -65,7 +65,7 @@ class User implements UserInterface
      * Use to hide user's content or profile when set inactive.
      *
      * @ORM\Column(type="boolean", options={"default" : 1})
-     * @Groups("read")
+     * @Groups({"read", "jwt"})
      */
     protected bool $active = true;
 
@@ -74,7 +74,7 @@ class User implements UserInterface
      * Use to restrict publishing of content created by users that are not verified.
      *
      * @ORM\Column(type="boolean", options={"default" : 0})
-     * @Groups("read")
+     * @Groups({"read", "jwt"})
      */
     protected bool $verified = false;
 
@@ -90,6 +90,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
+     * @Groups("jwt")
      */
     protected $firstName;
 
@@ -97,6 +98,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
+     * @Groups("jwt")
      */
     protected $lastName;
 
