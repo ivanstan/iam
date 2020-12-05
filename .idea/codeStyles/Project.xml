@@ -12,13 +12,12 @@
       <option name="SPACES_WITHIN_OBJECT_LITERAL_BRACES" value="true" />
       <option name="SPACES_WITHIN_IMPORTS" value="true" />
     </JSCodeStyleSettings>
-    <MySQLCodeStyleSettings version="2">
-      <option name="ALIAS_CASE" value="4" />
-      <option name="KEYWORD_CASE" value="0" />
-      <option name="TYPE_CASE" value="0" />
+    <MySQLCodeStyleSettings version="5">
+      <option name="USE_GENERAL_STYLE" value="false" />
       <option name="IDENTIFIER_CASE" value="1" />
+      <option name="CUSTOM_TYPE_CASE" value="0" />
+      <option name="ALIAS_CASE" value="4" />
       <option name="QUOTED_IDENTIFIER_CASE" value="1" />
-      <option name="QUOTE_IDENTIFIER" value="0" />
       <option name="FROM_ALIGN_JOIN_TABLES" value="true" />
       <option name="IMP_IF_THEN_WRAP_THEN" value="true" />
       <option name="IMP_IF_THEN_INDENT_THEN_ELSE" value="true" />

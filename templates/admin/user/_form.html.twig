@@ -31,5 +31,9 @@
     {% endif %}
 </div>
 
+<div class="card pt-3 px-3 mb-3">
+    {{ form_row(form.applications) }}
+</div>
+
 {% include 'components/form-submit.html.twig' with {'title':'Submit'|trans } only %}
 {{ form_end(form) }}

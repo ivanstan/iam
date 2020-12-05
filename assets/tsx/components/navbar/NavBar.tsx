@@ -102,6 +102,9 @@ class NavBar extends React.Component<any, any> {
             <ListItemText primary={'User management'} onClick={() => this.adminNavigate('/admin/users')} />
           </ListItem>
           <ListItem button>
+            <ListItemText primary={'Applications'} onClick={() => this.adminNavigate('/admin/application')} />
+          </ListItem>
+          <ListItem button>
             <ListItemText primary={'Sessions'} onClick={() => this.adminNavigate('/admin/sessions')} />
           </ListItem>
           <ListItem button>
