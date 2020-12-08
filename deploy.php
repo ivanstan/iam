@@ -47,6 +47,12 @@ task('copy', function () {
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');
 
+//task('dump-autoload', function () {
+//    run('{{bin/composer}} dump-env prod');
+//});
+
+set('bin/composer', '~/bin/composer.phar');
+
 task('deploy', [
     'deploy:info',
     'deploy:prepare',
@@ -63,11 +69,15 @@ task('deploy', [
     'copy',
     'deploy:cache:clear',
     'deploy:cache:warmup',
+//    'dump-autoload',
     'deploy:writable',
+    'database:migrate',
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
 ])->desc('Deploy your project');
 
-// Migrate database before symlink new release.
-before('deploy:symlink', 'database:migrate');
+//// set slack webhook
+//set('slack_webhook', /* your slack webhook*/);
+//// notify slack after successful deploy
+//after('success', 'slack:notify:success');
