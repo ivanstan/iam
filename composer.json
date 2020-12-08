@@ -78,7 +78,7 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "deploy": "dep deploy"
+        "deploy": "dep deploy prod"
     },
     "conflict": {
         "symfony/symfony": "*"
