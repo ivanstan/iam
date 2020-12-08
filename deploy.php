@@ -42,6 +42,7 @@ task('deploy:assets:install', function () {
 
 task('copy', function () {
     run('echo "scp -P 2233 -r ./public/build glutenfr@ivanstanojevic.me:~/projects/iam.ivanstanojevic.me/current/public"');
+    run('echo "scp -P 2233 -r ./public/bundles glutenfr@ivanstanojevic.me:~/projects/iam.ivanstanojevic.me/current/public"');
 })->desc('Install bundle assets');
 
 // [Optional] if deploy fails automatically unlock.
