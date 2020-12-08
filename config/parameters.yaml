@@ -4,3 +4,9 @@ parameters:
   default_timezone: 'Europe/Belgrade'
   date_format: 'd-m-Y H:i'
   app_name: 'Application Name'
+
+  router.request_context.host: '%env(APP_HOST)%'
+  router.request_context.scheme: 'https'
+  router.request_context.base_url: '/'
+  asset.request_context.base_path: '%router.request_context.base_url%'
+  asset.request_context.secure: true

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ "New user"|trans }} {{ parent() }}{% endblock %}
+{% block title %}{{ "New Application"|trans }} {{ parent() }}{% endblock %}
 
 {% block body %}
     {% include 'components/navbar.html.twig' %}
@@ -14,7 +14,7 @@
 
         <div class="row">
             <div class="col-12 col-md-8 mx-auto">
-                {{ include('admin/user/_form.html.twig') }}
+                {{ include('admin/application/_form.html.twig') }}
             </div>
         </div>
     </div>

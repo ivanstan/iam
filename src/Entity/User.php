@@ -6,6 +6,8 @@ use App\Entity\Traits\CreatedTrait;
 use App\Entity\Traits\UpdatedTrait;
 use App\Security\Role;
 use App\Service\DateTimeService;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -26,7 +28,7 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups("read")
+     * @Groups({"read", "jwt"})
      */
     protected $id;
 
@@ -35,7 +37,7 @@ class User implements UserInterface
      * @Assert\Email();
      * @Assert\NotBlank();
      * @Assert\NotNull();
-     * @Groups("read")
+     * @Groups({"read", "jwt"})
      */
     protected $email;
 
@@ -53,7 +55,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="json")
-     * @Groups("read")
+     * @Groups({"read", "jwt"})
      */
     protected array $roles = [];
 
@@ -63,7 +65,7 @@ class User implements UserInterface
      * Use to hide user's content or profile when set inactive.
      *
      * @ORM\Column(type="boolean", options={"default" : 1})
-     * @Groups("read")
+     * @Groups({"read", "jwt"})
      */
     protected bool $active = true;
 
@@ -72,7 +74,7 @@ class User implements UserInterface
      * Use to restrict publishing of content created by users that are not verified.
      *
      * @ORM\Column(type="boolean", options={"default" : 0})
-     * @Groups("read")
+     * @Groups({"read", "jwt"})
      */
     protected bool $verified = false;
 
@@ -88,6 +90,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
+     * @Groups("jwt")
      */
     protected $firstName;
 
@@ -95,6 +98,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(type="string", nullable=true)
+     * @Groups("jwt")
      */
     protected $lastName;
 
@@ -119,6 +123,16 @@ class User implements UserInterface
      * @Groups("read")
      */
     protected $sessions;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Application", mappedBy="users")
+     */
+    protected $applications;
+
+    public function __construct()
+    {
+        $this->applications = new ArrayCollection();
+    }
 
     /**
      * @ORM\PrePersist
@@ -303,5 +317,32 @@ class User implements UserInterface
     public function getSessions(): array
     {
         return $this->sessions->toArray();
+    }
+
+    /**
+     * @return Collection|Application[]
+     */
+    public function getApplications(): array
+    {
+        return $this->applications->toArray();
+    }
+
+    public function addApplication(Application $application): self
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications[] = $application;
+            $application->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application): self
+    {
+        if ($this->applications->removeElement($application)) {
+            $application->removeUser($this);
+        }
+
+        return $this;
     }
 }

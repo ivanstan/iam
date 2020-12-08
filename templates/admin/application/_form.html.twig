@@ -1,0 +1,6 @@
+{{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.url) }}
+
+    {% include 'components/form-submit.html.twig' with {'title':'Submit'|trans } only %}
+{{ form_end(form) }}

@@ -8,7 +8,7 @@ require 'recipe/symfony.php';
 set('application', 'Application Name');
 
 // Project repository
-set('repository', 'https://github.com/ivanstan/auth.git');
+set('repository', 'https://github.com/ivanstan/iam.git');
 set('git_tty', true);
 set('bin_dir', 'bin');
 set('http_user', 'glutenfr');
@@ -28,8 +28,8 @@ add('writable_dirs', []);
 host('ivanstanojevic.me')
     ->user('glutenfr')
     ->port(2233)
-    ->stage('stage')
-    ->set('deploy_path', '~/projects/auth.ivanstanojevic.me');
+    ->stage('prod')
+    ->set('deploy_path', '~/projects/iam.ivanstanojevic.me');
 
 // Tasks
 task('build', function () {
@@ -41,7 +41,7 @@ task('deploy:assets:install', function () {
 })->desc('Install bundle assets');
 
 task('copy', function () {
-    run('echo "scp -P 2233 -r ./public/build glutenfr@ivanstanojevic.me:/home/glutenfr/projects/auth.ivanstanojevic.me/current/public"');
+    run('echo "scp -P 2233 -r ./public/build glutenfr@ivanstanojevic.me:~/projects/iam.ivanstanojevic.me/current/public"');
 })->desc('Install bundle assets');
 
 // [Optional] if deploy fails automatically unlock.

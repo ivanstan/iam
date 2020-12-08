@@ -76,7 +76,7 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
             'code' => $throwable->getCode(),
             'file' => $throwable->getFile() . ':' . $throwable->getLine(),
             'message' => $throwable->getMessage(),
-            'trace' => $throwable->getTrace(),
+//            'trace' => $throwable->getTrace(),
         ];
     }
 }

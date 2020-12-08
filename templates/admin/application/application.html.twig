@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ "Applications"|trans }} {{ parent() }}{% endblock %}
+
+{% block body %}
+    {% include 'components/navbar.html.twig' %}
+
+    <div class="container-fluid mt-3">
+
+        <div class="row">
+            <div class="col-12">
+                {% include 'components/messages.html.twig' %}
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-12 d-flex justify-content-between">
+                <a class="btn btn-primary" href="{{ path('admin_application_new') }}">{{ "New"|trans }}</a>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Url</th>
+                <th>UUID</th>
+                <th class="text-center" style="width: 120px">{{ 'Actions'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for application in applications %}
+                <tr>
+                    <td>
+                        <a href="{{ path('admin_application_edit', {'id': application.id}) }}">{{ application.name }}</a>
+                    </td>
+                    <td><a target="_blank" href="{{ application.url }}">{{ application.url }}</a></td>
+                    <td>{{ application.uuid }}</td>
+                    <td class="d-flex justify-content-center align-baseline">
+                        <div class="float-right">
+                            {% include 'components/delete-button.html.twig' with {
+                                'action': path('admin_application_delete', {'id': application.id}),
+                                'csrf': csrf_token('delete_application' ~ application.id),
+                                'entity': 'application'
+                            } only %}
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

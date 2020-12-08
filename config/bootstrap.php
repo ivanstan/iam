@@ -19,7 +19,7 @@ if (is_array($env = @include dirname(__DIR__).'/.env.local.php') && (!isset($env
     throw new RuntimeException('Please run "composer require symfony/dotenv" to load the ".env" files configuring the application.');
 } else {
     // load all the .env files
-    (new Dotenv(false))->loadEnv(dirname(__DIR__).'/.env');
+    (new Dotenv())->loadEnv(dirname(__DIR__).'/.env');
 }
 
 if ($_SERVER['APP_ENV'] === 'test') {
@@ -27,17 +27,18 @@ if ($_SERVER['APP_ENV'] === 'test') {
     $kernel->boot();
 
     $command = new DoctrineReloadCommand($_SERVER['APP_ENV']);
-    (new Application($kernel))->add($command);
+    $application = new Application();
+    $application->add($command);
 
-    $command->run(
-        new ArrayInput(
-            [
-                'command' => 'doctrine:reload',
-                '--no-interaction' => true,
-            ]
-        ),
-        new ConsoleOutput()
-    );
+//    $command->run(
+//        new ArrayInput(
+//            [
+//                'command' => 'doctrine:reload',
+//                '--no-interaction' => true,
+//            ]
+//        ),
+//        new ConsoleOutput()
+//    );
 }
 
 $_SERVER += $_ENV;
