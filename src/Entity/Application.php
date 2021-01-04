@@ -38,6 +38,12 @@ class Application
     private $url;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Url()
+     */
+    private $redirect;
+
+    /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="applications")
      * @ORM\JoinTable(name="application_users")
      */
@@ -116,5 +122,15 @@ class Application
         $this->users->removeElement($user);
 
         return $this;
+    }
+
+    public function getRedirect(): ?string
+    {
+        return rtrim($this->redirect, '/');
+    }
+
+    public function setRedirect(string $redirect): void
+    {
+        $this->redirect = $redirect;
     }
 }

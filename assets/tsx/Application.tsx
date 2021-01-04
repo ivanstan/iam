@@ -15,6 +15,7 @@ import { theme } from './components/Theme';
 import LoaderTop from './components/LoaderTop';
 import { RegisterFormPortal } from './security/RegisterFormPortal';
 import { FlashMessageStore } from './services/mobx/FlashMessageStore';
+import LoginInput from "./security/LoginInput/LoginInput";
 
 const useStyles: any = theme => ({
   top: {
@@ -55,6 +56,7 @@ class Application extends React.Component<any, any> {
 
               {init && <LoginFormPortal id="login-form" />}
               {init && <RegisterFormPortal id="register-form" />}
+              {init && <LoginInput id="login-input" />}
             </Provider>
 
           </ThemeProvider>
