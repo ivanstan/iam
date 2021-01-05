@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div
-     id="login-input"
-     data-csrf="{{ csrf_token('authenticate') }}"
-     data-email="{{ last_username }}"
-     data-error="{{ error ? error.messageKey|trans(error.messageData) : null }}"
-     data-submit="{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}"
-></div>
+    <div class="p-2">
+    {% include 'components/messages.html.twig' %}
+    <div
+        id="login-input"
+        data-csrf="{{ csrf_token('authenticate') }}"
+        data-email="{{ last_username }}"
+        data-error="{{ error ? error.messageKey|trans(error.messageData) : null }}"
+        data-submit="{{ url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) }}"
+    ></div>
+    </div>
 {% endblock %}

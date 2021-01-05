@@ -62,9 +62,7 @@ class AuthController extends AbstractController
                 return new RedirectResponse($application->getRedirect() . '?token=' . $token->toString());
             }
 
-            $request->getSession()->getFlashBag()->set('error', 'Unable');
-
-
+            $request->getSession()->getFlashBag()->set('danger', 'Invalid login credentials.');
         }
 
         return $this->render(

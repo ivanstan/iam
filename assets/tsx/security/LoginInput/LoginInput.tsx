@@ -127,8 +127,6 @@ class LoginInput extends React.Component<LoginFormPropsInterface, any> {
 
     return <>
         <form method="post" ref={ref => this.form = ref} action={submit}>
-          <FormError text={formError || error}/>
-
           <TextField
             id="login-form-email"
             className={classes?.spacerBottom}
