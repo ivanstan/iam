@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="add components">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/tsx/security/LoginInput/LoginInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tsx/security/LoginInput/LoginInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pages/auth.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/auth.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +189,8 @@
       <workItem from="1609788007264" duration="22000" />
       <workItem from="1609788048382" duration="259000" />
       <workItem from="1609832724123" duration="3120000" />
-      <workItem from="1609835998576" duration="4190000" />
+      <workItem from="1609835998576" duration="5031000" />
+      <workItem from="1609843996796" duration="702000" />
     </task>
     <servers />
   </component>
