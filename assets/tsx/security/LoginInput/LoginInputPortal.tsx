@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import LoginInput from './LoginInput';
 
-export class LoginFormPortal extends React.Component<any, any> {
+export class LoginInputPortal extends React.Component<any, any> {
   render() {
     const element = document.getElementById(this.props.id);
     if (element) {

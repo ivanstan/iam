@@ -1,28 +1,27 @@
-import React from 'react';
-import { I18n } from 'react-polyglot';
-import { withStyles } from '@material-ui/core/styles';
-import { LinearProgress, ThemeProvider } from '@material-ui/core';
-import { LoginFormPortal } from './security/LoginFormPortal';
-import { NavBarPortal } from './components/navbar/NavBarPortal';
-import DeleteConfirmation from './components/dialog/DeleteConfirmationDialog';
-import { ActivityStore } from './services/mobx/ActivityStore';
-import BanIpDialog from './components/dialog/BanIpDialog';
-import { UserStore } from './services/mobx/UserStore';
-import { SettingsStore } from './services/mobx/SettingsStore';
-import { Provider } from 'mobx-react';
-import { If } from 'react-if';
-import { theme } from './components/Theme';
-import LoaderTop from './components/LoaderTop';
-import { RegisterFormPortal } from './security/RegisterFormPortal';
-import { FlashMessageStore } from './services/mobx/FlashMessageStore';
-import LoginInput from "./security/LoginInput/LoginInput";
+import React from "react";
+import { I18n } from "react-polyglot";
+import { withStyles } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/core";
+import { LoginFormPortal } from "./security/LoginFormPortal";
+import { NavBarPortal } from "./components/navbar/NavBarPortal";
+import DeleteConfirmation from "./components/dialog/DeleteConfirmationDialog";
+import { ActivityStore } from "./services/mobx/ActivityStore";
+import BanIpDialog from "./components/dialog/BanIpDialog";
+import { UserStore } from "./services/mobx/UserStore";
+import { SettingsStore } from "./services/mobx/SettingsStore";
+import { Provider } from "mobx-react";
+import { theme } from "./components/Theme";
+import LoaderTop from "./components/LoaderTop";
+import { RegisterFormPortal } from "./security/RegisterFormPortal";
+import { FlashMessageStore } from "./services/mobx/FlashMessageStore";
+import { LoginInputPortal } from "./security/LoginInput/LoginInputPortal";
 
 const useStyles: any = theme => ({
   top: {
-    position: 'fixed',
-    width: '100%',
-    zIndex: 10,
-  },
+    position: "fixed",
+    width: "100%",
+    zIndex: 10
+  }
 });
 
 class Application extends React.Component<any, any> {
@@ -56,7 +55,7 @@ class Application extends React.Component<any, any> {
 
               {init && <LoginFormPortal id="login-form" />}
               {init && <RegisterFormPortal id="register-form" />}
-              {init && <LoginInput id="login-input" />}
+              {init && <LoginInputPortal id="login-input" />}
             </Provider>
 
           </ThemeProvider>

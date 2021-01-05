@@ -2,5 +2,18 @@
     {{ form_row(form.name) }}
     {{ form_row(form.url) }}
 
+    {% if application.id is not null %}
+        <table class="table">
+            <tr>
+                <td>
+                    Login Url
+                </td>
+                <td>
+                    <a target="_blank" href="{{ url('auth_login', {'uuid': application.uuid}) }}">{{ url('auth_login', {'uuid': application.uuid}) }}</a>
+                </td>
+            </tr>
+        </table>
+    {% endif %}
+
     {% include 'components/form-submit.html.twig' with {'title':'Submit'|trans } only %}
 {{ form_end(form) }}

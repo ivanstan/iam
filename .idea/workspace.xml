@@ -2,13 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="add components">
-      <change afterPath="$PROJECT_DIR$/assets/tsx/security/LoginInput/LoginInput.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/tsx/security/LoginInput/LoginInputPortal.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/AuthController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/pages/auth.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vagrant.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/tsx/Application.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tsx/Application.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Application.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Application.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tsx/security/LoginInput/LoginInputPortal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tsx/security/LoginInput/LoginInputPortal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deploy.sh" beforeDir="false" afterPath="$PROJECT_DIR$/deploy.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/application/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/application/_form.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,13 +163,14 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/tsx/security/LoginInput" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.vagrant" />
+    <property name="settings.editor.selected.configurable" value="Symfony2.SettingsForm" />
     <property name="ts.external.directory.path" value="C:\Users\Ivan\projects\iam\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -188,11 +190,18 @@
       <workItem from="1607413341109" duration="4461000" />
       <workItem from="1609697327136" duration="3948000" />
       <workItem from="1609704366206" duration="1310000" />
-      <workItem from="1609784776349" duration="888000" />
+      <workItem from="1609784776349" duration="1127000" />
+      <workItem from="1609788007264" duration="22000" />
+      <workItem from="1609788048382" duration="259000" />
+      <workItem from="1609832724123" duration="2720000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
