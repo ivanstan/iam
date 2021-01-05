@@ -67,7 +67,6 @@ class AuthController extends AbstractController
 
         }
 
-
         return $this->render(
             'pages/auth.html.twig',
             [

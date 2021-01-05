@@ -22,6 +22,7 @@ interface LoginFormPropsInterface extends TranslateProps, StyledComponentProps {
   csrf: string,
   error: string,
   email: string,
+  submit: string,
   settings: Settings,
 }
 
@@ -121,11 +122,11 @@ class LoginInput extends React.Component<LoginFormPropsInterface, any> {
   };
 
   render() {
-    const { t, classes, error } = this.props;
+    const { t, classes, error, submit } = this.props;
     const { email, password, emailError, passwordError, dirty, formError } = this.state;
 
     return <>
-        <form method="post" ref={ref => this.form = ref}>
+        <form method="post" ref={ref => this.form = ref} action={submit}>
           <FormError text={formError || error}/>
 
           <TextField

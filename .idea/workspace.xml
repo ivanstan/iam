@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="add components">
-      <change afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vagrant.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/Application.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tsx/Application.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tsx/security/LoginInput/LoginInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tsx/security/LoginInput/LoginInput.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/tsx/security/LoginInput/LoginInputPortal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tsx/security/LoginInput/LoginInputPortal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deploy.sh" beforeDir="false" afterPath="$PROJECT_DIR$/deploy.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tsx/services/mobx/LocaleStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tsx/services/mobx/LocaleStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ApplicationType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ApplicationType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/application/_form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/application/_form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pages/auth.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/auth.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +193,8 @@
       <workItem from="1609784776349" duration="1127000" />
       <workItem from="1609788007264" duration="22000" />
       <workItem from="1609788048382" duration="259000" />
-      <workItem from="1609832724123" duration="2720000" />
+      <workItem from="1609832724123" duration="3120000" />
+      <workItem from="1609835998576" duration="2652000" />
     </task>
     <servers />
   </component>

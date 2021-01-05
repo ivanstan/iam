@@ -9,7 +9,7 @@ class Locale {
     allowMissing: true
   });
 
-  @observable current = window.localStorage.getItem('locale') || 'en';
+  @observable current = window.localStorage && window.localStorage.getItem('locale') || 'en';
 
   @computed get messages() {
     return this.getMessagesAsync.get();

@@ -11,6 +11,7 @@ export class LoginInputPortal extends React.Component<any, any> {
           csrf={element.getAttribute('data-csrf')}
           email={element.getAttribute('data-email')}
           error={element.getAttribute('data-error')}
+          submit={element.getAttribute('data-submit')}
         />
       );
 

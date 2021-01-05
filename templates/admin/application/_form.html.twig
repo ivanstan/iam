@@ -1,6 +1,7 @@
 {{ form_start(form) }}
     {{ form_row(form.name) }}
     {{ form_row(form.url) }}
+    {{ form_row(form.redirect) }}
 
     {% if application.id is not null %}
         <table class="table">
