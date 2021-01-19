@@ -57,6 +57,6 @@ final class UserCreateCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $io->success(\sprintf('Successfully created user %s', $email));
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

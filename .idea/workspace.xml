@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Entity/UserProfile.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Form/UserForm.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProfileController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Command/UserCreateCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command/UserCreateCommand.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Form/UserProfileForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserProfileForm.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,7 +207,7 @@
       <workItem from="1609876356300" duration="2717000" />
       <workItem from="1609919802029" duration="1240000" />
       <workItem from="1610110419538" duration="14000" />
-      <workItem from="1611073237803" duration="3008000" />
+      <workItem from="1611073237803" duration="3874000" />
     </task>
     <task id="LOCAL-00001" summary="add components">
       <created>1609844713209</created>
@@ -219,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609844713209</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add profile">
+      <created>1611076275986</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1611076275986</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -227,7 +231,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add components" />
-    <option name="LAST_COMMIT_MESSAGE" value="add components" />
+    <MESSAGE value="add profile" />
+    <option name="LAST_COMMIT_MESSAGE" value="add profile" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

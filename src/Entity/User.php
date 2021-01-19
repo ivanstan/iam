@@ -191,8 +191,8 @@ class User implements UserInterface
 
     public function getDisplayName(): string
     {
-        if ($this->firstName && $this->lastName) {
-            return $this->firstName . ' ' . $this->lastName;
+        if ($this->getProfile()->getFirstName() && $this->getProfile()->getLastName()) {
+            return $this->getProfile()->getFirstName() . ' ' . $this->getProfile()->getLastName();
         }
 
         return $this->getEmail();
