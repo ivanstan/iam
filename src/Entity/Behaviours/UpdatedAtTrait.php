@@ -11,7 +11,7 @@ trait UpdatedAtTrait
     /**
      * @ORM\Column(type="datetime")
      */
-    private ?DateTime $updatedAt = null;
+    protected ?DateTime $updatedAt = null;
 
     public function getUpdatedAt(): ?DateTime
     {

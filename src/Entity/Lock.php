@@ -15,31 +15,31 @@ class Lock
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      * @ORM\Column(type="string")
      */
-    private $name;
+    protected $name;
 
     /**
      * @var int
      * @ORM\Column(type="integer")
      */
-    private $value;
+    protected $value;
 
     /**
      * @var string
      * @ORM\Column(type="string")
      */
-    private $data;
+    protected $data;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $expire;
+    protected $expire;
 
     public function __construct(string $name)
     {

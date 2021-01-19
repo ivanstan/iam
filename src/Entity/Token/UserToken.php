@@ -28,12 +28,12 @@ abstract class UserToken extends Token
      * @ORM\ManyToOne(targetEntity="App\Entity\User", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
-    private User $user;
+    protected User $user;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $data;
+    protected $data;
 
     /**
      * @throws \Exception

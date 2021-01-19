@@ -11,7 +11,7 @@ trait CreatedAtTrait
     /**
      * @ORM\Column(type="datetime")
      */
-    private ?DateTime $createdAt = null;
+    protected ?DateTime $createdAt = null;
 
     public function getCreatedAt(): ?DateTime
     {

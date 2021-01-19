@@ -19,46 +19,46 @@ class Session
      * @ORM\Column(type="integer")
      * @Groups("read")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=128, unique=true)
      */
-    private $sessionId;
+    protected $sessionId;
 
     /**
      * @var User
      * @ORM\ManyToOne(targetEntity="App\Entity\User",inversedBy="sessions")
      */
-    private $user;
+    protected $user;
 
     /**
      * @var mixed
      * @ORM\Column(type="blob", nullable=true)
      */
-    private $data;
+    protected $data;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime")
      * @Groups("read")
      */
-    private $date;
+    protected $date;
 
     /**
      * @var \DateInterval
      * @ORM\Column(type="dateinterval")
      * @Groups("read")
      */
-    private $lifetime;
+    protected $lifetime;
 
     /**
      * @var \DateTime
      * @ORM\Column(type="datetime", nullable=true)
      * @Groups("read")
      */
-    private $lastAccess;
+    protected $lastAccess;
 
     /**
      * @var string
@@ -66,7 +66,7 @@ class Session
      * @ORM\Column(type="string", nullable=true)
      * @Groups("read")
      */
-    private $ip;
+    protected $ip;
 
     /**
      * @var string
@@ -74,7 +74,7 @@ class Session
      * @ORM\Column(type="text", nullable=true)
      * @Groups("read")
      */
-    private $userAgent;
+    protected $userAgent;
 
     public function getId(): string
     {

@@ -22,7 +22,7 @@ class Mail
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -32,7 +32,7 @@ class Mail
      * @Assert\NotBlank();
      * @Assert\NotNull();
      */
-    private $from;
+    protected $from;
 
     /**
      * @var string
@@ -42,21 +42,21 @@ class Mail
      * @Assert\NotBlank();
      * @Assert\NotNull();
      */
-    private $to;
+    protected $to;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", nullable=true, name="`subject`")
      */
-    private $subject;
+    protected $subject;
 
     /**
      * @var string
      *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $body;
+    protected $body;
 
     /**
      * @ORM\PrePersist

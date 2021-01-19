@@ -112,9 +112,15 @@ class User implements UserInterface
      */
     protected $applications;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Permission::class)
+     */
+    protected $permission;
+
     public function __construct()
     {
         $this->applications = new ArrayCollection();
+        $this->permission = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -294,6 +300,30 @@ class User implements UserInterface
         if ($this->applications->removeElement($application)) {
             $application->removeUser($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Permission[]
+     */
+    public function getPermission(): Collection
+    {
+        return $this->permission;
+    }
+
+    public function addPermission(Permission $permission): self
+    {
+        if (!$this->permission->contains($permission)) {
+            $this->permission[] = $permission;
+        }
+
+        return $this;
+    }
+
+    public function removePermission(Permission $permission): self
+    {
+        $this->permission->removeElement($permission);
 
         return $this;
     }

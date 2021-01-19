@@ -25,7 +25,7 @@ abstract class Token
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -33,13 +33,13 @@ abstract class Token
      * @Assert\NotNull
      * @Assert\NotBlank
      */
-    private $token;
+    protected $token;
 
     /**
      * @var \DateInterval
      * @ORM\Column(name="`interval`", type="dateinterval", nullable=true)
      */
-    private $interval;
+    protected $interval;
 
     /**
      * @throws \Exception

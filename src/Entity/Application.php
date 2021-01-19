@@ -24,34 +24,40 @@ class Application
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
      */
-    private $uuid;
+    protected $uuid;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Url()
-     */
-    private $url;
+    protected $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Url()
      */
-    private $redirect;
+    protected $url;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Url()
+     */
+    protected $redirect;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="applications")
      * @ORM\JoinTable(name="application_users")
      */
-    private $users;
+    protected $users;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Permission::class, mappedBy="application", orphanRemoval=true)
+     */
+    protected $permissions;
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->permissions = new ArrayCollection();
     }
 
     public function getId()
@@ -132,5 +138,35 @@ class Application
     public function setRedirect(string $redirect): void
     {
         $this->redirect = $redirect;
+    }
+
+    /**
+     * @return Collection|Permission[]
+     */
+    public function getPermissions(): Collection
+    {
+        return $this->permissions;
+    }
+
+    public function addPermission(Permission $permission): self
+    {
+        if (!$this->permissions->contains($permission)) {
+            $this->permissions[] = $permission;
+            $permission->setApplication($this);
+        }
+
+        return $this;
+    }
+
+    public function removePermission(Permission $permission): self
+    {
+        if ($this->permissions->removeElement($permission)) {
+            // set the owning side to null (unless already changed)
+            if ($permission->getApplication() === $this) {
+                $permission->setApplication(null);
+            }
+        }
+
+        return $this;
     }
 }
