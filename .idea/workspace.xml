@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="add components">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/scripts/update-components.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Behaviours/CreatedAtTrait.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Behaviours/UpdatedAtTrait.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/security/LoginInput/LoginInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tsx/security/LoginInput/LoginInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Mail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Token/Token.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Token/Token.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Traits/CreatedTrait.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Traits/UpdatedTrait.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +166,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/tsx/security/LoginInput" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -171,6 +177,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ivan\projects\iam" />
       <recent name="C:\Users\Ivan\projects\iam\assets\tsx\security\LoginInput" />
     </key>
   </component>
@@ -190,12 +197,31 @@
       <workItem from="1609788048382" duration="259000" />
       <workItem from="1609832724123" duration="3120000" />
       <workItem from="1609835998576" duration="5031000" />
-      <workItem from="1609843996796" duration="702000" />
+      <workItem from="1609843996796" duration="723000" />
+      <workItem from="1609845866497" duration="34000" />
+      <workItem from="1609845965631" duration="605000" />
+      <workItem from="1609847713530" duration="1233000" />
+      <workItem from="1609876356300" duration="2717000" />
+      <workItem from="1609919802029" duration="1240000" />
+      <workItem from="1610110419538" duration="14000" />
+      <workItem from="1611073237803" duration="1130000" />
     </task>
+    <task id="LOCAL-00001" summary="add components">
+      <created>1609844713209</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1609844713209</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add components" />
+    <option name="LAST_COMMIT_MESSAGE" value="add components" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -2,7 +2,7 @@
 
 namespace App\Entity\Token;
 
-use App\Entity\Traits\CreatedTrait;
+use App\Entity\Behaviours\CreatedAtTrait;
 use App\Security\TokenGenerator;
 use App\Service\DateTimeService;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class Token
 {
-    use CreatedTrait;
+    use CreatedAtTrait;
 
     /**
      * @ORM\Id()

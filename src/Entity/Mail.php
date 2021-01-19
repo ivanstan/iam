@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Entity\Traits\CreatedTrait;
+use App\Entity\Behaviours\CreatedAtTrait;
 use App\Service\DateTimeService;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Mail
 {
-    use CreatedTrait;
+    use CreatedAtTrait;
 
     /**
      * @var int

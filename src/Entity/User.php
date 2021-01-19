@@ -2,10 +2,9 @@
 
 namespace App\Entity;
 
-use App\Entity\Traits\CreatedTrait;
-use App\Entity\Traits\UpdatedTrait;
+use App\Entity\Behaviours\CreatedAtTrait;
+use App\Entity\Behaviours\UpdatedAtTrait;
 use App\Security\Role;
-use App\Service\DateTimeService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -21,8 +20,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface
 {
-    use CreatedTrait;
-    use UpdatedTrait;
+    use CreatedAtTrait;
+    use UpdatedAtTrait;
 
     /**
      * @ORM\Id()
@@ -132,23 +131,6 @@ class User implements UserInterface
     public function __construct()
     {
         $this->applications = new ArrayCollection();
-    }
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function setCreatedAt(): void
-    {
-        $this->created = DateTimeService::getCurrentUTC();
-        $this->updated = DateTimeService::getCurrentUTC();
-    }
-
-    /**
-     * @ORM\PreUpdate
-     */
-    public function setUpdated(): void
-    {
-        $this->updated = DateTimeService::getCurrentUTC();
     }
 
     public function getId(): ?int
