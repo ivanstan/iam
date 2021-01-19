@@ -3,31 +3,27 @@
 namespace App\Form;
 
 use App\Entity\User;
-use App\Entity\UserProfile;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserProfileForm extends AbstractType
+class UserForm extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add(
-                'firstName',
-                TextType::class,
+                'profile',
+                UserProfileForm::class,
                 [
                     'label' => false,
-                    'attr' => ['placeholder' => 'First name']
                 ]
             )
             ->add(
-                'lastName',
-                TextType::class,
+                'preference',
+                UserPreferenceForm::class,
                 [
                     'label' => false,
-                    'attr' => ['placeholder' => 'Last name']
                 ]
             );
     }
@@ -36,7 +32,7 @@ class UserProfileForm extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => UserProfile::class,
+                'data_class' => User::class,
             ]
         );
     }

@@ -86,34 +86,18 @@ class User implements UserInterface
     protected bool $banned = false;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
-     * @Groups("jwt")
-     */
-    protected $firstName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
-     * @Groups("jwt")
-     */
-    protected $lastName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $avatar;
-
-    /**
      * @ORM\OneToOne(targetEntity="App\Entity\UserPreference", cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinColumn(onDelete="CASCADE")
      * @Groups("read")
      */
     protected $preference;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\UserProfile", cascade={"persist", "remove"}, fetch="EAGER")
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     * @Groups("read")
+     */
+    protected $profile;
 
     /**
      * @var Session[]
@@ -251,11 +235,7 @@ class User implements UserInterface
 
     public function getPreference(): UserPreference
     {
-        if ($this->preference) {
-            return $this->preference;
-        }
-
-        return new UserPreference();
+        return $this->preference ?? new UserPreference();
     }
 
     public function setPreference(UserPreference $preference): void
@@ -263,24 +243,14 @@ class User implements UserInterface
         $this->preference = $preference;
     }
 
-    public function getLastName(): ?string
+    public function getProfile(): UserProfile
     {
-        return $this->lastName;
+        return $this->profile ?? new UserProfile();
     }
 
-    public function setLastName(?string $lastName): void
+    public function setProfile(UserProfile $profile): void
     {
-        $this->lastName = $lastName;
-    }
-
-    public function getFirstName(): ?string
-    {
-        return $this->firstName;
-    }
-
-    public function setFirstName(?string $firstName): void
-    {
-        $this->firstName = $firstName;
+        $this->profile = $profile;
     }
 
     public function isBanned(): bool

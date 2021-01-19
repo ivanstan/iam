@@ -2,15 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/scripts/update-components.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Behaviours/CreatedAtTrait.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Behaviours/UpdatedAtTrait.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/UserProfile.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/UserForm.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Mail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Token/Token.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Token/Token.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Traits/CreatedTrait.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Traits/UpdatedTrait.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProfileController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/UserProfileForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/UserProfileForm.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +27,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -171,6 +176,7 @@
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="Symfony2.SettingsForm" />
     <property name="ts.external.directory.path" value="C:\Users\Ivan\projects\iam\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -204,7 +210,7 @@
       <workItem from="1609876356300" duration="2717000" />
       <workItem from="1609919802029" duration="1240000" />
       <workItem from="1610110419538" duration="14000" />
-      <workItem from="1611073237803" duration="1130000" />
+      <workItem from="1611073237803" duration="3008000" />
     </task>
     <task id="LOCAL-00001" summary="add components">
       <created>1609844713209</created>
