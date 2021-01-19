@@ -2,19 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/tests/Panther/DefaultTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/iam.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/iam.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Application.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Application.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Behaviours/CreatedAtTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Behaviours/CreatedAtTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Behaviours/UpdatedAtTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Behaviours/UpdatedAtTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Lock.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Lock.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Mail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Session.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Session.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Token/Token.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Token/Token.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Token/UserToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Token/UserToken.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/UserPreference.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/UserPreference.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/UserProfile.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/UserProfile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/phpunit.xml.dist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,6 +161,9 @@
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-code" />
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
       <path value="$PROJECT_DIR$/vendor/ocramius/proxy-manager" />
+      <path value="$PROJECT_DIR$/vendor/php-webdriver/webdriver" />
+      <path value="$PROJECT_DIR$/vendor/dbrekelmans/bdi" />
+      <path value="$PROJECT_DIR$/vendor/symfony/panther" />
     </include_path>
   </component>
   <component name="ProjectId" id="1lMiPnSIlAiU1cXfBA7G77PHQ8L" />
@@ -217,7 +216,7 @@
       <workItem from="1609876356300" duration="2717000" />
       <workItem from="1609919802029" duration="1240000" />
       <workItem from="1610110419538" duration="14000" />
-      <workItem from="1611073237803" duration="5325000" />
+      <workItem from="1611073237803" duration="6278000" />
     </task>
     <task id="LOCAL-00001" summary="add components">
       <created>1609844713209</created>

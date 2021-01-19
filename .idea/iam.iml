@@ -125,6 +125,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-code" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nikic/php-parser" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/ocramius/proxy-manager" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-webdriver/webdriver" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/dbrekelmans/bdi" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/panther" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

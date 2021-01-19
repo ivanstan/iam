@@ -8,6 +8,7 @@
 /public/bundles/
 /var/
 /vendor/
+/drivers/
 ###< symfony/framework-bundle ###
 
 ###> symfony/phpunit-bridge ###
