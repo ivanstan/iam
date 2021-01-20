@@ -2,14 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/Panther/DefaultTest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/Api/MetadataController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/iam.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/iam.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/phpunit.xml.dist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EventSubscriber/TimezoneSubscriber.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -101,7 +101,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/finder" />
       <path value="$PROJECT_DIR$/vendor/symfony/security-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/routing" />
-      <path value="$PROJECT_DIR$/vendor/symfony/twig-pack" />
       <path value="$PROJECT_DIR$/vendor/symfony/config" />
       <path value="$PROJECT_DIR$/vendor/symfony/serializer-pack" />
       <path value="$PROJECT_DIR$/vendor/symfony/mailer" />
@@ -164,6 +163,9 @@
       <path value="$PROJECT_DIR$/vendor/php-webdriver/webdriver" />
       <path value="$PROJECT_DIR$/vendor/dbrekelmans/bdi" />
       <path value="$PROJECT_DIR$/vendor/symfony/panther" />
+      <path value="$PROJECT_DIR$/vendor/zircote/swagger-php" />
+      <path value="$PROJECT_DIR$/vendor/nelmio/api-doc-bundle" />
+      <path value="$PROJECT_DIR$/vendor/exsyst/swagger" />
     </include_path>
   </component>
   <component name="ProjectId" id="1lMiPnSIlAiU1cXfBA7G77PHQ8L" />
@@ -216,7 +218,8 @@
       <workItem from="1609876356300" duration="2717000" />
       <workItem from="1609919802029" duration="1240000" />
       <workItem from="1610110419538" duration="14000" />
-      <workItem from="1611073237803" duration="6278000" />
+      <workItem from="1611073237803" duration="6950000" />
+      <workItem from="1611087068957" duration="5456000" />
     </task>
     <task id="LOCAL-00001" summary="add components">
       <created>1609844713209</created>
