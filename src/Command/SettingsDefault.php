@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use App\Model\Settings as SettingsModel;
 
-class SettingsDefault extends Command
+final class SettingsDefault extends Command
 {
     protected static $defaultName = 'settings:default';
 

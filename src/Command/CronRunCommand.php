@@ -15,7 +15,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class CronRunCommand extends Command
+final class CronRunCommand extends Command
 {
     protected static $defaultName = 'cron:run';
 
@@ -47,7 +47,7 @@ class CronRunCommand extends Command
 
         $io->success('Cron has been executed.');
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     protected function deleteInvalidTokens(string $type): void

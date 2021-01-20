@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Controller/Api/MetadataController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/iam.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/iam.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EventSubscriber/TimezoneSubscriber.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Command/CronRunCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command/CronRunCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Command/DoctrineReloadCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command/DoctrineReloadCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Command/SettingsDefault.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command/SettingsDefault.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,7 +214,9 @@
       <workItem from="1609919802029" duration="1240000" />
       <workItem from="1610110419538" duration="14000" />
       <workItem from="1611073237803" duration="6950000" />
-      <workItem from="1611087068957" duration="5456000" />
+      <workItem from="1611087068957" duration="7553000" />
+      <workItem from="1611169039568" duration="315000" />
+      <workItem from="1611169374701" duration="7000" />
     </task>
     <task id="LOCAL-00001" summary="add components">
       <created>1609844713209</created>
@@ -242,7 +239,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611077132425</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add profile">
+      <created>1611134395810</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1611134395810</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

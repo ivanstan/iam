@@ -55,9 +55,11 @@ final class DoctrineReloadCommand extends Command
         $force = $input->getOption('force') !== false;
 
         if (!$force && !\in_array($this->env, self::$envs, true)) {
-            $io->warning('This is intended only for use in dev or test environment.');
+            $io->warning(
+                'This is intended for use only in dev or test environment. Run with -f parameter to execute regardless of environment.'
+            );
 
-            return 1;
+            return Command::FAILURE;
         }
 
         $application = $this->getApplication();
@@ -86,6 +88,6 @@ final class DoctrineReloadCommand extends Command
             $application->run(new ArrayInput($options));
         }
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
