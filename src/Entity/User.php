@@ -100,14 +100,6 @@ class User implements UserInterface
     protected $profile;
 
     /**
-     * @var Session[]
-     * @ORM\OneToMany(targetEntity="App\Entity\Session", mappedBy="user", cascade={"remove"})
-     * @ORM\JoinColumn(onDelete="CASCADE")
-     * @Groups("read")
-     */
-    protected $sessions;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Application", mappedBy="users")
      */
     protected $applications;
@@ -130,7 +122,7 @@ class User implements UserInterface
 
     public function eraseCredentials(): void
     {
-        //        $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     /**
@@ -146,6 +138,44 @@ class User implements UserInterface
         $this->password = $password;
 
         return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = Role::USER;
+
+        return array_values(array_unique($roles));
+    }
+
+    public function setRoles(array $roles): self
+    {
+        if (!\in_array(Role::USER, $roles, true)) {
+            $roles[] = Role::USER;
+        }
+
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getSalt()
+    {
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
+    public function getUsername(): string
+    {
+        return $this->email;
     }
 
     public function isActive(): bool
@@ -172,29 +202,6 @@ class User implements UserInterface
         $this->plainPassword = $plainPassword;
     }
 
-    /**
-     * @see UserInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = Role::USER;
-
-        return array_values(array_unique($roles));
-    }
-
-    public function setRoles(array $roles): self
-    {
-        if (!\in_array(Role::USER, $roles, true)) {
-            $roles[] = Role::USER;
-        }
-
-        $this->roles = $roles;
-
-        return $this;
-    }
-
     public function getDisplayName(): string
     {
         if ($this->getProfile()->getFirstName() && $this->getProfile()->getLastName()) {
@@ -202,6 +209,16 @@ class User implements UserInterface
         }
 
         return $this->getEmail();
+    }
+
+    public function getProfile(): UserProfile
+    {
+        return $this->profile ?? new UserProfile();
+    }
+
+    public function setProfile(UserProfile $profile): void
+    {
+        $this->profile = $profile;
     }
 
     public function getEmail(): ?string
@@ -212,21 +229,6 @@ class User implements UserInterface
     public function setEmail(string $email): void
     {
         $this->email = $email;
-    }
-
-    public function getSalt()
-    {
-        // not needed when using the "bcrypt" algorithm in security.yaml
-    }
-
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
-    {
-        return $this->email;
     }
 
     public function isVerified(): bool
@@ -249,16 +251,6 @@ class User implements UserInterface
         $this->preference = $preference;
     }
 
-    public function getProfile(): UserProfile
-    {
-        return $this->profile ?? new UserProfile();
-    }
-
-    public function setProfile(UserProfile $profile): void
-    {
-        $this->profile = $profile;
-    }
-
     public function isBanned(): bool
     {
         return $this->banned;
@@ -267,14 +259,6 @@ class User implements UserInterface
     public function setBanned(bool $banned): void
     {
         $this->banned = $banned;
-    }
-
-    /**
-     * @return Session[]
-     */
-    public function getSessions(): array
-    {
-        return $this->sessions->toArray();
     }
 
     /**

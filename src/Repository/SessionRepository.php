@@ -7,7 +7,7 @@ use App\Entity\User;
 use App\Model\Api\CollectionSpecification;
 use App\Service\DateTimeService;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
 
 class SessionRepository extends ServiceEntityRepository

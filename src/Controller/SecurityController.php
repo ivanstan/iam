@@ -280,7 +280,7 @@ final class SecurityController extends AbstractController implements LoggerAware
 
             $user->setPlainPassword($data);
             $user->setVerified(true);
-            $user->setUpdated();
+            $user->setUpdatedAt();
 
             $em->flush();
 
@@ -318,7 +318,7 @@ final class SecurityController extends AbstractController implements LoggerAware
 
             $user->setPlainPassword($data);
             $user->setVerified(true);
-            $user->setUpdated();
+            $user->setUpdatedAt();
             $em->flush();
 
             $this->addFlash('success', $this->translator->trans('New password has been set.'));

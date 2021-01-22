@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="">
+    <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="nelmio">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Command/CronRunCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command/CronRunCommand.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Command/DoctrineReloadCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command/DoctrineReloadCommand.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Command/SettingsDefault.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Command/SettingsDefault.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Api/AbstractApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Api/AbstractApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Api/JwtController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Api/JwtController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/LockRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/LockRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/MailRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/MailRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/SessionRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/SessionRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/SettingsRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/SettingsRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/UserTokenRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserTokenRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +41,7 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="PhpDebugGeneral" listening_started="true" />
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/babdev/pagerfanta-bundle" />
@@ -216,7 +224,8 @@
       <workItem from="1611073237803" duration="6950000" />
       <workItem from="1611087068957" duration="7553000" />
       <workItem from="1611169039568" duration="315000" />
-      <workItem from="1611169374701" duration="7000" />
+      <workItem from="1611169374701" duration="3815000" />
+      <workItem from="1611321299689" duration="4784000" />
     </task>
     <task id="LOCAL-00001" summary="add components">
       <created>1609844713209</created>
@@ -246,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611134395810</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="nelmio">
+      <created>1611169410620</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1611169410620</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,7 +271,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add components" />
     <MESSAGE value="add profile" />
-    <option name="LAST_COMMIT_MESSAGE" value="add profile" />
+    <MESSAGE value="nelmio" />
+    <option name="LAST_COMMIT_MESSAGE" value="nelmio" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

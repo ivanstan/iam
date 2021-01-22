@@ -5,7 +5,7 @@ namespace App\Repository;
 use App\Entity\Settings;
 use App\Model\Settings as SettingsModel;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 class SettingsRepository extends ServiceEntityRepository
 {

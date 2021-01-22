@@ -5,20 +5,17 @@ namespace App\Controller\Api;
 use App\Repository\ApplicationRepository;
 use App\Repository\UserRepository;
 use App\Security\JwtTokenService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Validation;
 
 /**
  * @Route("/api")
  */
-class JwtController extends AbstractController
+class JwtController extends AbstractApiController
 {
     /**
      * @Route("/token/issue", name="api_jwt_issue", methods={"POST"})
@@ -30,23 +27,15 @@ class JwtController extends AbstractController
         ApplicationRepository $applicationRepository,
         JwtTokenService $service
     ): JsonResponse {
-        $validator = Validation::createValidator();
-        $params = $request->request->all();
-
-        $violations = $validator->validate(
-            $params,
-            new Assert\Collection(
-                [
-                    'email' => new Assert\Email(),
-                    'password' => new Assert\Length(['min' => 6]),
-                    'app' => new Assert\Uuid(),
-                ]
-            )
+        $this->validate(
+            [
+                'email' => new Assert\Email(),
+                'password' => new Assert\Length(['min' => 6]),
+                'app' => new Assert\Uuid(),
+            ]
         );
 
-        if ($violations->count() > 0) {
-            throw new BadRequestHttpException($violations->get(0)->getMessage());
-        }
+        $params = $request->request->all();
 
         $app = $applicationRepository->findOneBy(['uuid' => $params['app']]);
         if ($app === null) {
