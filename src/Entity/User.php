@@ -6,8 +6,8 @@ use App\Entity\Behaviours\CreatedAtTrait;
 use App\Entity\Behaviours\UpdatedAtTrait;
 use App\Security\Role;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -29,7 +29,7 @@ class User implements UserInterface
      * @ORM\Column(type="integer")
      * @Groups({"read", "jwt"})
      */
-    protected $id;
+    protected ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -38,19 +38,18 @@ class User implements UserInterface
      * @Assert\NotNull();
      * @Groups({"read", "jwt"})
      */
-    protected $email;
+    protected ?string $email = null;
 
     /**
-     * @var string The hashed password
+     * @var ?string The hashed password
      * @ORM\Column(type="string", nullable=true)
      */
-    protected $password;
+    protected ?string $password = null;
 
     /**
-     * @var string
      * @Groups("read")
      */
-    protected $plainPassword;
+    protected ?string $plainPassword = null;
 
     /**
      * @ORM\Column(type="json")
@@ -90,14 +89,14 @@ class User implements UserInterface
      * @ORM\JoinColumn(onDelete="CASCADE")
      * @Groups("read")
      */
-    protected $preference;
+    protected ?UserPreference $preference = null;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\UserProfile", cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinColumn(onDelete="CASCADE")
      * @Groups("read")
      */
-    protected $profile;
+    protected ?UserProfile $profile = null;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Application", mappedBy="users")
@@ -105,14 +104,14 @@ class User implements UserInterface
     protected $applications;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Permission::class)
+     * @ORM\ManyToMany(targetEntity=Claim::class)
      */
-    protected $permission;
+    protected $claims;
 
     public function __construct()
     {
         $this->applications = new ArrayCollection();
-        $this->permission = new ArrayCollection();
+        $this->claims = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -262,7 +261,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Application[]
+     * @return Application[]
      */
     public function getApplications(): array
     {
@@ -289,25 +288,25 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Permission[]
+     * @return Claim[]
      */
-    public function getPermission(): Collection
+    public function getClaims(): array
     {
-        return $this->permission;
+        return $this->claims->toArray();
     }
 
-    public function addPermission(Permission $permission): self
+    public function addClaim(Claim $claim): self
     {
-        if (!$this->permission->contains($permission)) {
-            $this->permission[] = $permission;
+        if (!$this->claims->contains($claim)) {
+            $this->claims[] = $claim;
         }
 
         return $this;
     }
 
-    public function removePermission(Permission $permission): self
+    public function removeClaim(Claim $claim): self
     {
-        $this->permission->removeElement($permission);
+        $this->claims->removeElement($claim);
 
         return $this;
     }

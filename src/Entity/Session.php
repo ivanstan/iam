@@ -29,7 +29,7 @@ class Session
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="App\Entity\User",inversedBy="sessions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     protected $user;
 

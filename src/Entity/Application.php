@@ -50,14 +50,14 @@ class Application
     protected $users;
 
     /**
-     * @ORM\OneToMany(targetEntity=Permission::class, mappedBy="application", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Claim::class, mappedBy="application", orphanRemoval=true)
      */
-    protected $permissions;
+    protected $claims = [];
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
-        $this->permissions = new ArrayCollection();
+        $this->claims = new ArrayCollection();
     }
 
     public function getId()
@@ -141,29 +141,29 @@ class Application
     }
 
     /**
-     * @return Collection|Permission[]
+     * @return Collection|Claim[]
      */
-    public function getPermissions(): Collection
+    public function getClaims(): Collection
     {
-        return $this->permissions;
+        return $this->claims;
     }
 
-    public function addPermission(Permission $permission): self
+    public function addClaim(Claim $claim): self
     {
-        if (!$this->permissions->contains($permission)) {
-            $this->permissions[] = $permission;
-            $permission->setApplication($this);
+        if (!$this->claims->contains($claim)) {
+            $this->claims[] = $claim;
+            $claim->setApplication($this);
         }
 
         return $this;
     }
 
-    public function removePermission(Permission $permission): self
+    public function removeClaim(Claim $claim): self
     {
-        if ($this->permissions->removeElement($permission)) {
+        if ($this->claims->removeElement($claim)) {
             // set the owning side to null (unless already changed)
-            if ($permission->getApplication() === $this) {
-                $permission->setApplication(null);
+            if ($claim->getApplication() === $this) {
+                $claim->setApplication(null);
             }
         }
 

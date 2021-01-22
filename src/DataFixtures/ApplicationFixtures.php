@@ -14,8 +14,9 @@ class ApplicationFixtures extends Fixture
     {
         $application = new Application();
         $application->setUuid(self::DEFAULT_APP_UUID);
-        $application->setUrl('https://local.default');
         $application->setName('Default');
+        $application->setUrl('https://local.default');
+        $application->setRedirect('https://local.default');
 
         $manager->persist($application);
         $manager->flush();

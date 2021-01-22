@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ "New user"|trans }} {{ parent() }}{% endblock %}
+{% set title = "New user"|trans %}
+
+{% if user.id is not null %}
+    {% set title = "Edit user"|trans %}
+{% endif %}
+
+{% block title %}{{ title }}{{ parent() }}{% endblock %}
 
 {% block body %}
     {% include 'components/navbar.html.twig' %}

@@ -17,7 +17,7 @@ class MailRepository extends ServiceEntityRepository
     public function findAll(): QueryBuilder
     {
         $builder = $this->createQueryBuilder('m');
-        $builder->orderBy('m.created', 'DESC');
+        $builder->orderBy('m.createdAt', 'DESC');
 
         return $builder;
     }

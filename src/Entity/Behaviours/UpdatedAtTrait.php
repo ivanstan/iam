@@ -25,5 +25,9 @@ trait UpdatedAtTrait
     public function setUpdatedAt(): void
     {
         $this->updatedAt = DateTimeService::getCurrentUTC();
+
+//        if (method_exists($this, 'setCreatedAt')) {
+//            $this->setCreatedAt();
+//        }
     }
 }

@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\PermissionRepository;
+use App\Repository\ClaimRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=PermissionRepository::class)
+ * @ORM\Entity(repositoryClass=ClaimRepository::class)
  */
-class Permission
+class Claim
 {
     /**
      * @ORM\Id
@@ -18,7 +18,7 @@ class Permission
     protected ?int $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Application::class, inversedBy="permissions")
+     * @ORM\ManyToOne(targetEntity=Application::class, inversedBy="claims")
      * @ORM\JoinColumn(nullable=false)
      */
     protected ?Application $application;
