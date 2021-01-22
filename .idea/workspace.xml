@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="nelmio">
+    <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Api/AbstractApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Api/AbstractApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Api/JwtController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Api/JwtController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/LockRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/LockRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/MailRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/MailRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/SessionRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/SessionRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/SettingsRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/SettingsRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/UserTokenRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserTokenRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -225,7 +219,8 @@
       <workItem from="1611087068957" duration="7553000" />
       <workItem from="1611169039568" duration="315000" />
       <workItem from="1611169374701" duration="3815000" />
-      <workItem from="1611321299689" duration="4784000" />
+      <workItem from="1611321299689" duration="8087000" />
+      <workItem from="1611342277540" duration="1014000" />
     </task>
     <task id="LOCAL-00001" summary="add components">
       <created>1609844713209</created>
@@ -262,7 +257,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611169410620</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="nelmio">
+      <created>1611327965082</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1611327965082</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
