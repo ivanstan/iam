@@ -56,13 +56,11 @@ class JwtControllerTests extends WebTestCase
             ]
         );
 
-        $response = json_decode($client->getResponse()->getContent(), true);
+        $response = json_decode($client->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
         $service = self::$service;
 
         $token = $service->parse($response['token']);
-
-        dd($token);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }

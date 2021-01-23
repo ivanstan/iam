@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Swagger\Annotations as SWG;
 
 /**
  * @Route("/api")
@@ -13,19 +14,33 @@ use Symfony\Component\Routing\Annotation\Route;
 class MetadataController extends AbstractController
 {
     /**
-     * @Route(path="/entities")
+     * @Route(path="/entity", methods={"GET"})
+     * @SWG\Tag(name="Entity")
+     * @SWG\Response(
+     *     response=200,
+     *     description="Returns list of declared entites."
+     * )
      */
-    public function entities(): JsonResponse
+    public function entity(): JsonResponse
     {
         return new JsonResponse(
-            [
-                $this->getDoctrine()->getManager()->getConfiguration()->getMetadataDriverImpl()->getAllClassNames(),
-            ]
+            $this->getDoctrine()->getManager()->getConfiguration()->getMetadataDriverImpl()->getAllClassNames(),
         );
     }
 
     /**
-     * @Route(path="/metadata")
+     * @Route(path="/metadata", methods={"GET"})
+     * @SWG\Tag(name="Entity")
+     * @SWG\Response(
+     *     response=200,
+     *     description="Returns the entity metadata.",
+     * )
+     * @SWG\Parameter(
+     *     name="entity",
+     *     in="query",
+     *     type="string",
+     *     description="Entity FQN."
+     * )
      */
     public function metadata(Request $request): JsonResponse
     {

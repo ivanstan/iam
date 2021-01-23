@@ -1,9 +1,9 @@
 controllers:
     resource: ../../src/Controller/
     type: annotation
-#    prefix:
-#        en: '' # don't prefix URLs for English, the default locale
-#        rs: '/rs'
+    prefix:
+        en: '' # don't prefix URLs for English, the default locale
+        sr: '/sr'
 
 kernel:
     resource: ../../src/Kernel.php
