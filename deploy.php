@@ -19,7 +19,7 @@ set('git_tty', true);
 
 // Shared files/dirs between deploys
 add('shared_files', ['.env']);
-add('shared_dirs', ['var']);
+add('shared_dirs', ['var', 'config/secrets']);
 add('writable_dirs', []);
 
 // Writable dirs by web server

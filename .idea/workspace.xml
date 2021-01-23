@@ -5,16 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/scss/doc.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/NelmioApiDocBundle/SwaggerUi/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/navbar/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tsx/components/navbar/NavBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/nelmio_api_doc.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/nelmio_api_doc.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deploy.php" beforeDir="false" afterPath="$PROJECT_DIR$/deploy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deploy.sh" beforeDir="false" afterPath="$PROJECT_DIR$/deploy.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,7 +226,7 @@
       <workItem from="1611395482572" duration="2685000" />
       <workItem from="1611408412203" duration="101000" />
       <workItem from="1611408854955" duration="5420000" />
-      <workItem from="1611416477012" duration="605000" />
+      <workItem from="1611416477012" duration="1058000" />
     </task>
     <task id="LOCAL-00001" summary="add components">
       <created>1609844713209</created>
@@ -298,7 +291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611398007954</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="nelmio">
+      <created>1611417092540</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1611417092540</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
