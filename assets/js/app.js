@@ -3,7 +3,7 @@ import React from 'react';
 
 import '../scss/app.scss';
 import Application from '../tsx/Application.tsx';
-import ReactApplication from '../tsx/ReactApplication';
+import ReactApplication from '../tsx/ReactApplication.tsx';
 
 let element;
 

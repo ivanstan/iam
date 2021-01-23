@@ -61,10 +61,6 @@ class NavBar extends React.Component<any, any> {
     this.handleClose();
   };
 
-  public adminNavigate = (url) => {
-    window.location.href = url;
-  };
-
   public userNavigate = (url) => {
     window.location.href = url;
     this.handleClose();
@@ -169,19 +165,23 @@ class NavBar extends React.Component<any, any> {
           onClose={this.handleClose}
         >
           <If condition={user !== null}>
-            <MenuItem onClick={() => this.userNavigate('/user/profile')}>{t('Profile')}</MenuItem>
+            <MenuItem component="a" href={"/user/profile"}>
+              {t('Profile')}
+            </MenuItem>
           </If>
 
           <If condition={user !== null}>
-            <MenuItem onClick={() => {
-              this.userNavigate('/#/user/account');
-            }}>{t('Account')}</MenuItem>
+            <MenuItem component="a" href={"/#/user/account"}>
+              {t("Account")}
+            </MenuItem>
           </If>
 
           <Divider />
 
           <If condition={user !== null}>
-            <MenuItem data-test="logout" onClick={() => this.userNavigate('/logout')}>{t('Logout')}</MenuItem>
+            <MenuItem component="a" href={"/logout"} data-test="logout">
+              {t("Logout")}
+            </MenuItem>
           </If>
         </Menu>
 
