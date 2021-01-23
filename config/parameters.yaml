@@ -3,7 +3,7 @@ parameters:
   mail_from: 'no-replay@domain.com'
   default_timezone: 'Europe/Belgrade'
   date_format: 'd-m-Y H:i'
-  app_name: 'Application Name'
+  app_name: '%env(APP_NAME)%'
 
   router.request_context.host: '%env(APP_HOST)%'
   router.request_context.scheme: 'https'

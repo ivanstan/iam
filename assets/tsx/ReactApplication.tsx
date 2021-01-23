@@ -18,7 +18,7 @@ import RegistrationPage from './pages/RegistrationPage';
 import { FlashMessageStore } from './services/mobx/FlashMessageStore';
 
 @observer
-export class ReactApplication extends React.Component<any, any> {
+export default class ReactApplication extends React.Component<any, any> {
 
   componentDidMount = () => {
     Promise.all([UserStore.me(), SettingsStore.refresh(), FlashMessageStore.init()]).then(() => {
@@ -53,5 +53,3 @@ export class ReactApplication extends React.Component<any, any> {
     );
   };
 }
-
-export default ReactApplication;

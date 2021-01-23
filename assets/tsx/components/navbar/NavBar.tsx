@@ -1,5 +1,5 @@
-import React from 'react';
-import { inject, observer } from 'mobx-react';
+import React from "react";
+import { inject, observer } from "mobx-react";
 import {
   AppBar,
   Button,
@@ -12,24 +12,24 @@ import {
   MenuItem,
   SwipeableDrawer,
   Toolbar,
-  Typography,
-} from '@material-ui/core';
-import { translate } from 'react-polyglot';
-import { withStyles } from '@material-ui/core/styles';
-import { AccountCircled, MenuIcon } from '../icons';
-import { If } from 'react-if';
+  Typography
+} from "@material-ui/core";
+import { translate } from "react-polyglot";
+import { withStyles } from "@material-ui/core/styles";
+import { AccountCircled, MenuIcon } from "../icons";
+import { If } from "react-if";
 
 const useStyles: any = theme => ({
   adminMenu: {
-    minWidth: 250,
+    minWidth: 250
   },
   appTitle: {
-    color: '#fff',
-    '&:hover': {
-      color: '#fff',
-      textDecoration: 'none',
-    },
-  },
+    color: "#fff",
+    "&:hover": {
+      color: "#fff",
+      textDecoration: "none"
+    }
+  }
 });
 
 const ToolBarButton = withStyles(theme => ({
@@ -97,24 +97,27 @@ class NavBar extends React.Component<any, any> {
       <div>
         <Divider />
         <List className={classes.adminMenu}>
-          <ListItem button>
+          <ListItem button component="a" href="/admin/users">
             {/*<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>*/}
-            <ListItemText primary={'User management'} onClick={() => this.adminNavigate('/admin/users')} />
+            <ListItemText primary={"User management"} />
           </ListItem>
-          <ListItem button>
-            <ListItemText primary={'Applications'} onClick={() => this.adminNavigate('/admin/application')} />
+          <ListItem button component="a" href="/admin/application">
+            <ListItemText primary={"Applications"} />
           </ListItem>
-          <ListItem button>
-            <ListItemText primary={'Sessions'} onClick={() => this.adminNavigate('/admin/sessions')} />
+          <ListItem button component="a" href="/admin/sessions">
+            <ListItemText primary={"Sessions"} />
           </ListItem>
-          <ListItem button>
-            <ListItemText primary={'Mailbox'} onClick={() => this.adminNavigate('/admin/mailbox')} />
+          <ListItem button component="a" href="/admin/mailbox">
+            <ListItemText primary={"Mailbox"} />
           </ListItem>
-          <ListItem button>
-            <ListItemText primary={'Block'} onClick={() => this.adminNavigate('/admin/block')} />
+          <ListItem button component="a" href="/admin/block">
+            <ListItemText primary={"Block"} />
           </ListItem>
-          <ListItem button>
-            <ListItemText primary={'Settings'} onClick={() => this.adminNavigate('/#/admin/settings')} />
+          <ListItem button component="a" href="#/admin/settings">
+            <ListItemText primary={"Settings"} />
+          </ListItem>
+          <ListItem button component="a" href="/api/doc">
+            <ListItemText primary={"API"} />
           </ListItem>
         </List>
       </div>

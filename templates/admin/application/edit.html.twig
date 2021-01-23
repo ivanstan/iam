@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ "New Application"|trans }} {{ parent() }}{% endblock %}
+{% set title = "New application"|trans %}
+
+{% if application.id is not null %}
+    {% set title = "Edit application"|trans %}
+{% endif %}
+
+{% block title %}{{ title }}{{ parent() }}{% endblock %}
 
 {% block body %}
     {% include 'components/navbar.html.twig' %}

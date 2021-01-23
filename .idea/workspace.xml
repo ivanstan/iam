@@ -4,24 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="nelmio">
+    <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tsx/ReactApplication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tsx/ReactApplication.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/tsx/components/navbar/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/tsx/components/navbar/NavBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/parameters.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/parameters.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/deploy.sh" beforeDir="false" afterPath="$PROJECT_DIR$/deploy.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataFixtures/ApplicationFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/ApplicationFixtures.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Application.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Application.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Behaviours/UpdatedAtTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Behaviours/UpdatedAtTrait.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Mail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Permission.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Claim.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Session.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Session.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20210119174900.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ApplicationRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ApplicationRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/MailRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/MailRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/PermissionRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ClaimRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/user/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/user/users.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/user/users.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/application/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/application/edit.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,7 +224,8 @@
       <workItem from="1611169039568" duration="315000" />
       <workItem from="1611169374701" duration="3815000" />
       <workItem from="1611321299689" duration="8087000" />
-      <workItem from="1611342277540" duration="5332000" />
+      <workItem from="1611342277540" duration="5663000" />
+      <workItem from="1611395482572" duration="2497000" />
     </task>
     <task id="LOCAL-00001" summary="add components">
       <created>1609844713209</created>
@@ -286,7 +276,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611346291963</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="nelmio">
+      <created>1611351207599</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1611351207599</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
