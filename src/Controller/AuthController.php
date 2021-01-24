@@ -53,9 +53,7 @@ class AuthController extends AbstractController
             $params = $request->request->all();
             $user = $this->userRepository->findByEmail($params['email']);
 
-            if ($user && $this->encoder->isPasswordValid($user, $params['password'])) {
-
-                // todo check if user has authorized for this application
+            if ($user && $this->encoder->isPasswordValid($user, $params['password']) && $this->repository->userIsMemberOfApplication($user, $application)) {
 
                 $token = $this->service->issueToken($user, $application);
 
