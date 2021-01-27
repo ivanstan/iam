@@ -40,10 +40,11 @@ class Application extends React.Component<any, any> {
   render = () => {
     const { init } = this.state;
     const { classes } = this.props;
+    const locale = document.getElementsByTagName('html')[0].getAttribute('lang');
 
     return (
       <>
-        <I18n allowMissing locale={'en'} messages={{}}>
+        <I18n allowMissing locale={locale as string} messages={{}}>
           <ThemeProvider theme={theme}>
             <Provider settings={SettingsStore} activity={ActivityStore} user={UserStore}>
 

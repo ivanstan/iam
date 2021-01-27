@@ -660,7 +660,7 @@
         },
         "files": [
             "assets/css/app.css",
-            "assets/js/app.js",
+            "assets/js/main.tsx",
             "config/packages/assets.yaml",
             "config/packages/prod/webpack_encore.yaml",
             "config/packages/test/webpack_encore.yaml",

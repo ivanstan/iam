@@ -16,6 +16,7 @@ import AdminSettingsPage from './pages/AdminSettingsPage';
 import LoaderTop from './components/LoaderTop';
 import RegistrationPage from './pages/RegistrationPage';
 import { FlashMessageStore } from './services/mobx/FlashMessageStore';
+import { LocaleStore } from "./services/mobx/LocaleStore";
 
 @observer
 export default class ReactApplication extends React.Component<any, any> {
@@ -31,9 +32,10 @@ export default class ReactApplication extends React.Component<any, any> {
 
     const isAdmin = UserStore.current && UserStore.current.hasRole(Role.Admin);
     const isUser = UserStore.current;
+    const locale = document.getElementsByTagName('html')[0].getAttribute('lang');
 
     return (
-      <I18n allowMissing locale={'en'} messages={{}}>
+      <I18n allowMissing locale={locale as string} messages={LocaleStore.messages}>
         <Provider settings={SettingsStore} activity={ActivityStore} user={UserStore}>
           <ThemeProvider theme={theme}>
             <LoaderTop />

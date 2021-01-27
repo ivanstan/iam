@@ -23,6 +23,6 @@
         "strictPropertyInitialization": false
     },
     "include": [
-        "assets/tsx"
+        "assets/"
     ]
 }

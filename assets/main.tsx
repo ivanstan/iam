@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 
-import '../scss/app.scss';
-import Application from '../tsx/Application.tsx';
-import ReactApplication from '../tsx/ReactApplication.tsx';
+import './scss/app.scss';
+import Application from './Application.tsx';
+import ReactApplication from './ReactApplication.tsx';
 
 let element;
 
