@@ -5,61 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e531c76c-dc53-43c4-95d3-fa69861a0bba" name="Default Changelist" comment="nelmio">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maker/Generator.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maker/Resources/skeleton/crud/controller/Controller.tpl.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maker/Resources/skeleton/crud/templates/_delete_form.tpl.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maker/Resources/skeleton/crud/templates/_form.tpl.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maker/Resources/skeleton/crud/templates/edit.tpl.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maker/Resources/skeleton/crud/templates/index.tpl.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maker/Resources/skeleton/crud/templates/new.tpl.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/maker/Resources/skeleton/crud/templates/show.tpl.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/iam.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/iam.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/Application.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/Application.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/ReactApplication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/ReactApplication.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/AbstractComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/AbstractComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/EmailFormField.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/EmailFormField.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/FlashMessages.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/FlashMessages.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/FormField.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/FormField.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/LoaderTop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/LoaderTop.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/ProtectedRoute.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/ProtectedRoute.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/Theme.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/Theme.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/dialog/BanIpDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/dialog/BanIpDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/dialog/ConfirmationDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/dialog/ConfirmationDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/dialog/DeleteConfirmationDialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/dialog/DeleteConfirmationDialog.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/form/FormError.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/form/FormError.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/form/PasswordInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/form/PasswordInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/form/PasswordRepeatInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/form/PasswordRepeatInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/form/RegistrationForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/form/RegistrationForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/icons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/icons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/navbar/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/navbar/NavBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/components/navbar/NavBarPortal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/components/navbar/NavBarPortal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/model/Role.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/model/Role.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/model/Settings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/model/Settings.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/model/UserModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/model/UserModel.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/pages/AccountPage/DeactivateAccount.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/pages/AccountPage/DeactivateAccount.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/pages/AccountPage/DeleteAccount.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/pages/AccountPage/DeleteAccount.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/pages/AccountPage/EmailChangeForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/pages/AccountPage/EmailChangeForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/pages/AccountPage/PasswordChangeForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/pages/AccountPage/PasswordChangeForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/pages/AccountPage/UserSessions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/pages/AccountPage/UserSessions.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/pages/AccountPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/pages/AccountPage/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/pages/AdminSettingsPage/BooleanSettings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/pages/AdminSettingsPage/BooleanSettings.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/pages/AdminSettingsPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/pages/AdminSettingsPage/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/pages/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/pages/HomePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/pages/RegistrationPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/pages/RegistrationPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/security/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/security/LoginForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/security/LoginFormPortal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/security/LoginFormPortal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/security/LoginInput/LoginInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/security/LoginInput/LoginInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/security/LoginInput/LoginInputPortal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/security/LoginInput/LoginInputPortal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/security/RegisterFormPortal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/assets/security/RegisterFormPortal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/services/BackendService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/services/BackendService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/services/UserService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/services/UserService.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/services/mobx/ActivityStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/services/mobx/ActivityStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/services/mobx/FlashMessageStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/services/mobx/FlashMessageStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/services/mobx/LocaleStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/services/mobx/LocaleStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/services/mobx/SettingsStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/services/mobx/SettingsStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/tsx/services/mobx/UserStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/services/mobx/UserStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/update-components.sh" beforeDir="false" afterPath="$PROJECT_DIR$/bin/code.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/sentry.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/sentry.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/update-components.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +90,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/flex" />
       <path value="$PROJECT_DIR$/vendor/doctrine/doctrine-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/stopwatch" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/reflection" />
       <path value="$PROJECT_DIR$/vendor/symfony/webpack-encore-bundle" />
       <path value="$PROJECT_DIR$/vendor/doctrine/persistence" />
       <path value="$PROJECT_DIR$/vendor/symfony/options-resolver" />
@@ -162,7 +122,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
       <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
       <path value="$PROJECT_DIR$/vendor/symfony/web-profiler-bundle" />
-      <path value="$PROJECT_DIR$/vendor/webimpress/safe-writer" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
       <path value="$PROJECT_DIR$/vendor/symfony/twig-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/mime" />
@@ -180,7 +139,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/process" />
       <path value="$PROJECT_DIR$/vendor/symfony/dotenv" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/type-resolver" />
-      <path value="$PROJECT_DIR$/vendor/symfony/orm-pack" />
       <path value="$PROJECT_DIR$/vendor/phpdocumentor/reflection-docblock" />
       <path value="$PROJECT_DIR$/vendor/symfony/string" />
       <path value="$PROJECT_DIR$/vendor/sensio/framework-extra-bundle" />
@@ -209,7 +167,6 @@
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-eventmanager" />
       <path value="$PROJECT_DIR$/vendor/laminas/laminas-code" />
       <path value="$PROJECT_DIR$/vendor/nikic/php-parser" />
-      <path value="$PROJECT_DIR$/vendor/ocramius/proxy-manager" />
       <path value="$PROJECT_DIR$/vendor/php-webdriver/webdriver" />
       <path value="$PROJECT_DIR$/vendor/dbrekelmans/bdi" />
       <path value="$PROJECT_DIR$/vendor/symfony/panther" />
@@ -234,6 +191,9 @@
       <path value="$PROJECT_DIR$/vendor/php-http/promise" />
       <path value="$PROJECT_DIR$/vendor/http-interop/http-factory-guzzle" />
       <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/friendsofphp/proxy-manager-lts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/proxy-manager-bridge" />
+      <path value="$PROJECT_DIR$/vendor/nyholm/psr7" />
     </include_path>
   </component>
   <component name="ProjectId" id="1lMiPnSIlAiU1cXfBA7G77PHQ8L" />
@@ -306,7 +266,10 @@
       <workItem from="1611431457786" duration="421000" />
       <workItem from="1611499113973" duration="1118000" />
       <workItem from="1611563495342" duration="56000" />
-      <workItem from="1611776193036" duration="1165000" />
+      <workItem from="1611776193036" duration="1911000" />
+      <workItem from="1612377791654" duration="128000" />
+      <workItem from="1612377940706" duration="41000" />
+      <workItem from="1612510084169" duration="1767000" />
     </task>
     <task id="LOCAL-00001" summary="add components">
       <created>1609844713209</created>
