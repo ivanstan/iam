@@ -94,7 +94,7 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "deploy": "sh deploy.sh",
+        "deploy": "dep deploy prod",
         "test": "bin/phpunit -c phpunit.xml tests/"
     },
     "conflict": {

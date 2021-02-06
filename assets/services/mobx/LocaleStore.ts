@@ -20,8 +20,13 @@ class Locale {
       return this._messages[this.current];
     }
 
-    const response = await fetch(`/translations/messages.${this.current}.json`);
-    const data = await response.json();
+    let data;
+    try {
+      const response = await fetch(`/translations/messages.${this.current}.json`);
+       data = await response.json();
+    } catch (e) {
+       data = {};
+    }
 
     this._messages[this.current] = data;
 
