@@ -1,0 +1,11 @@
+{% if imports is not empty %}
+{% for import in imports %}
+{{ import|raw }}
+{% endfor %}
+
+{% endif %}
+export interface {{ className }}Interface {
+{% for name, type  in fields %}
+  {{ name }}: {{ type }};
+{% endfor %}
+}
