@@ -2,17 +2,27 @@
 
 namespace App\Controller\Api;
 
+use App\Service\CaseConverterTrait;
+use App\Service\Generator\DoctrineEntityGeneratorParameter;
+use App\Service\Util\ClassUtil;
+use App\Service\Util\DoctrineUtil;
+use Swagger\Annotations as SWG;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Swagger\Annotations as SWG;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @Route("/api")
  */
 class MetadataController extends AbstractController
 {
+    use CaseConverterTrait;
+
+    public function __construct(protected DoctrineUtil $util)
+    {
+    }
+
     /**
      * @Route(path="/entity", methods={"GET"})
      * @SWG\Tag(name="Entity")
@@ -23,13 +33,30 @@ class MetadataController extends AbstractController
      */
     public function entity(): JsonResponse
     {
+        $entityList = $this->getDoctrine()->getManager()->getConfiguration()->getMetadataDriverImpl()->getAllClassNames();
+
+        $data = [];
+        foreach ($entityList as $fqn) {
+            $className = ClassUtil::getClassNameFromFqn($fqn);
+
+            $data[] = [
+                '@id' => $this->generateUrl(
+                    'api_entity_metadata',
+                    ['entity' => $this->camelCaseToSnakeCase($className)],
+                    UrlGeneratorInterface::ABSOLUTE_URL
+                ),
+                '@type' => 'Entity',
+                'name' => $className,
+            ];
+        }
+
         return new JsonResponse(
-            $this->getDoctrine()->getManager()->getConfiguration()->getMetadataDriverImpl()->getAllClassNames(),
+            $data,
         );
     }
 
     /**
-     * @Route(path="/metadata", methods={"GET"})
+     * @Route(path="/entity/{entity}", methods={"GET"}, name="api_entity_metadata")
      * @SWG\Tag(name="Entity")
      * @SWG\Response(
      *     response=200,
@@ -42,21 +69,17 @@ class MetadataController extends AbstractController
      *     description="Entity FQN."
      * )
      */
-    public function metadata(Request $request): JsonResponse
+    public function metadata(string $entity): JsonResponse
     {
-        $entity = $request->get('entity');
+        $metadata = $this->getDoctrine()->getManager()->getClassMetadata($this->util->getEntityFqn($this->snakeCaseToCamelCase($entity)));
 
-        if (!in_array($entity, $this->getDoctrine()->getManager()->getConfiguration()->getMetadataDriverImpl()->getAllClassNames(), true)) {
-            throw new \RuntimeException(sprintf('Non existing entity "%s"', $entity));
-        }
-
-        $metadata = $this->getDoctrine()->getManager()->getClassMetadata($entity);
+        $param = new DoctrineEntityGeneratorParameter($metadata);
 
         return new JsonResponse(
             [
-                'name' => $metadata->getName(),
+                'name' => ClassUtil::getClassNameFromFqn($metadata->getName()),
                 'identifier' => $metadata->getIdentifierFieldNames(),
-                'fields' => array_merge($metadata->fieldMappings, $metadata->associationMappings),
+                'fields' => $param->getFields(),
             ]
         );
     }
