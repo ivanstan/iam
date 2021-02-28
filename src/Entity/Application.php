@@ -26,17 +26,20 @@ class Application
     /**
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue(strategy="UUID")
+     * @Groups("user")
      */
     protected $uuid;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("user")
      */
     protected $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Url()
+     * @Groups("user")
      */
     protected $url;
 
@@ -49,13 +52,11 @@ class Application
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="applications")
      * @ORM\JoinTable(name="application_users")
-     * @Ignore()
      */
     protected $users;
 
     /**
      * @ORM\OneToMany(targetEntity=Claim::class, mappedBy="application", orphanRemoval=true)
-     * @Ignore()
      */
     protected $claims = [];
 

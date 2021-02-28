@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity()
@@ -13,21 +14,25 @@ class UserProfile
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("user")
      */
     protected ?int $id = null;
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Groups("user")
      */
     protected ?string $firstName = null;
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Groups("user")
      */
     protected ?string $lastName = null;
 
     /**
      * @ORM\Column(type="string", nullable=true)
+     * @Groups("user")
      */
     protected ?string $avatar = null;
 

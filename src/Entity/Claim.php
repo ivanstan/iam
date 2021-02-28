@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ClaimRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
@@ -15,18 +16,19 @@ class Claim
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("user")
      */
     protected ?int $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=Application::class, inversedBy="claims")
      * @ORM\JoinColumn(nullable=false)
-     * @Ignore
      */
     protected ?Application $application;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("user")
      */
     protected ?string $name;
 

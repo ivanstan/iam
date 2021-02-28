@@ -47,13 +47,13 @@ class User implements UserInterface
     protected ?string $password = null;
 
     /**
-     * @Groups("read")
+     * @Groups({"read", "user"})
      */
     protected ?string $plainPassword = null;
 
     /**
      * @ORM\Column(type="json")
-     * @Groups({"read", "jwt"})
+     * @Groups({"read", "jwt", "user"})
      */
     protected array $roles = [];
 
@@ -63,7 +63,7 @@ class User implements UserInterface
      * Use to hide user's content or profile when set inactive.
      *
      * @ORM\Column(type="boolean", options={"default" : 1})
-     * @Groups({"read", "jwt"})
+     * @Groups({"read", "jwt", "user"})
      */
     protected bool $active = true;
 
@@ -72,7 +72,7 @@ class User implements UserInterface
      * Use to restrict publishing of content created by users that are not verified.
      *
      * @ORM\Column(type="boolean", options={"default" : 0})
-     * @Groups({"read", "jwt"})
+     * @Groups({"read", "jwt", "user"})
      */
     protected bool $verified = false;
 
@@ -80,31 +80,33 @@ class User implements UserInterface
      * Used for denying misbehaving users access to platform. If true user won't be able to login.
      *
      * @ORM\Column(type="boolean", options={"default" : 0})
-     * @Groups("read")
+     * @Groups({"read", "user"})
      */
     protected bool $banned = false;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\UserPreference", cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinColumn(onDelete="CASCADE")
-     * @Groups("read")
+     * @Groups({"read", "user"})
      */
     protected ?UserPreference $preference = null;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\UserProfile", cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinColumn(onDelete="CASCADE")
-     * @Groups("read")
+     * @Groups({"read", "user"})
      */
     protected ?UserProfile $profile = null;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Application", mappedBy="users")
+     * @Groups("user")
      */
     protected $applications;
 
     /**
      * @ORM\ManyToMany(targetEntity=Claim::class)
+     * @Groups("user")
      */
     protected $claims;
 
