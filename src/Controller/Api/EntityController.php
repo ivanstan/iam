@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
@@ -33,6 +34,7 @@ class EntityController extends AbstractController
         $fqn = $this->util->getEntityFqn($this->snakeCaseToCamelCase($name));
 
         // ToDo: check permission
+        // ToDo: add permission hook
 
         $spec = new CollectionSpecification($fqn);
 
@@ -47,7 +49,7 @@ class EntityController extends AbstractController
         return new JsonResponse($data);
     }
 
-    #[Route('/collection/{name}/{id}', name: "api_entity_item")]
+    #[Route('/entity/{name}/{id}', name: "api_entity_item")]
     public function item(
         string $name,
         int $id
@@ -56,6 +58,10 @@ class EntityController extends AbstractController
 
         $entity = $this->em->getRepository($fqn)->find($id);
 
+        if ($entity === null) {
+            throw new NotFoundHttpException();
+        }
+
         // ToDo: check permission
         // ToDo: add permission hook
 
@@ -63,7 +69,7 @@ class EntityController extends AbstractController
             '@context' => 'http://www.w3.org/ns/hydra/context.jsonld',
         ];
 
-        $data = array_merge($data, $this->normalizer->normalize($entity), 'json', ['metadata' => true]);
+        $data = array_merge($data, $this->normalizer->normalize($entity, 'json', ['metadata' => true]));
 
         return new JsonResponse($data);
     }
