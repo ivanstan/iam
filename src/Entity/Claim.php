@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ClaimRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ORM\Entity(repositoryClass=ClaimRepository::class)
@@ -20,6 +21,7 @@ class Claim
     /**
      * @ORM\ManyToOne(targetEntity=Application::class, inversedBy="claims")
      * @ORM\JoinColumn(nullable=false)
+     * @Ignore
      */
     protected ?Application $application;
 

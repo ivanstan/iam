@@ -27,7 +27,7 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"read", "jwt"})
+     * @Groups({"read", "jwt", "user"})
      */
     protected ?int $id = null;
 
@@ -36,7 +36,7 @@ class User implements UserInterface
      * @Assert\Email();
      * @Assert\NotBlank();
      * @Assert\NotNull();
-     * @Groups({"read", "jwt"})
+     * @Groups({"read", "jwt", "user"})
      */
     protected ?string $email = null;
 

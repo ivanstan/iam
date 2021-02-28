@@ -6,6 +6,8 @@ use App\Repository\ApplicationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -17,6 +19,7 @@ class Application
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("user")
      */
     protected $id;
 
@@ -46,11 +49,13 @@ class Application
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="applications")
      * @ORM\JoinTable(name="application_users")
+     * @Ignore()
      */
     protected $users;
 
     /**
      * @ORM\OneToMany(targetEntity=Claim::class, mappedBy="application", orphanRemoval=true)
+     * @Ignore()
      */
     protected $claims = [];
 

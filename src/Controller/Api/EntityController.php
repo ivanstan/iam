@@ -59,7 +59,7 @@ class EntityController extends AbstractController
         $entity = $this->em->getRepository($fqn)->find($id);
 
         if ($entity === null) {
-            throw new NotFoundHttpException();
+            throw new NotFoundHttpException(\sprintf('Entity [%s:%d] not found', $this->snakeCaseToCamelCase($name), $id));
         }
 
         // ToDo: check permission
@@ -69,7 +69,7 @@ class EntityController extends AbstractController
             '@context' => 'http://www.w3.org/ns/hydra/context.jsonld',
         ];
 
-        $data = array_merge($data, $this->normalizer->normalize($entity, 'json', ['metadata' => true]));
+        $data = array_merge($data, $this->normalizer->normalize($entity, 'json', ['metadata' => true, 'groups' => ['read', $name]]));
 
         return new JsonResponse($data);
     }
