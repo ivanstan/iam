@@ -36,7 +36,7 @@ class EntityRepository
             $builder->orderBy('e.' . $specification->getSort(), $specification->getSortDirection());
         }
 
-        $collection = new Collection();
+        $collection = new Collection($specification->getEntity());
         $collection->setTotal($total);
 
         $collection->setMembers($builder->getQuery()->getResult());

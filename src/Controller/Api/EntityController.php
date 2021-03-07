@@ -44,7 +44,7 @@ class EntityController extends AbstractController
             '@context' => 'http://www.w3.org/ns/hydra/context.jsonld',
         ];
 
-        $data = array_merge($data, $this->normalizer->normalize($collection));
+        $data = array_merge($data, $this->normalizer->normalize($collection, 'json', ['metadata' => false, 'groups' => ['read', 'collection', $name]]));
 
         return new JsonResponse($data);
     }

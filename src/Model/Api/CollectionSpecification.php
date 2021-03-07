@@ -11,6 +11,11 @@ class CollectionSpecification
 
     protected string $entity;
 
+    public function __construct(string $entity)
+    {
+        $this->entity = $entity;
+    }
+
     public function getQuery(): ?string
     {
         return $this->query;
