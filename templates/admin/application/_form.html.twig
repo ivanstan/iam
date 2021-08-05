@@ -13,6 +13,27 @@
                     <a target="_blank" href="{{ url('auth_login', {'uuid': application.uuid}) }}">{{ url('auth_login', {'uuid': application.uuid}) }}</a>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    Embed
+                </td>
+                <td>
+                    &lt;iframe        <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;class=&quot;d-block mx-auto&quot;        <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;height=&quot;270&quot;        <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;width=&quot;500&quot;        <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;frameborder=&quot;0&quot;        <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;style=&quot;overflow:hidden; width: 500px; position: relative; top: 50%;        <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;transform: translateY(-50%);&quot; <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;scrolling=&quot;no&quot;        <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;sandbox=&quot;allow-forms allow-same-origin allow-top-navigation allow-top-navigation-by-user-activation allow-scripts&quot;        <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;src=&quot;{{ url('auth_login', {'uuid': application.uuid}) }}&quot;<br>
+
+                    &gt;        <br>
+
+                    &lt;/iframe&gt;
+                </td>
+            </tr>
         </table>
     {% endif %}
 

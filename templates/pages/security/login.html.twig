@@ -12,14 +12,27 @@
     <div class="container vertical-center">
         <div class="row">
             <div class="col-lg-5 max-w-sm rounded overflow-hidden shadow-lg mx-auto">
-                <div class="h-100"
-                     id="login-form"
-                     data-csrf="{{ csrf_token('authenticate') }}"
-                     data-email="{{ last_username }}"
-                     data-registration-allowed="{{ registration_allowed }}"
-                     data-error="{{ error ? error.messageKey|trans(error.messageData) : null }}"
-                ></div>
+                <iframe
+                    class="d-block mx-auto"
+                    height="270"
+                    width="500"
+                    frameborder="0"
+                    style="overflow:hidden; width: 500px; position: relative; top: 50%; transform: translateY(-50%);"
+                    scrolling="no"
+                    sandbox="allow-forms allow-same-origin allow-top-navigation allow-top-navigation-by-user-activation allow-scripts"
+                    src="http://localhost:8000/auth/1a66b49a-f601-11eb-9a03-0242ac130003/login"
+                >
+                </iframe>
+
+{#                <div class="h-100"#}
+{#                     id="login-form"#}
+{#                     data-csrf="{{ csrf_token('authenticate') }}"#}
+{#                     data-email="{{ last_username }}"#}
+{#                     data-registration-allowed="{{ registration_allowed }}"#}
+{#                     data-error="{{ error ? error.messageKey|trans(error.messageData) : null }}"#}
+{#                ></div>#}
             </div>
+
         </div>
     </div>
 

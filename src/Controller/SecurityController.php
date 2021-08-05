@@ -11,6 +11,7 @@ use App\Repository\SettingsRepository;
 use App\Security\Role;
 use App\Security\SecurityMailerService;
 use App\Security\SecurityService;
+use App\Security\TokenAuthenticator;
 use App\Service\DateTimeService;
 use App\Service\Traits\LoggerAwareTrait;
 use App\Service\Traits\TranslatorAwareTrait;
@@ -67,12 +68,13 @@ final class SecurityController extends AbstractController implements LoggerAware
         );
     }
 
-    /**
-     * @Route("/logout", name="app_logout")
-     */
-    public function logout(): void
+    #[Route('/logout', name: 'app_logout')]
+    public function logout(): RedirectResponse
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        $response = $this->redirect($this->generateUrl('app_login'));
+        $response->headers->clearCookie(TokenAuthenticator::COOKIE_NAME);
+
+        return $response;
     }
 
     /**

@@ -38,7 +38,7 @@ class TokenAuthenticator extends AbstractAuthenticator
 
     public function authenticate(Request $request): PassportInterface
     {
-        $token = $request->cookies->get(self::COOKIE_NAME) ;
+        $token = $request->cookies->get(self::COOKIE_NAME);
         if (null === $token) {
             // The token header was empty, authentication fails with HTTP Status
             // Code 401 "Unauthorized"
@@ -68,6 +68,8 @@ class TokenAuthenticator extends AbstractAuthenticator
             // or to translate this message
             // $this->translator->trans($exception->getMessageKey(), $exception->getMessageData())
         ];
+
+        dd($exception);
 
         return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
     }

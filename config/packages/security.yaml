@@ -1,28 +1,21 @@
 security:
+    enable_authenticator_manager: true
     encoders:
         App\Entity\User:
             algorithm: auto
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        # used to reload user from session & other features (e.g. switch_user)
-        app_user_provider:
-            entity:
-                class: App\Entity\User
-                property: email
+        user_provider:
+            id: App\Security\UserProvider
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
-            lazy: true
-            provider: app_user_provider
-            guard:
-                authenticators:
-                    - App\Security\Authenticator\FormAuthenticator
-            logout:
-                path: app_logout
+            stateless: true
+            custom_authenticators:
+                - App\Security\TokenAuthenticator
                 # where to redirect after logout
                 # target: app_any_route
 

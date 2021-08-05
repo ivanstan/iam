@@ -3,26 +3,23 @@
 namespace App\Security;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer;
 use Lcobucci\JWT\Signer\Key\LocalFileReference;
-use Lcobucci\JWT\Token;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserProvider implements UserProviderInterface
 {
     protected ?Configuration $configuration = null;
-    protected string $projectDir;
-    protected string $env;
 
-    public function __construct($projectDir, $env)
-    {
-        $this->projectDir = $projectDir;
-        $this->env = $env;
+    public function __construct(
+        protected $projectDir,
+        protected $env,
+        protected UserRepository $repository
+    ) {
     }
 
     /**
@@ -38,6 +35,8 @@ class UserProvider implements UserProviderInterface
      */
     public function loadUserByUsername(string $token)
     {
+        dd($token);
+
         // Load a User object from your data source or throw UsernameNotFoundException.
         // The $username argument may not actually be a username:
         // it is whatever value is being returned by the getUsername()
@@ -51,11 +50,7 @@ class UserProvider implements UserProviderInterface
         $parsed = $this->getConfig()->parser()->parse($token);
 
         if ($data = $parsed->claims()->get('user')) {
-            $user = new User($data['id']);
-            $user->setEmail($data['email']);
-            $user->setRoles($data['roles'] ?? []);
-
-            return $user;
+            return $this->repository->find($data['id']);
         }
 
         return null;
@@ -112,8 +107,8 @@ class UserProvider implements UserProviderInterface
         ];
     }
 
-    public function loadUserByIdentifier(string $identifier)
+    public function loadUserByIdentifier(string $identifier): ?UserInterface
     {
-
+        return $this->getUser($identifier);
     }
 }
