@@ -4,6 +4,7 @@
 namespace App\Command;
 
 use App\Entity\Application;
+use App\Model\ApplicationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -23,7 +24,7 @@ class SetupCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int {
         $application = new Application();
         $application->setName('IAM');
-        $application->setUuid('1a66b49a-f601-11eb-9a03-0242ac130003');
+        $application->setUuid(ApplicationService::IAM_APP_UUID);
         $application->setUrl('localhost');
         $application->setRedirect('localhost');
 

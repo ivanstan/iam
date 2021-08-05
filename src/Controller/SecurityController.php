@@ -7,6 +7,7 @@ use App\Entity\Token\UserToken;
 use App\Entity\User;
 use App\Form\PasswordRepeatType;
 use App\Form\RegistrationForm;
+use App\Model\ApplicationService;
 use App\Repository\SettingsRepository;
 use App\Security\Role;
 use App\Security\SecurityMailerService;
@@ -47,7 +48,7 @@ final class SecurityController extends AbstractController implements LoggerAware
     /**
      * @Route("/login", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils, SettingsRepository $repository): Response
+    public function login(AuthenticationUtils $authenticationUtils, ApplicationService $service, SettingsRepository $repository): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('app_index');
@@ -61,6 +62,7 @@ final class SecurityController extends AbstractController implements LoggerAware
         return $this->render(
             'pages/security/login.html.twig',
             [
+                'loginUrl' => $service->set($service->getIam())->getLoginUrl(),
                 'last_username' => $lastUsername,
                 'error' => $error,
                 'registration_allowed' => $repository->isRegistrationEnabled(),
