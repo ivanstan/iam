@@ -5,15 +5,12 @@ namespace App\EventSubscriber;
 use App\Entity\User;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class PasswordHashSubscriber
 {
-    private UserPasswordEncoderInterface $encoder;
-
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    public function __construct(protected UserPasswordHasherInterface $encoder)
     {
-        $this->encoder = $encoder;
     }
 
     public function prePersist(LifecycleEventArgs $args): void
@@ -40,7 +37,7 @@ class PasswordHashSubscriber
     private function encode(User $user): void
     {
         if ($user->getPlainPassword() !== null) {
-            $encoded = $this->encoder->encodePassword($user, $user->getPlainPassword());
+            $encoded = $this->encoder->hashPassword($user, $user->getPlainPassword());
 
             $user->setPassword($encoded);
         }

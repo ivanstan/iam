@@ -2,7 +2,6 @@
 
 namespace App\EventSubscriber;
 
-use App\Entity\Session;
 use App\Repository\SessionRepository;
 use App\Service\DateTimeService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,13 +11,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class UserActivitySubscriber implements EventSubscriberInterface
 {
-    protected EntityManagerInterface $em;
-    protected SessionRepository $repository;
-
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(protected EntityManagerInterface $em, protected SessionRepository $repository)
     {
-        $this->em = $em;
-        $this->repository = $em->getRepository(Session::class);
     }
 
     public static function getSubscribedEvents(): array

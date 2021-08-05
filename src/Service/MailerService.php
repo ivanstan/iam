@@ -9,7 +9,6 @@ use Psr\Log\LoggerAwareInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Twig\Environment;
 
@@ -34,7 +33,6 @@ class MailerService implements LoggerAwareInterface
     {
         $body = $this->twig->render($email->getHtmlTemplate(), $email->getContext());
 
-        /** @var Address $address */
         foreach ($email->getTo() as $address) {
             $message = (new Email())
                 ->from($this->mailFrom)

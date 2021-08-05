@@ -17,30 +17,19 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class SecurityService
 {
-    private EntityManagerInterface $em;
-    private RequestStack $requestStack;
-    private TokenStorageInterface $tokenStorage;
-    private EventDispatcherInterface $eventDispatcher;
-    private SessionInterface $session;
-
     public function __construct(
-        EntityManagerInterface $em,
-        RequestStack $requestStack,
-        TokenStorageInterface $tokenStorage,
-        EventDispatcherInterface $eventDispatcher,
-        SessionInterface $session
+        private EntityManagerInterface $em,
+        private RequestStack $requestStack,
+        private TokenStorageInterface $tokenStorage,
+        private EventDispatcherInterface $eventDispatcher,
+        private SessionInterface $session
     ) {
-        $this->requestStack = $requestStack;
-        $this->tokenStorage = $tokenStorage;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->session = $session;
-        $this->em = $em;
     }
 
     public function login(User $user): void
     {
         $token = new UsernamePasswordToken($user, $user->getPassword(), 'main', $user->getRoles());
-        $request = $this->requestStack->getMasterRequest();
+        $request = $this->requestStack->getMainRequest();
 
         if ($request && !$request->hasPreviousSession()) {
             $request->setSession($this->session);
@@ -55,7 +44,7 @@ class SecurityService
         $this->tokenStorage->setToken($token);
         $this->session->set('_security_common', serialize($token));
 
-        $event = new InteractiveLoginEvent($this->requestStack->getMasterRequest(), $token);
+        $event = new InteractiveLoginEvent($this->requestStack->getMainRequest(), $token);
         $this->eventDispatcher->dispatch($event);
     }
 

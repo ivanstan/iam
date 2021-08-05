@@ -16,17 +16,13 @@ use Symfony\Component\Uid\Uuid;
 class JwtTokenService
 {
     protected ?Configuration $configuration = null;
-    protected string $projectDir;
-    protected NormalizerInterface $normalizer;
-    protected RouterInterface $router;
-    protected string $env;
 
-    public function __construct($projectDir, $env, NormalizerInterface $normalizer, RouterInterface $router)
-    {
-        $this->projectDir = $projectDir;
-        $this->normalizer = $normalizer;
-        $this->router = $router;
-        $this->env = $env;
+    public function __construct(
+        protected string $projectDir,
+        protected string $env,
+        protected NormalizerInterface $normalizer,
+        protected RouterInterface $router
+    ) {
     }
 
     public function issueToken(User $user, Application $application)

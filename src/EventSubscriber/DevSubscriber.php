@@ -33,7 +33,6 @@ class DevSubscriber implements EventSubscriberInterface
 
         foreach (self::$messages as $type) {
             if ($event->getRequest()->query->get($type) !== null) {
-                /** @var FlashBagInterface $flashBag */
                 $flashBag = $event->getRequest()->getSession()->getFlashBag();
                 $flashBag->add($type, 'This is a sample message. It\'s only available in dev and test environments.');
             }

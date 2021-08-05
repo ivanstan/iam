@@ -16,11 +16,8 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
      */
     protected const API_PATH = '/api';
 
-    private string $env;
-
-    public function __construct($env)
+    public function __construct(protected string $env)
     {
-        $this->env = $env;
     }
 
     public static function getSubscribedEvents(): array

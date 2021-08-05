@@ -2,15 +2,14 @@
 
 namespace App\Service\Traits;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 trait TranslatorAwareTrait
 {
     private TranslatorInterface $translator;
 
-    /**
-     * @required
-     */
+    #[Required]
     public function setTranslator(TranslatorInterface $translator): void
     {
         $this->translator = $translator;

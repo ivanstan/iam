@@ -4,8 +4,7 @@ namespace App\Service;
 
 class FileManager
 {
-    /** @var string */
-    private $projectDir;
+    private string $projectDir;
 
     public function __construct($projectDir)
     {

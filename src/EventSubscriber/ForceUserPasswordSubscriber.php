@@ -9,7 +9,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Controller\ErrorController;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -22,13 +21,10 @@ class ForceUserPasswordSubscriber implements EventSubscriberInterface
 
     protected const REDIRECT_TO = [SecurityController::class, 'password'];
 
-    protected TokenStorageInterface $tokenStorage;
-    protected UrlGeneratorInterface $urlGenerator;
-
-    public function __construct(TokenStorageInterface $tokenStorage, UrlGeneratorInterface $urlGenerator)
-    {
-        $this->tokenStorage = $tokenStorage;
-        $this->urlGenerator = $urlGenerator;
+    public function __construct(
+        protected TokenStorageInterface $tokenStorage,
+        protected UrlGeneratorInterface $urlGenerator
+    ) {
     }
 
     public static function getSubscribedEvents(): array
@@ -52,7 +48,6 @@ class ForceUserPasswordSubscriber implements EventSubscriberInterface
 
     protected function controller(Request $request): Response
     {
-        /** @var FlashBagInterface $flashBag */
         $flashBag = $request->getSession()->getFlashBag();
         $flashBag->add('info', $this->translator->trans('settings.password_is_null'));
 

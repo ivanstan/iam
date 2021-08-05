@@ -39,7 +39,7 @@ class CustomExtension extends AbstractExtension
 
     public function sortLink(string $name, string $title, $default = []): string
     {
-        $request = $this->request->getMasterRequest();
+        $request = $this->request->getMainRequest();
 
         $query = $request->query->all();
 

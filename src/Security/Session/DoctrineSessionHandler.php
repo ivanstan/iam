@@ -2,7 +2,6 @@
 
 namespace App\Security\Session;
 
-use App\Entity\Session;
 use App\Entity\User;
 use App\Repository\SessionRepository;
 use App\Service\DateTimeService;
@@ -12,17 +11,12 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class DoctrineSessionHandler implements \SessionHandlerInterface
 {
-    protected EntityManagerInterface $em;
-    protected TokenStorageInterface $token;
-    protected RequestStack $requestStack;
-    protected SessionRepository $repository;
-
-    public function __construct(EntityManagerInterface $em, TokenStorageInterface $token, RequestStack $requestStack)
-    {
-        $this->em = $em;
-        $this->token = $token;
-        $this->requestStack = $requestStack;
-        $this->repository = $this->em->getRepository(Session::class);
+    public function __construct(
+        protected EntityManagerInterface $em,
+        protected TokenStorageInterface $token,
+        protected RequestStack $requestStack,
+        protected SessionRepository $repository
+    ) {
     }
 
     public function close(): bool
@@ -30,28 +24,28 @@ class DoctrineSessionHandler implements \SessionHandlerInterface
         return true;
     }
 
-    public function destroy($sessionId): bool
+    public function destroy($id): bool
     {
-        $this->repository->remove($sessionId);
+        $this->repository->remove($id);
 
         return true;
     }
 
-    public function gc($seconds): bool
+    public function gc($max_lifetime): bool
     {
         $this->repository->purge();
 
         return true;
     }
 
-    public function open($path, $sessionId): bool
+    public function open($path, $name): bool
     {
         return true;
     }
 
-    public function read($sessionId)
+    public function read($id)
     {
-        $session = $this->repository->get($sessionId);
+        $session = $this->repository->get($id);
 
         if (!$session || $session->getData() === null) {
             return '';
@@ -62,18 +56,18 @@ class DoctrineSessionHandler implements \SessionHandlerInterface
         return \is_resource($resource) ? stream_get_contents($resource) : $resource;
     }
 
-    public function write($sessionId, $data): bool
+    public function write($id, $data): bool
     {
         $lifeTime = (int)ini_get('session.gc_maxlifetime');
 
-        $session = $this->repository->get($sessionId);
+        $session = $this->repository->get($id);
 
         $session->setData($data);
         $session->setDate(DateTimeService::getCurrentUTC());
         $session->setLifetime(new \DateInterval('PT' . $lifeTime . 'S'));
         $session->setUser($this->getUser());
 
-        if ($request = $this->requestStack->getMasterRequest()) {
+        if ($request = $this->requestStack->getMainRequest()) {
             $session->setIp($request->getClientIp());
             $session->setUserAgent($request->headers->get('User-Agent'));
         }
