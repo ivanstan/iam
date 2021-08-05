@@ -2,7 +2,6 @@ import React from "react";
 import { I18n } from "react-polyglot";
 import { withStyles } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/core";
-import { LoginFormPortal } from "./security/LoginFormPortal";
 import { NavBarPortal } from "./components/navbar/NavBarPortal";
 import DeleteConfirmation from "./components/dialog/DeleteConfirmationDialog";
 import { ActivityStore } from "./services/mobx/ActivityStore";
@@ -54,7 +53,6 @@ class Application extends React.Component<any, any> {
               <BanIpDialog />
               <NavBarPortal id="react-navbar" />
 
-              {init && <LoginFormPortal id="login-form" />}
               {init && <RegisterFormPortal id="register-form" />}
               {init && <LoginInputPortal id="login-input" />}
             </Provider>
