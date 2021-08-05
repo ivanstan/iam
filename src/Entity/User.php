@@ -7,7 +7,6 @@ use App\Entity\Behaviours\UpdatedAtTrait;
 use App\Security\Role;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\PersistentCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -311,5 +310,10 @@ class User implements UserInterface
         $this->claims->removeElement($claim);
 
         return $this;
+    }
+
+    public function getUserIdentifier(): string
+    {
+        return (string)$this->id;
     }
 }
