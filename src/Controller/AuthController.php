@@ -72,7 +72,7 @@ class AuthController extends AbstractController
 
         if (!$provider->isValid($token)) {
             $this->addFlash('warning', 'Please login to continue.');
-            $this->redirect($this->generateUrl('security_login'));
+            $this->redirect($this->generateUrl('app_login'));
         }
 
         $response = $this->redirect($this->generateUrl('app_index'));

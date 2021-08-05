@@ -92,6 +92,9 @@ class UserProvider implements UserProviderInterface
         try {
             $this->getConfig()->validator()->assert($this->getConfig()->parser()->parse($token), ...$this->getValidationConstraints());
         } catch (\Exception $exception) {
+
+            dd($exception->getMessage());
+
             return false;
         }
 
@@ -101,7 +104,7 @@ class UserProvider implements UserProviderInterface
     private function getValidationConstraints(): array
     {
         return [
-            new \Lcobucci\JWT\Validation\Constraint\IssuedBy('https://iam.ivanstanojevic.me/'),
+//            new \Lcobucci\JWT\Validation\Constraint\IssuedBy('https://iam.ivanstanojevic.me/'),
             new \Lcobucci\JWT\Validation\Constraint\SignedWith(
                 $this->getConfig()->signer(),
                 $this->getConfig()->verificationKey()
