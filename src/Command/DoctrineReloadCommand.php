@@ -58,7 +58,7 @@ final class DoctrineReloadCommand extends Command
                 'This is intended for use only in dev or test environment. Run with -f parameter to execute regardless of environment.'
             );
 
-            return Command::FAILURE;
+            return self::FAILURE;
         }
 
         $application = $this->getApplication();
@@ -87,6 +87,6 @@ final class DoctrineReloadCommand extends Command
             $application->run(new ArrayInput($options));
         }
 
-        return Command::SUCCESS;
+        return self::SUCCESS;
     }
 }

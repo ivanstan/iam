@@ -8,9 +8,6 @@
     "dbrekelmans/bdi": {
         "version": "0.3"
     },
-    "deployer/recipes": {
-        "version": "6.2.2"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {

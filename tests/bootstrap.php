@@ -15,7 +15,7 @@ if (file_exists(dirname(__DIR__) . '/config/bootstrap.php')) {
     (new Dotenv())->bootEnv(dirname(__DIR__) . '/.env');
 }
 
-if ('xtest' === $_SERVER['APP_ENV']) {
+if ('test' === $_SERVER['APP_ENV']) {
     $kernel = new Kernel($_SERVER['APP_ENV'], true); // create a "test" kernel
     $kernel->boot();
 

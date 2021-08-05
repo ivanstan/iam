@@ -17,7 +17,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\Security\Core\Event\AuthenticationEvent;
-use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
+use Symfony\Component\Security\Http\Event\LoginFailureEvent;
 
 class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterface
 {
@@ -101,7 +101,7 @@ class SecuritySubscriber implements EventSubscriberInterface, LoggerAwareInterfa
         }
     }
 
-    public function onAuthenticationFailure(AuthenticationFailureEvent $event): void
+    public function onAuthenticationFailure(LoginFailureEvent $event): void
     {
         if (!$this->request->getCurrentRequest()) {
             return;

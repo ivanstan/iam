@@ -7,9 +7,9 @@ use App\Service\Traits\TranslatorAwareTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
@@ -26,21 +26,12 @@ class FormAuthenticator extends AbstractFormLoginAuthenticator implements Passwo
     use TargetPathTrait;
     use TranslatorAwareTrait;
 
-    private EntityManagerInterface $em;
-    private UrlGeneratorInterface $urlGenerator;
-    private CsrfTokenManagerInterface $csrfTokenManager;
-    private UserPasswordEncoderInterface $passwordEncoder;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        UrlGeneratorInterface $urlGenerator,
-        CsrfTokenManagerInterface $csrfTokenManager,
-        UserPasswordEncoderInterface $passwordEncoder
+        protected EntityManagerInterface $em,
+        protected UrlGeneratorInterface $urlGenerator,
+        protected CsrfTokenManagerInterface $csrfTokenManager,
+        protected UserPasswordHasherInterface $passwordEncoder
     ) {
-        $this->em = $entityManager;
-        $this->urlGenerator = $urlGenerator;
-        $this->csrfTokenManager = $csrfTokenManager;
-        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function supports(Request $request): bool

@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Application
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\GeneratedValue(strategy: "AUTO")]
     #[ORM\Column(type: 'integer')]
     #[Groups(['user'])]
     protected $id;

@@ -45,6 +45,6 @@ final class SettingsDefault extends Command
 
         $io->success('Settings reverted to factory default.');
 
-        return Command::SUCCESS;
+        return self::SUCCESS;
     }
 }

@@ -8,8 +8,8 @@ use App\Security\JwtTokenService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -22,7 +22,7 @@ class JwtController extends AbstractApiController
      */
     public function messages(
         Request $request,
-        UserPasswordEncoderInterface $encoder,
+        UserPasswordHasherInterface $encoder,
         UserRepository $userRepository,
         ApplicationRepository $applicationRepository,
         JwtTokenService $service

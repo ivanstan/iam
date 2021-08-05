@@ -40,7 +40,7 @@ final class CronRunCommand extends Command
 
         $io->success('Cron has been executed.');
 
-        return Command::SUCCESS;
+        return self::SUCCESS;
     }
 
     protected function deleteInvalidTokens(string $type): void

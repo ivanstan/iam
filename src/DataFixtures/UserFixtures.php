@@ -6,7 +6,7 @@ use App\Entity\User;
 use App\Security\Role;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture
 {
@@ -14,16 +14,16 @@ class UserFixtures extends Fixture
 
     private const PASSWORD = 'test123';
 
-    protected UserPasswordEncoderInterface $encoder;
+    protected UserPasswordHasherInterface $encoder;
 
-    public function __construct(UserPasswordEncoderInterface $encoder)
+    public function __construct(UserPasswordHasherInterface $encoder)
     {
         $this->encoder = $encoder;
     }
 
     public function load(ObjectManager $manager): void
     {
-        $password = $this->encoder->encodePassword(new User(), self::PASSWORD);
+        $password = $this->encoder->hashPassword(new User(), self::PASSWORD);
 
         // Add admin user
         $user = new User();

@@ -72,7 +72,7 @@ final class ReactEntityGeneratorCommand extends Command
 
         $this->printRouteInstruction($output, $className, $routeName);
 
-        return Command::SUCCESS;
+        return self::SUCCESS;
     }
 
     protected function askForEntity(InputInterface $input, OutputInterface $output): string
