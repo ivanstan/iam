@@ -5,6 +5,7 @@ namespace App\Command;
 use App\Service\Generator\ReactEntityFormGenerator;
 use App\Service\Generator\ReactEntityInterfaceGenerator;
 use App\Service\Generator\ReactEntityRouteGenerator;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -12,12 +13,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 
-class ReactEntityGeneratorCommand extends Command
+#[AsCommand(
+    name: 'generate:entity', description: 'Generate react CRUD code for given entity'
+)]
+final class ReactEntityGeneratorCommand extends Command
 {
     protected const ENTITY_ARGUMENT = 'entity';
     protected const FORCE_ARGUMENT = 'force';
-
-    protected static $defaultName = 'generate:entity';
 
     public function __construct(
         protected ReactEntityInterfaceGenerator $interface,
@@ -30,7 +32,6 @@ class ReactEntityGeneratorCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setDescription('Generate react CRUD code for given entity.')
             ->addOption(
                 self::ENTITY_ARGUMENT,
                 null,

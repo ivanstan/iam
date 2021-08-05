@@ -10,27 +10,20 @@ use App\Entity\Token\UserRecoveryToken;
 use App\Entity\Token\UserVerificationToken;
 use App\Service\DateTimeService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(
+    name: 'cron:run', description: 'Generate react CRUD code for given entity'
+)]
 final class CronRunCommand extends Command
 {
-    protected static $defaultName = 'cron:run';
-
-    protected EntityManagerInterface $em;
-
-    public function __construct(string $name = null, EntityManagerInterface $em)
+    public function __construct(private EntityManagerInterface $em)
     {
-        parent::__construct($name);
-        $this->em = $em;
-    }
-
-    protected function configure(): void
-    {
-        $this
-            ->setDescription('Default cron job');
+        parent::__construct();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

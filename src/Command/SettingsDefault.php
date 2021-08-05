@@ -3,29 +3,22 @@
 namespace App\Command;
 
 use App\Entity\Settings;
+use App\Model\Settings as SettingsModel;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use App\Model\Settings as SettingsModel;
 
+#[AsCommand(
+    name: 'settings:default', description: 'Revert settings to factory default'
+)]
 final class SettingsDefault extends Command
 {
-    protected static $defaultName = 'settings:default';
-
-    protected EntityManagerInterface $em;
-
-    public function __construct(string $name = null, EntityManagerInterface $em)
+    public function __construct(private EntityManagerInterface $em)
     {
-        parent::__construct($name);
-        $this->em = $em;
-    }
-
-    protected function configure(): void
-    {
-        $this
-            ->setDescription('Revert settings to factory default.');
+        parent::__construct();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int {
@@ -52,6 +45,6 @@ final class SettingsDefault extends Command
 
         $io->success('Settings reverted to factory default.');
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
