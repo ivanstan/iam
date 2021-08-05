@@ -28,7 +28,7 @@ final class UserController extends AbstractController
     public function users(Request $request, UserRepository $repository): Response
     {
         $query = $repository->collection(
-            (new CollectionSpecification())
+            (new CollectionSpecification(User::class))
                 ->setQuery(
                     $request->query->get('query')
                 )

@@ -24,7 +24,7 @@ final class SessionController extends AbstractController
     public function index(Request $request, SessionRepository $repository): Response
     {
         $builder = $repository->collection(
-            (new CollectionSpecification())
+            (new CollectionSpecification(Session::class))
                 ->setQuery(
                     $request->query->get('query')
                 )
