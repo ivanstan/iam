@@ -4,109 +4,87 @@ namespace App\Entity;
 
 use App\Entity\Behaviours\CreatedAtTrait;
 use App\Entity\Behaviours\UpdatedAtTrait;
+use App\Repository\UserRepository;
 use App\Security\Role;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
- * @ORM\HasLifecycleCallbacks()
- */
+#[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class User implements UserInterface
 {
     use CreatedAtTrait;
     use UpdatedAtTrait;
 
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     * @Groups({"read", "jwt", "user"})
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    #[Groups(["read", "jwt", "user"])]
     protected ?int $id = null;
 
-    /**
-     * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\Email();
-     * @Assert\NotBlank();
-     * @Assert\NotNull();
-     * @Groups({"read", "jwt", "user"})
-     */
+    #[ORM\Column(type: 'string', length: 180)]
+    #[Assert\Email]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
+    #[Groups(["read", "jwt", "user"])]
     protected ?string $email = null;
 
     /**
      * @var ?string The hashed password
-     * @ORM\Column(type="string", nullable=true)
      */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected ?string $password = null;
 
-    /**
-     * @Groups({"read", "user"})
-     */
+    #[Groups(["read", "user"])]
     protected ?string $plainPassword = null;
 
-    /**
-     * @ORM\Column(type="json")
-     * @Groups({"read", "jwt", "user"})
-     */
+    #[ORM\Column(type: 'json')]
+    #[Groups(["read", "jwt", "user"])]
     protected array $roles = [];
 
     /**
      * Used to indicate if user is active. Inactive users are pending for account delete or have set their account for temporary
      * inactivity.
      * Use to hide user's content or profile when set inactive.
-     *
-     * @ORM\Column(type="boolean", options={"default" : 1})
-     * @Groups({"read", "jwt", "user"})
      */
+    #[ORM\Column(type: 'boolean', options: ['default' => 1])]
+    #[Groups(["read", "jwt", "user"])]
     protected bool $active = true;
 
     /**
      * If true user is indeed owner of account self::email.
      * Use to restrict publishing of content created by users that are not verified.
-     *
-     * @ORM\Column(type="boolean", options={"default" : 0})
-     * @Groups({"read", "jwt", "user"})
      */
+    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
+    #[Groups(["read", "jwt", "user"])]
     protected bool $verified = false;
 
     /**
      * Used for denying misbehaving users access to platform. If true user won't be able to login.
-     *
-     * @ORM\Column(type="boolean", options={"default" : 0})
-     * @Groups({"read", "user"})
      */
+    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
+    #[Groups(["read", "user"])]
     protected bool $banned = false;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\UserPreference", cascade={"persist", "remove"}, fetch="EAGER")
-     * @ORM\JoinColumn(onDelete="CASCADE")
-     * @Groups({"read", "user"})
-     */
+    #[ORM\OneToOne(targetEntity: UserPreference::class, cascade: ['persist', 'remove'], fetch: 'EAGER')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    #[Groups(["read", "user"])]
     protected ?UserPreference $preference = null;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\UserProfile", cascade={"persist", "remove"}, fetch="EAGER")
-     * @ORM\JoinColumn(onDelete="CASCADE")
-     * @Groups({"read", "user"})
-     */
+    #[ORM\OneToOne(targetEntity: UserProfile::class, cascade: ['persist', 'remove'], fetch: 'EAGER')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    #[Groups(["read", "user"])]
     protected ?UserProfile $profile = null;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Application", mappedBy="users")
-     * @Groups("user")
-     */
+    #[ORM\ManyToMany(targetEntity: Application::class, mappedBy: 'users')]
+    #[Groups(["user"])]
     protected $applications;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Claim::class)
-     * @Groups("user")
-     */
+    #[ORM\ManyToMany(targetEntity: Claim::class)]
+    #[Groups(["user"])]
     protected $claims;
 
     public function __construct()

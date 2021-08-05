@@ -7,57 +7,40 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass=ApplicationRepository::class)
- */
+#[ORM\Entity(repositoryClass: ApplicationRepository::class)]
 class Application
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     * @Groups("user")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    #[Groups(['user'])]
     protected $id;
 
-    /**
-     * @ORM\Column(type="guid")
-     * @ORM\GeneratedValue(strategy="UUID")
-     * @Groups("user")
-     */
+    #[ORM\Column(type: 'guid')]
+    #[ORM\GeneratedValue(strategy: 'UUID')]
+    #[Groups(['user'])]
     protected $uuid;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups("user")
-     */
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['user'])]
     protected $name;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Url()
-     * @Groups("user")
-     */
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Url]
+    #[Groups(['user'])]
     protected $url;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Url()
-     */
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Url]
     protected $redirect;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="applications")
-     * @ORM\JoinTable(name="application_users")
-     */
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'applications')]
+    #[ORM\JoinTable(name: 'application_users')]
     protected $users;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Claim::class, mappedBy="application", orphanRemoval=true)
-     */
+    #[ORM\OneToMany(targetEntity: Claim::class, mappedBy: 'application', orphanRemoval: true)]
     protected $claims = [];
 
     public function __construct()

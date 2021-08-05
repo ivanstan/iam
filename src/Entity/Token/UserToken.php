@@ -3,36 +3,32 @@
 namespace App\Entity\Token;
 
 use App\Entity\User;
+use App\Repository\UserTokenRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\UserTokenRepository")
- * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({
- *     UserVerificationToken::TYPE = "App\Entity\Token\UserVerificationToken",
- *     UserRecoveryToken::TYPE = "App\Entity\Token\UserRecoveryToken",
- *     UserInvitationToken::TYPE = "App\Entity\Token\UserInvitationToken",
- *     UserAccessToken::TYPE = "App\Entity\Token\UserAccessToken",
- *     UserEmailChangeToken::TYPE = "App\Entity\Token\UserEmailChangeToken",
- *     UserDeleteToken::TYPE = "App\Entity\Token\UserDeleteToken"
- * })
- */
+#[ORM\Entity(repositoryClass: UserTokenRepository::class)]
+#[ORM\InheritanceType(('SINGLE_TABLE'))]
+#[ORM\DiscriminatorColumn(name: 'type', type: 'string')]
+#[ORM\DiscriminatorMap([
+    UserVerificationToken::TYPE => UserVerificationToken::class,
+    UserRecoveryToken::TYPE => UserRecoveryToken::class,
+    UserInvitationToken::TYPE => UserInvitationToken::class,
+    UserAccessToken::TYPE => UserAccessToken::class,
+    UserEmailChangeToken::TYPE => UserEmailChangeToken::class,
+    UserDeleteToken::TYPE => UserDeleteToken::class,
+])]
 abstract class UserToken extends Token
 {
     public const TYPE = 'user';
 
     /**
      * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", cascade={"persist"})
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
+    #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'])]
+    #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
     protected User $user;
 
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
+    #[ORM\Column(type: 'string', nullable: true)]
     protected $data;
 
     /**

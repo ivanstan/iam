@@ -3,59 +3,52 @@
 namespace App\Entity;
 
 use App\Entity\Behaviours\CreatedAtTrait;
-use App\Service\DateTimeService;
+use App\Repository\MailRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\MailRepository")
- * @ORM\HasLifecycleCallbacks()
- */
+#[ORM\Entity(repositoryClass: MailRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Mail
 {
     use CreatedAtTrait;
 
     /**
      * @var int
-     *
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
      */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     protected ?int $id = null;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", name="`from`")
-     * @Assert\Email();
-     * @Assert\NotBlank();
-     * @Assert\NotNull();
      */
+    #[ORM\Column(name: '`from`', type: 'string')]
+    #[Assert\Email]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     protected $from;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", name="`to`")
-     * @Assert\Email();
-     * @Assert\NotBlank();
-     * @Assert\NotNull();
      */
+    #[ORM\Column(name: '`to`', type: 'string')]
+    #[Assert\Email]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
     protected $to;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true, name="`subject`")
      */
+    #[ORM\Column(name: '`subject`', type: 'string', nullable: true)]
     protected $subject;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
      */
+    #[ORM\Column(type: 'text', nullable: true)]
     protected ?string $body = null;
 
     public function getId(): int

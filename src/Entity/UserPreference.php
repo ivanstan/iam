@@ -6,27 +6,22 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity()
- */
+#[ORM\Entity]
 class UserPreference
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     * @Groups("user")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    #[Groups(['user'])]
     protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="timezone", type="string")
-     * @Assert\NotBlank()
-     * @Assert\NotNull()
-     * @Groups("user")
      */
+    #[ORM\Column(name: 'timezone', type: 'string')]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
+    #[Groups(['user'])]
     protected $timezone;
 
     public function getId(): ?int

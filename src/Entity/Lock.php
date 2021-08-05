@@ -2,43 +2,40 @@
 
 namespace App\Entity;
 
+use App\Repository\LockRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\LockRepository")
- * @ORM\Table(name="`lock`")
- */
+#[ORM\Entity(repositoryClass: LockRepository::class)]
+#[ORM\Table(name: '`lock`')]
 class Lock
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     protected $id;
 
     /**
      * @var string
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     protected $name;
 
     /**
      * @var int
-     * @ORM\Column(type="integer")
      */
+    #[ORM\Column(type: 'integer')]
     protected $value;
 
     /**
      * @var string
-     * @ORM\Column(type="string")
      */
+    #[ORM\Column(type: 'string')]
     protected $data;
 
     /**
      * @var \DateTime
-     * @ORM\Column(type="datetime", nullable=true)
      */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     protected $expire;
 
     public function __construct(string $name)

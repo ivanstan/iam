@@ -2,40 +2,30 @@
 
 namespace App\Entity;
 
+use App\Repository\SettingsRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\SettingsRepository")
- * @ORM\Table(indexes={
- *  @ORM\Index(name="default", columns={"namespace","name"}),
- * })
- */
+#[ORM\Entity(repositoryClass: SettingsRepository::class)]
 class Settings
 {
     public const DEFAULT_NAMESPACE = 'root';
 
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank();
-     * @Assert\NotNull();
-     * @Groups("read")
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: 'string')]
+    #[Assert\NotBlank]
+    #[Assert\NotNull]
+    #[Groups(['read'])]
     protected string $name;
 
-    /**
-     * @ORM\Id()
-     * @ORM\Column(type="string")
-     * @Groups("read")
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: 'string')]
+    #[Groups(['read'])]
     protected string $namespace = self::DEFAULT_NAMESPACE;
 
-    /**
-     * @ORM\Column(type="text")
-     * @Groups("read")
-     */
+    #[ORM\Column(type: 'text')]
+    #[Groups(['read'])]
     protected ?string $value = null;
 
     public function getNamespace(): string

@@ -2,78 +2,75 @@
 
 namespace App\Entity;
 
+use App\Repository\SessionRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\SessionRepository")
- * @ORM\HasLifecycleCallbacks()
- */
+#[ORM\Entity(repositoryClass: SessionRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Session
 {
     /**
      * @var int
-     *
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     * @Groups("read")
      */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    #[Groups(['read'])]
     protected $id;
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=128, unique=true)
      */
+    #[ORM\Column(type: 'string', length: 128, unique: true)]
     protected $sessionId;
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
+    #[ORM\ManyToOne(targetEntity: User::class)]
     protected $user;
 
     /**
      * @var mixed
-     * @ORM\Column(type="blob", nullable=true)
      */
+    #[ORM\Column(type: 'blob', nullable: true)]
     protected $data;
 
     /**
      * @var \DateTime
-     * @ORM\Column(type="datetime")
-     * @Groups("read")
      */
+
+    #[ORM\Column(type: 'datetime')]
+    #[Groups(['read'])]
     protected $date;
 
     /**
      * @var \DateInterval
-     * @ORM\Column(type="dateinterval")
-     * @Groups("read")
      */
+    #[ORM\Column(type: 'dateinterval')]
+    #[Groups(['read'])]
     protected $lifetime;
 
     /**
      * @var \DateTime
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Groups("read")
      */
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups(['read'])]
     protected $lastAccess;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
-     * @Groups("read")
      */
+    #[ORM\Column(type: 'string', nullable: true)]
+    #[Groups(['read'])]
     protected $ip;
 
     /**
      * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
-     * @Groups("read")
      */
+    #[ORM\Column(type: 'text', nullable: true)]
+    #[Groups(['read'])]
     protected $userAgent;
 
     public function getId(): string

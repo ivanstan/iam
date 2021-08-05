@@ -8,37 +8,33 @@ use App\Service\DateTimeService;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * @ORM\Entity()
- * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="type", type="string")
- * @ORM\DiscriminatorMap({
- *     UserToken::TYPE = "App\Entity\Token\UserToken",
- * })
- */
+#[ORM\Entity]
+#[ORM\InheritanceType('SINGLE_TABLE')]
+#[ORM\DiscriminatorColumn(name: 'type', type: 'string')]
+#[ORM\DiscriminatorMap([
+    UserToken::TYPE => UserToken::class,
+])]
 abstract class Token
 {
     use CreatedAtTrait;
 
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     protected $id;
 
     /**
      * @var string
-     * @ORM\Column(type="string")
-     * @Assert\NotNull
-     * @Assert\NotBlank
      */
+    #[ORM\Column(type: 'string')]
+    #[Assert\NotNull]
+    #[Assert\NotBlank]
     protected $token;
 
     /**
      * @var \DateInterval
-     * @ORM\Column(name="`interval`", type="dateinterval", nullable=true)
      */
+    #[ORM\Column(name: '`interval`', type: 'dateinterval', nullable: true)]
     protected $interval;
 
     /**

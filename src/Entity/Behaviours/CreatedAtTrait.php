@@ -8,9 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait CreatedAtTrait
 {
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     protected ?DateTime $createdAt = null;
 
     public function getCreatedAt(): ?DateTime
@@ -18,9 +16,7 @@ trait CreatedAtTrait
         return $this->createdAt;
     }
 
-    /**
-     * @ORM\PrePersist
-     */
+    #[ORM\PrePersist]
     public function setCreatedAt(): void
     {
         $this->createdAt = DateTimeService::getCurrentUTC();
