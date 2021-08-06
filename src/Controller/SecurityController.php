@@ -45,9 +45,7 @@ final class SecurityController extends AbstractController implements LoggerAware
         $this->securityService = $securityService;
     }
 
-    /**
-     * @Route("/login", name="app_login")
-     */
+    #[Route('/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils, ApplicationService $service, SettingsRepository $repository): Response
     {
         if ($this->getUser()) {
@@ -79,9 +77,7 @@ final class SecurityController extends AbstractController implements LoggerAware
         return $response;
     }
 
-    /**
-     * @Route("/register", name="security_register")
-     */
+    #[Route('/register', name: 'security_register')]
     public function register(Request $request, SettingsRepository $repository): Response
     {
         if (!$repository->isRegistrationEnabled()) {
@@ -116,9 +112,7 @@ final class SecurityController extends AbstractController implements LoggerAware
         );
     }
 
-    /**
-     * @Route("/recovery", name="security_recovery")
-     */
+    #[Route('/recovery', name: 'security_recovery')]
     public function recovery(Request $request): Response
     {
         $form = $this->createFormBuilder()->add(
@@ -196,11 +190,9 @@ final class SecurityController extends AbstractController implements LoggerAware
         return $this->redirectToRoute('app_index');
     }
 
-    /**
-     * @Route("/password/recover/{token}", name="security_recovery_token")
-     * @Route("/verify/{token}", name="security_verification_token")
-     * @Route("/invitation/{token}", name="security_invitation_token")
-     */
+    #[Route('/password/recover/{token}', name: 'security_recovery_token')]
+    #[Route('/verify/{token}', name: 'security_verification_token')]
+    #[Route('/invitation/{token}', name: 'security_invitation_token')]
     public function verifyToken(Request $request, string $token): RedirectResponse
     {
         if ($this->getUser() !== null) {
@@ -339,7 +331,7 @@ final class SecurityController extends AbstractController implements LoggerAware
     }
 
     /**
-     * @Route("/user/email/change/{token}", name="security_email_change_token")
+     * @Route("", name="security_email_change_token")
      * @IsGranted("ROLE_USER")
      */
     public function emailChange(Request $request, string $token, EntityManagerInterface $em): RedirectResponse

@@ -13,14 +13,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route(path="/admin")
- */
+#[Route('/admin/mailbox')]
 final class MailBoxController extends AbstractController
 {
     /**
-     * @Route("/mailbox", name="admin_mailbox")
-     * @Route("/mailbox/{mail}", name="admin_mailbox_read")
+     * @Route("/", name="admin_mailbox")
+     * @Route("/{mail}", name="admin_mailbox_read")
      * @IsGranted("ROLE_ADMIN")
      */
     public function mailbox(Request $request, MailRepository $repository, UserRepository $userRepository, Mail $mail = null): Response

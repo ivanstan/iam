@@ -11,14 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin")
- */
+#[Route('/admin/block')]
 final class BlockController extends AbstractController
 {
-    /**
-     * @Route("/block", name="block_index")
-     */
+    #[Route('/', name: 'block_index')]
     public function index(Request $request): Response
     {
         /** @var QueryBuilder $builder */
@@ -32,9 +28,7 @@ final class BlockController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/block/{id}/delete", name="block_delete", methods={"DELETE"})
-     */
+    #[Route('/{id}/delete', name: 'block_delete', methods: ['DELETE'])]
     public function delete(Request $request, Lock $lock): Response
     {
         if ($this->isCsrfTokenValid('delete'.$lock->getId(), $request->request->get('_token'))) {

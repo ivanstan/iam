@@ -13,14 +13,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin")
- */
+#[Route('/admin/sessions')]
 final class SessionController extends AbstractController
 {
-    /**
-     * @Route("/sessions", name="admin_session_index")
-     */
+    #[Route('/', name: 'admin_session_index')]
     public function index(Request $request, SessionRepository $repository): Response
     {
         $builder = $repository->collection(
@@ -46,10 +42,8 @@ final class SessionController extends AbstractController
             ]
         );
     }
-
-    /**
-     * @Route("/session/{id}/delete", name="admin_session_delete", methods={"DELETE"})
-     */
+    
+    #[Route('/{id}/delete', name: 'admin_session_delete', methods: 'DELETE')]
     public function delete(Request $request, Session $session): Response
     {
         if ($this->isCsrfTokenValid('delete' . $session->getId(), $request->request->get('_token'))) {

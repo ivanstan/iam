@@ -11,6 +11,7 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class AbstractApiController extends AbstractController
 {
@@ -18,31 +19,19 @@ class AbstractApiController extends AbstractController
     protected NormalizerInterface $normalizer;
     protected EntityManagerInterface $em;
 
-    /**
-     * @required
-     *
-     * @param SerializerInterface $serializer
-     */
+    #[Required]
     public function setSerializer(SerializerInterface $serializer): void
     {
         $this->serializer = $serializer;
     }
 
-    /**
-     * @required
-     *
-     * @param NormalizerInterface $normalizer
-     */
+    #[Required]
     public function setNormalizer(NormalizerInterface $normalizer): void
     {
         $this->normalizer = $normalizer;
     }
 
-    /**
-     * @required
-     *
-     * @param EntityManagerInterface $em
-     */
+    #[Required]
     public function setEntityManager(EntityManagerInterface $em): void
     {
         $this->em = $em;

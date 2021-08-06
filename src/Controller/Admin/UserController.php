@@ -15,16 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route(path="/admin")
- */
+#[Route('/admin')]
 final class UserController extends AbstractController
 {
     use TranslatorAwareTrait;
 
-    /**
-     * @Route("/users", name="app_admin_users")
-     */
+    #[Route('/users', name: 'app_admin_users')]
     public function users(Request $request, UserRepository $repository): Response
     {
         $query = $repository->collection(
@@ -51,10 +47,8 @@ final class UserController extends AbstractController
         );
     }
 
-    /**
-     * @Route("/user/new", name="user_new", methods={"GET","POST"})
-     * @Route("/user/{id}/edit", name="user_edit", methods={"GET","POST"})
-     */
+    #[Route('/user/new', name: 'user_new', methods: ['GET', 'POST'])]
+    #[Route('/user/{id}/edit', name: 'user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, SecurityMailerService $recovery, User $user = null): Response
     {
         $user = $user ?? new User();
@@ -91,9 +85,7 @@ final class UserController extends AbstractController
         );
     }
 
-    /**
-     * @Route("/user/{id}/delete", name="user_delete", methods={"DELETE"})
-     */
+    #[Route('/user/{id}/delete', name: 'user_delete', methods: ['DELETE'])]
     public function delete(Request $request, User $user): Response
     {
         /** @var User $currentUser */
