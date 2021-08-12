@@ -21,7 +21,7 @@ set('composer_action', 'install');
 set('bin/composer', '~/bin/composer.phar');
 
 // Shared files/dirs between deploys
-add('shared_files', ['.env']);
+add('shared_files', ['.env', '.env.local']);
 add('shared_dirs', ['var', 'config/secrets']);
 add('writable_dirs', []);
 
@@ -68,6 +68,10 @@ task('deploy:dump-env', function () {
     run('cd {{release_path}} && {{bin/composer}} dump-env prod');
 });
 
+task('deploy:executable', function () {
+    run('chmod +x {{release_path}}/bin/console');
+});
+
 task('deploy', [
     'deploy:info',
     'deploy:prepare',
@@ -79,6 +83,7 @@ task('deploy', [
     'deploy:shared',
     'deploy:assets',
     'deploy:vendors',
+    'deploy:executable',
     'deploy:assets:install',
     'deploy:assetic:dump',
     'deploy:cache:clear',
